@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="4"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -50,16 +50,28 @@
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIBarButtonItem" id="569228792">
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">NavBack.png</string>
+								</object>
 								<float key="IBUIWidth">48</float>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="546438037"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="845554665">
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">NavForward.png</string>
+								</object>
 								<float key="IBUIWidth">48</float>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="546438037"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="694644083">
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">01-refresh.png</string>
+								</object>
 								<float key="IBUIWidth">48</float>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="546438037"/>
@@ -289,7 +301,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">23</int>
+			<int key="maxID">24</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -302,14 +314,12 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>back:</string>
-							<string>close:</string>
 							<string>forward:</string>
 							<string>openSafari:</string>
 							<string>stopReload:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -566,7 +576,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">DVDCase.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">TodayInHistory.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">3.1</string>
 	</data>

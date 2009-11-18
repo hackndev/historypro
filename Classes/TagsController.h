@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TagsController : UITableViewController {
+@interface TagsController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+	IBOutlet UITableView *tableView;
+	IBOutlet UITextView *textView;
 	NSArray *tags;
 
 }
+@property (readonly) UITableView *tableView;
 
 -(id)initWithTags:(NSArray *)aTags;
 

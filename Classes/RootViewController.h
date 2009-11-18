@@ -6,7 +6,7 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
-@class TagsController;
+//@class TagsController;
 
 @interface RootViewController : UITableViewController {
 

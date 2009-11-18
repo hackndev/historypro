@@ -12,9 +12,14 @@
 
 @implementation TagsController
 
+@synthesize tableView;
+
 -(id)initWithTags:(NSArray *)aTags {
-	self = [super init];
+	self = [super initWithNibName:@"TagsController" bundle:nil];
 	tags = [aTags retain];
+	
+	NSLog(@"view: %@", [self view]);
+	
 	return self;
 }
 
@@ -29,6 +34,7 @@
 
 
 - (void)viewDidLoad {
+	NSLog(@"my view: %@", tableView);
     [super viewDidLoad];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -101,6 +107,8 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
+	
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     // Set up the cell...
 	Tag *curtag = [tags objectAtIndex:indexPath.row];

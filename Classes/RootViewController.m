@@ -122,7 +122,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	Event *e = [[Server sharedInstance].events objectAtIndex:indexPath.row];
 	TagsController *controller = [[TagsController alloc] initWithTags:e.tags];
-	controller.title = e.name;
+	//controller.title = e.name;
 	[self.navigationController pushViewController:controller animated:YES];
 	[controller release];
 }

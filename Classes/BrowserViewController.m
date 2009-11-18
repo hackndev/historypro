@@ -39,21 +39,22 @@
 - (IBAction)back:(id)unused
 {
 	[webView goBack];
-	NSLog(@"go back");
 }
 
 - (IBAction)forward:(id)unused
 {
 	[webView goForward];
-		NSLog(@"go forward");
 }
 
 - (IBAction)stopReload:(id)unused
 {
 	if(isStop) {
 		[webView stopLoading];
+	stopReloadButton.image = [UIImage imageNamed:@"NavStop.png"];
+
 	} else {
 		[webView reload];
+	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
 	}
 	isStop != isStop;
 }
@@ -67,12 +68,14 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
 	isStop = YES;
+	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
 	[[NetState sharedInstance] startedNetworkAccess];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
 	isStop = NO;
+	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
 	[[NetState sharedInstance] finishedNetworkAccess];
 }
 
