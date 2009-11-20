@@ -12,10 +12,11 @@
 	IBOutlet UITableView *tableView;
 	IBOutlet UITextView *textView;
 	NSArray *tags;
+	NSString *name;
 
 }
 @property (readonly) UITableView *tableView;
 
--(id)initWithTags:(NSArray *)aTags;
+-(id)initWithTags:(NSArray *)aTags evName:(NSString *)aName;
 
 @end

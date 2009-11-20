@@ -9,16 +9,16 @@
 #import "TagsController.h"
 #import "BrowserViewController.h"
 #import "Tag.h"
+#import "RootViewController.h"
 
 @implementation TagsController
 
 @synthesize tableView;
 
--(id)initWithTags:(NSArray *)aTags {
-	self = [super initWithNibName:@"TagsController" bundle:nil];
+-(id)initWithTags:(NSArray *)aTags evName:(NSString *)aName{
+	self = [super init];
 	tags = [aTags retain];
-	
-	NSLog(@"view: %@", [self view]);
+	name = [aName retain];
 	
 	return self;
 }
@@ -34,8 +34,8 @@
 
 
 - (void)viewDidLoad {
-	NSLog(@"my view: %@", tableView);
     [super viewDidLoad];
+	textView.text = name;
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
