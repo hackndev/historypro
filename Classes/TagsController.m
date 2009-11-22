@@ -15,7 +15,7 @@
 
 @synthesize tableView;
 
--(id)initWithTags:(NSArray *)aTags evName:(NSString *)aName{
+-(id)initWithTags:(NSArray *)aTags eventName:(NSString *)aName{
 	self = [super init];
 	tags = [aTags retain];
 	name = [aName retain];

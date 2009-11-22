@@ -121,7 +121,7 @@
 // Override to support row selection in the table view.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	Event *e = [[Server sharedInstance].events objectAtIndex:indexPath.row];
-	TagsController *controller = [[TagsController alloc] initWithTags:e.tags evName:e.name];
+	TagsController *controller = [[TagsController alloc] initWithTags:e.tags eventName:e.name];
 	//controller.title = e.name;
 	[self.navigationController pushViewController:controller animated:YES];
 	[controller release];
