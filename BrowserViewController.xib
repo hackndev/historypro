@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -55,7 +55,6 @@
 									<string key="NSResourceName">NavBack.png</string>
 								</object>
 								<float key="IBUIWidth">48</float>
-								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="546438037"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="845554665">
@@ -64,7 +63,6 @@
 									<string key="NSResourceName">NavForward.png</string>
 								</object>
 								<float key="IBUIWidth">48</float>
-								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="546438037"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="694644083">
@@ -73,7 +71,6 @@
 									<string key="NSResourceName">01-refresh.png</string>
 								</object>
 								<float key="IBUIWidth">48</float>
-								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="546438037"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="874927309">
@@ -81,7 +78,6 @@
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="1031422559">
-								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="546438037"/>
 								<int key="IBUISystemItemIdentifier">9</int>
 							</object>
