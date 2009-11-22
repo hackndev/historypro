@@ -173,6 +173,7 @@
 
 - (void)dealloc {
 	[tags release];
+	[name release];
 	[super dealloc];
 }
 
