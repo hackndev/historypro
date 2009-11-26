@@ -29,13 +29,6 @@
 	[webView loadRequest:request];
 }
 
-/*- (IBAction)close:(id)unused
-{
-	[viewController dismissModalViewControllerAnimated:YES];
-	NSLog(@"DissMissModal");
-}
-*/
-
 - (IBAction)back:(id)unused
 {
 	[webView goBack];
@@ -78,6 +71,5 @@
 	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
 	[[NetState sharedInstance] finishedNetworkAccess];
 }
-
 
 @end

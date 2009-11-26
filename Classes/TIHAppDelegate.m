@@ -19,29 +19,28 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {    
-    
-    // Override point for customization after app launch    
-	
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{    
 	[window addSubview:[navigationController view]];
     [window makeKeyAndVisible];
 }
 
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-	// Save data if appropriate
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+
 }
 
 
 #pragma mark -
 #pragma mark Memory management
 
-- (void)dealloc {
+- (void)dealloc
+{
 	[navigationController release];
 	[window release];
 	[super dealloc];
 }
-
 
 @end
 

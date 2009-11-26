@@ -10,7 +10,6 @@
 #import "Event.h"
 #import "Tag.h"
 
-
 @implementation Server
 
 @synthesize events = _events;

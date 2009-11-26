@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Server : NSObject {
+@interface Server : NSObject
+{
 	NSMutableArray *_events;
 
 }

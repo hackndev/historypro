@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NetState : NSObject {
+@interface NetState : NSObject
+{
 	unsigned int networkCounter;
 }
 

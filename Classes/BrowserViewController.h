@@ -9,22 +9,22 @@
 #import <UIKit/UIKit.h>
 
 
-@interface BrowserViewController : UIViewController {
+@interface BrowserViewController : UIViewController
+{
 	IBOutlet UIBarButtonItem *stopReloadButton;
 	IBOutlet UIWebView *webView;
-	
+
 	UIViewController *viewController;
 	
 	BOOL isStop;
 }
+
 @property (nonatomic, readwrite, assign) UIViewController *viewController;
 
 - (IBAction)back:(id)unused;
 - (IBAction)forward:(id)unused;
 - (IBAction)stopReload:(id)unused;
 - (IBAction)openSafari:(id)unused;
-//- (IBAction)close:(id)unused;
-
 - (void)navigateTo:(NSURLRequest *)request;
 
 @end

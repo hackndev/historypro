@@ -17,7 +17,8 @@
 
 - (id)initWithName:(NSString *)aName
 			  date:(NSDate *)aDate
-			  tags:(NSArray *)aTags {
+			  tags:(NSArray *)aTags
+{
 	self = [super init];
 	if (nil != self) {
 		name = [aName retain];

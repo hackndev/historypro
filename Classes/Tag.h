@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Tag : NSObject {
+@interface Tag : NSObject
+{
 	NSString *tagname;
 	NSString *url;
 

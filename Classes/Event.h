@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Event : NSObject {
+@interface Event : NSObject
+{
 	NSString *name;
 	NSDate *date;
 	NSArray *tags;
 
 }
+
 - (id)initWithName:(NSString *)aName
 			  date:(NSDate *)aDate
 			  tags:(NSArray *)aTags;
