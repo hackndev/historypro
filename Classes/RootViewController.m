@@ -36,7 +36,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = @"November 15";	
+	
+	NSDate *date = [[NSDate alloc] init];
+	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"dd MMMM"];
+	
+	NSString *stringFromDate = [formatter stringFromDate:date];
+	
+	self.title = (@"%@", stringFromDate);
 	
 	[[Server sharedInstance] getEventsForDate:[NSDate date]];
 }
