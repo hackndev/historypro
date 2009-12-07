@@ -14,12 +14,12 @@
 @synthesize tagname;
 @synthesize url;
 
-- (id)initWithTagname:(NSString *)aTegname
+- (id)initWithTagname:(NSString *)aTagname
 			  url:(NSString *)aUrl 
 {
 	self = [super init];
 	if (nil != self) {
-		tagname = [aTegname retain];
+		tagname = [aTagname retain];
 		url = [aUrl retain];
 	}
 	return self;

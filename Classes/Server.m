@@ -9,6 +9,7 @@
 #import "Server.h"
 #import "Event.h"
 #import "Tag.h"
+#import "DDXML+HTML.h"
 
 @implementation Server
 
@@ -35,7 +36,60 @@
 
 - (void)getEventsForDate:(NSDate *)date
 {
-	// TODO: fetch new events
+	NSError *error = nil;
+	NSURL *url = [NSURL URLWithString:@"http://en.wikipedia.org/wiki/November_15"];
+	NSData *htmlData = [[NSData alloc] initWithContentsOfURL:url];
+	
+	// html
+	DDXMLDocument *htmlDocument = [[DDXMLDocument alloc]
+								   initWithHTMLData:htmlData
+								   options:HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR
+								   error:&error
+								   ];
+	
+	// xpath
+	NSArray *array = [htmlDocument
+					  nodesForXPath:@"/html/body/div[@id='globalWrapper']/div[@id='column-content']/div[@id='content']/div[@id='bodyContent']/ul[3]/li"
+					  error:&error
+					  ];
+	
+	
+	for(DDXMLElement *lis in array) {
+		NSMutableString *descr = [NSMutableString string];
+		NSMutableArray *tags = [NSMutableArray array];
+		for(DDXMLElement *e in [lis children]) {
+			if([e kind] == DDXMLTextKind) {
+				[descr appendString:[e description]];
+			} else {
+				if ([[e attributeForName:@"href"] description] != nil) {
+					NSString *prehttp = @"http://en.wikipedia.org";
+					NSString *tagLink = [prehttp stringByAppendingString:[[e attributeForName:@"href"] stringValue]];
+					NSString *tagName = [[e childAtIndex:0] description];
+					[descr appendString:tagName];
+					Tag *c = [[Tag alloc] initWithTagname:tagName url:tagLink];
+					[tags addObject:c];
+				} else {
+					for (DDXMLElement *q in [e children]) {
+						if([q kind] == DDXMLTextKind) {
+							[descr appendString:[q description]];
+						} else {
+							if ([[q attributeForName:@"href"] description] != nil) {
+								NSString *prehttp = @"http://en.wikipedia.org";
+								NSString *tagLink = [prehttp stringByAppendingString:[[e attributeForName:@"href"] stringValue]];
+								NSString *tagName = [[q childAtIndex:0] description];
+								[descr appendString:tagName];
+								Tag *c = [[Tag alloc] initWithTagname:tagName url:tagLink];
+								[tags addObject:c];
+							}
+						}
+					}
+				}
+			}
+		}
+		Event *n = [[[Event alloc] initWithName:descr date:[NSDate date] tags:tags] autorelease];
+		[_events addObject:n];
+	}
+	
 #ifdef STUB
 	[NSTimer scheduledTimerWithTimeInterval:1
 									 target:self
@@ -50,20 +104,6 @@
 #ifdef STUB
 - (void)_onTimer:(id)unused
 {
-	Tag *c = [[[Tag alloc] initWithTagname:@"Penda of Mercia" url:@"http://en.wikipedia.org/wiki/Penda_of_Mercia"] autorelease];
-	Tag *b = [[[Tag alloc] initWithTagname:@"Oswiu of Northumbria" url:@"http://en.wikipedia.org/wiki/Oswiu_of_Northumbria"] autorelease];
-	Tag *d = [[[Tag alloc] initWithTagname:@"Battle of Winwaed" url:@"http://en.wikipedia.org/wiki/Battle_of_Winwaed"] autorelease];
-	NSArray *testarray = [[[NSArray alloc] initWithObjects:d, c, b, nil] autorelease];
-	Event *e = [[[Event alloc] initWithName:@"655 – Battle of Winwaed: Penda of Mercia is defeated by Oswiu of Northumbria" date:[NSDate date] tags:testarray] autorelease];
-	Tag *a = [[[Tag alloc] initWithTagname:@"Battle of Morgarten" url:@"http://en.wikipedia.org/wiki/Battle_of_Morgarten"] autorelease];
-	Tag *z = [[[Tag alloc] initWithTagname:@"Schweizer Eidgenossenschaft" url:@"http://en.wikipedia.org/wiki/Swiss_Confederation"] autorelease];
-	Tag *x = [[[Tag alloc] initWithTagname:@"Leopold I" url:@"http://en.wikipedia.org/wiki/Leopold_I,_Duke_of_Austria"] autorelease];
-	NSArray *testarray1 = [[[NSArray alloc] initWithObjects:a, z, x, nil] autorelease];
-	Event *w = [[[Event alloc] initWithName:@"1315 – Battle of Morgarten the Schweizer Eidgenossenschaft ambushes the army of Leopold I" date:[NSDate date] tags:testarray1] autorelease];
-	
-	[_events addObject:e];
-	[_events addObject:w];
-	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"server.events.updated" object:self];
 }
 #endif
