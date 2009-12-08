@@ -64,12 +64,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [[Server sharedInstance].list count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [[Server sharedInstance].events count];
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	
+    NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
+    NSArray *companies = [dict objectForKey:@"Objects"];
+    return [companies count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,10 +85,15 @@
     }
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-	Event *e = [[Server sharedInstance].events objectAtIndex:indexPath.row];
-	cell.textLabel.text = e.name;
-	
+	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
+    NSArray *companies = [dict objectForKey:@"Objects"];
+    cell.text = [[companies objectAtIndex:indexPath.row] name];
     return cell;
+	}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
+    return [dict objectForKey:@"Title"];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

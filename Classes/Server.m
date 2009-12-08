@@ -14,6 +14,7 @@
 @implementation Server
 
 @synthesize events = _events;
+@synthesize list = _list;
 
 - (id)init
 {
@@ -21,6 +22,7 @@
 	if(!self) return self;
 	
 	_events = [[NSMutableArray alloc] init];
+	_list = [[NSMutableArray alloc] init];
 	
 	return self;
 }
@@ -48,9 +50,12 @@
 								   ];
 	
 	// xpath
+	NSMutableArray *ArrEv = [[NSMutableArray alloc] init];
+	NSMutableArray *ArrBi = [[NSMutableArray alloc] init];
+	NSMutableArray *ArrDe = [[NSMutableArray alloc] init];
 	for (int i=1; i < 4; i++) {
+		int j = 0;
 		NSString *xpath = [NSString stringWithFormat:@"/html/body/div[@id='globalWrapper']/div[@id='column-content']/div[@id='content']/div[@id='bodyContent']/ul[%d]/li", i];
-		NSLog(@"%@", xpath);
 		NSArray *array = [htmlDocument
 						  nodesForXPath:xpath
 						  error:&error
@@ -78,7 +83,7 @@
 							} else {
 								if ([[q attributeForName:@"href"] description] != nil) {
 									NSString *prehttp = @"http://en.wikipedia.org";
-									NSString *tagLink = [prehttp stringByAppendingString:[[e attributeForName:@"href"] stringValue]];
+									NSString *tagLink = [prehttp stringByAppendingString:[[q attributeForName:@"href"] stringValue]];
 									NSString *tagName = [[q childAtIndex:0] description];
 									[descr appendString:tagName];
 									Tag *c = [[Tag alloc] initWithTagname:tagName url:tagLink];
@@ -91,6 +96,37 @@
 			}
 			Event *n = [[[Event alloc] initWithName:descr date:[NSDate date] tags:tags] autorelease];
 			[_events addObject:n];
+			if (i == 1) {
+				[ArrEv addObject:n];
+			}
+			if (i == 2) {
+				[ArrBi addObject:n];
+			}
+			if (i == 3) {
+				[ArrDe addObject:n];
+			}
+			j = j++;
+			NSLog(@"%i", j);
+		}
+		switch (i) {
+			case 1:
+				[_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+								  @"Events", @"Title",
+								  ArrEv, @"Objects",
+								  nil]];
+				break;
+			case 2:
+				[_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+								  @"Birth", @"Title",
+								  ArrBi, @"Objects",
+								  nil]];
+				break;
+			case 3:
+				[_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+								  @"Death", @"Title",
+								  ArrDe, @"Objects",
+								  nil]];
+				break;
 		}
 	}
 	
