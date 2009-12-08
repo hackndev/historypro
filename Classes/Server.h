@@ -11,9 +11,11 @@
 @interface Server : NSObject
 {
 	NSMutableArray *_events;
+	NSMutableArray *_list;
 
 }
 @property (readonly) NSArray *events;
+@property (readonly) NSArray *list;
 
 + (Server *)sharedInstance;
 - (void)getEventsForDate:(NSDate *)date;
