@@ -38,8 +38,15 @@
 
 - (void)getEventsForDate:(NSDate *)date
 {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	NSDate *curdate = [date retain];
+	[formatter setDateFormat:@"MMMM dd"];
+	NSString *stringFromDate = [formatter stringFromDate:curdate];
+	[formatter release];
+	NSString *stringForRef = [stringFromDate stringByReplacingOccurrencesOfString:@" " withString:@"_"];
 	NSError *error = nil;
-	NSURL *url = [NSURL URLWithString:@"http://en.wikipedia.org/wiki/November_15"];
+	NSString *formattedString = [NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", stringForRef];
+	NSURL *url = [NSURL URLWithString:formattedString];
 	NSData *htmlData = [[NSData alloc] initWithContentsOfURL:url];
 	
 	// html
@@ -54,7 +61,6 @@
 	NSMutableArray *ArrBi = [[NSMutableArray alloc] init];
 	NSMutableArray *ArrDe = [[NSMutableArray alloc] init];
 	for (int i=1; i < 4; i++) {
-		int j = 0;
 		NSString *xpath = [NSString stringWithFormat:@"/html/body/div[@id='globalWrapper']/div[@id='column-content']/div[@id='content']/div[@id='bodyContent']/ul[%d]/li", i];
 		NSArray *array = [htmlDocument
 						  nodesForXPath:xpath
@@ -105,8 +111,6 @@
 			if (i == 3) {
 				[ArrDe addObject:n];
 			}
-			j = j++;
-			NSLog(@"%i", j);
 		}
 		switch (i) {
 			case 1:

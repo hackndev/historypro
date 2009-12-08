@@ -36,11 +36,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	NSDate *date = [[NSDate alloc] init];
-	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"dd MMMM"];
+	[formatter setTimeStyle:NSDateFormatterNoStyle];
+	[formatter setDateStyle:NSDateFormatterMediumStyle];
+	NSDate *date = [[NSDate alloc] init];
+	[formatter setLocale:[NSLocale currentLocale]];
 	
 	NSString *stringFromDate = [formatter stringFromDate:date];
 	
@@ -87,7 +87,7 @@
     
 	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
     NSArray *companies = [dict objectForKey:@"Objects"];
-    cell.text = [[companies objectAtIndex:indexPath.row] name];
+    cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
     return cell;
 	}
 
@@ -98,8 +98,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	Event *e = [[Server sharedInstance].events objectAtIndex:indexPath.row];
-	TagsController *controller = [[TagsController alloc] initWithTags:e.tags eventName:e.name];
+	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
+    NSArray *companies = [dict objectForKey:@"Objects"];
+	TagsController *controller = [[TagsController alloc] initWithTags:[[companies objectAtIndex:indexPath.row] tags] eventName:[[companies objectAtIndex:indexPath.row] name]];
 	[self.navigationController pushViewController:controller animated:YES];
 	[controller release];
 }
