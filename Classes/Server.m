@@ -41,13 +41,17 @@
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	NSDate *curdate = [date retain];
 	[formatter setDateFormat:@"MMMM dd"];
+	
+	NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	[formatter setLocale:usLocale];
+	
 	NSString *stringFromDate = [formatter stringFromDate:curdate];
 	[formatter release];
 	NSString *stringForRef = [stringFromDate stringByReplacingOccurrencesOfString:@" " withString:@"_"];
 	NSError *error = nil;
 	NSString *formattedString = [NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", stringForRef];
 	NSURL *url = [NSURL URLWithString:formattedString];
-	NSData *htmlData = [[NSData alloc] initWithContentsOfURL:url];
+	NSData *htmlData = [[[NSData alloc] initWithContentsOfURL:url] autorelease];
 	
 	// html
 	DDXMLDocument *htmlDocument = [[DDXMLDocument alloc]
@@ -80,7 +84,7 @@
 						NSString *tagLink = [prehttp stringByAppendingString:[[e attributeForName:@"href"] stringValue]];
 						NSString *tagName = [[e childAtIndex:0] description];
 						[descr appendString:tagName];
-						Tag *c = [[Tag alloc] initWithTagname:tagName url:tagLink];
+						Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
 						[tags addObject:c];
 					} else {
 						for (DDXMLElement *q in [e children]) {
@@ -92,7 +96,7 @@
 									NSString *tagLink = [prehttp stringByAppendingString:[[q attributeForName:@"href"] stringValue]];
 									NSString *tagName = [[q childAtIndex:0] description];
 									[descr appendString:tagName];
-									Tag *c = [[Tag alloc] initWithTagname:tagName url:tagLink];
+									Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
 									[tags addObject:c];
 								}
 							}
