@@ -54,23 +54,23 @@
 		D52F90E610B41FA200A08BF6 /* 01-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-refresh.png"; sourceTree = "<group>"; };
 		D52F90E710B41FA200A08BF6 /* NavBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBack.png; sourceTree = "<group>"; };
 		D52F90E810B41FA200A08BF6 /* NavForward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavForward.png; sourceTree = "<group>"; };
-		D57799B110CC02D200CDD0E7 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
-		D57799B210CC02D200CDD0E7 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
-		D57799B310CC02D200CDD0E7 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
-		D57799B410CC02D200CDD0E7 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
-		D57799B510CC02D200CDD0E7 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
-		D57799B610CC02D200CDD0E7 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
-		D57799B710CC02D200CDD0E7 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
-		D57799B810CC02D200CDD0E7 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
-		D57799B910CC02D200CDD0E7 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
-		D57799BA10CC02D200CDD0E7 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
-		D57799BB10CC02D200CDD0E7 /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringAdditions.h; sourceTree = "<group>"; };
-		D57799BC10CC02D200CDD0E7 /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
-		D5779A4B10CC040000CDD0E7 /* DDXML+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDXML+HTML.h"; sourceTree = "<group>"; };
-		D5779A4C10CC040000CDD0E7 /* DDXMLDocument+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDXMLDocument+HTML.h"; sourceTree = "<group>"; };
-		D5779A4D10CC040000CDD0E7 /* DDXMLDocument+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DDXMLDocument+HTML.m"; sourceTree = "<group>"; };
-		D5779A4E10CC040000CDD0E7 /* DDXMLNode+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDXMLNode+HTML.h"; sourceTree = "<group>"; };
-		D5779A4F10CC040000CDD0E7 /* DDXMLNode+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DDXMLNode+HTML.m"; sourceTree = "<group>"; };
+		D57799B110CC02D200CDD0E7 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXML.h; path = Classes/DDXML.h; sourceTree = "<group>"; };
+		D57799B210CC02D200CDD0E7 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXMLDocument.h; path = Classes/DDXMLDocument.h; sourceTree = "<group>"; };
+		D57799B310CC02D200CDD0E7 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDXMLDocument.m; path = Classes/DDXMLDocument.m; sourceTree = "<group>"; };
+		D57799B410CC02D200CDD0E7 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXMLElement.h; path = Classes/DDXMLElement.h; sourceTree = "<group>"; };
+		D57799B510CC02D200CDD0E7 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDXMLElement.m; path = Classes/DDXMLElement.m; sourceTree = "<group>"; };
+		D57799B610CC02D200CDD0E7 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXMLElementAdditions.h; path = Classes/DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		D57799B710CC02D200CDD0E7 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDXMLElementAdditions.m; path = Classes/DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		D57799B810CC02D200CDD0E7 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXMLNode.h; path = Classes/DDXMLNode.h; sourceTree = "<group>"; };
+		D57799B910CC02D200CDD0E7 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDXMLNode.m; path = Classes/DDXMLNode.m; sourceTree = "<group>"; };
+		D57799BA10CC02D200CDD0E7 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXMLPrivate.h; path = Classes/DDXMLPrivate.h; sourceTree = "<group>"; };
+		D57799BB10CC02D200CDD0E7 /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringAdditions.h; path = Classes/NSStringAdditions.h; sourceTree = "<group>"; };
+		D57799BC10CC02D200CDD0E7 /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringAdditions.m; path = Classes/NSStringAdditions.m; sourceTree = "<group>"; };
+		D5779A4B10CC040000CDD0E7 /* DDXML+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DDXML+HTML.h"; path = "Classes/DDXML+HTML.h"; sourceTree = "<group>"; };
+		D5779A4C10CC040000CDD0E7 /* DDXMLDocument+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DDXMLDocument+HTML.h"; path = "Classes/DDXMLDocument+HTML.h"; sourceTree = "<group>"; };
+		D5779A4D10CC040000CDD0E7 /* DDXMLDocument+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DDXMLDocument+HTML.m"; path = "Classes/DDXMLDocument+HTML.m"; sourceTree = "<group>"; };
+		D5779A4E10CC040000CDD0E7 /* DDXMLNode+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DDXMLNode+HTML.h"; path = "Classes/DDXMLNode+HTML.h"; sourceTree = "<group>"; };
+		D5779A4F10CC040000CDD0E7 /* DDXMLNode+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DDXMLNode+HTML.m"; path = "Classes/DDXMLNode+HTML.m"; sourceTree = "<group>"; };
 		D5BA9B6310B438C30066082A /* TagsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagsController.xib; sourceTree = "<group>"; };
 		D5CFA75D109CCC1C00645CD0 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		D5CFA75E109CCC1C00645CD0 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
@@ -102,23 +102,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D5779A4B10CC040000CDD0E7 /* DDXML+HTML.h */,
-				D5779A4C10CC040000CDD0E7 /* DDXMLDocument+HTML.h */,
-				D5779A4D10CC040000CDD0E7 /* DDXMLDocument+HTML.m */,
-				D5779A4E10CC040000CDD0E7 /* DDXMLNode+HTML.h */,
-				D5779A4F10CC040000CDD0E7 /* DDXMLNode+HTML.m */,
-				D57799B110CC02D200CDD0E7 /* DDXML.h */,
-				D57799B210CC02D200CDD0E7 /* DDXMLDocument.h */,
-				D57799B310CC02D200CDD0E7 /* DDXMLDocument.m */,
-				D57799B410CC02D200CDD0E7 /* DDXMLElement.h */,
-				D57799B510CC02D200CDD0E7 /* DDXMLElement.m */,
-				D57799B610CC02D200CDD0E7 /* DDXMLElementAdditions.h */,
-				D57799B710CC02D200CDD0E7 /* DDXMLElementAdditions.m */,
-				D57799B810CC02D200CDD0E7 /* DDXMLNode.h */,
-				D57799B910CC02D200CDD0E7 /* DDXMLNode.m */,
-				D57799BA10CC02D200CDD0E7 /* DDXMLPrivate.h */,
-				D57799BB10CC02D200CDD0E7 /* NSStringAdditions.h */,
-				D57799BC10CC02D200CDD0E7 /* NSStringAdditions.m */,
 				D5D206DE10B03AEE00C3531C /* BrowserViewController.h */,
 				D5D206DF10B03AEE00C3531C /* BrowserViewController.m */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
@@ -150,6 +133,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				D577A66210CE9A4500CDD0E7 /* KissXML */,
 				D5EF938910BF1A5B004A40DE /* XIB */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -188,6 +172,30 @@
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D577A66210CE9A4500CDD0E7 /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				D5779A4B10CC040000CDD0E7 /* DDXML+HTML.h */,
+				D5779A4C10CC040000CDD0E7 /* DDXMLDocument+HTML.h */,
+				D5779A4D10CC040000CDD0E7 /* DDXMLDocument+HTML.m */,
+				D5779A4E10CC040000CDD0E7 /* DDXMLNode+HTML.h */,
+				D5779A4F10CC040000CDD0E7 /* DDXMLNode+HTML.m */,
+				D57799B110CC02D200CDD0E7 /* DDXML.h */,
+				D57799B210CC02D200CDD0E7 /* DDXMLDocument.h */,
+				D57799B310CC02D200CDD0E7 /* DDXMLDocument.m */,
+				D57799B410CC02D200CDD0E7 /* DDXMLElement.h */,
+				D57799B510CC02D200CDD0E7 /* DDXMLElement.m */,
+				D57799B610CC02D200CDD0E7 /* DDXMLElementAdditions.h */,
+				D57799B710CC02D200CDD0E7 /* DDXMLElementAdditions.m */,
+				D57799B810CC02D200CDD0E7 /* DDXMLNode.h */,
+				D57799B910CC02D200CDD0E7 /* DDXMLNode.m */,
+				D57799BA10CC02D200CDD0E7 /* DDXMLPrivate.h */,
+				D57799BB10CC02D200CDD0E7 /* NSStringAdditions.h */,
+				D57799BC10CC02D200CDD0E7 /* NSStringAdditions.m */,
+			);
+			name = KissXML;
 			sourceTree = "<group>";
 		};
 		D5EF938910BF1A5B004A40DE /* XIB */ = {
