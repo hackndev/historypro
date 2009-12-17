@@ -74,6 +74,11 @@
     return [companies count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 88;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -87,21 +92,14 @@
     
 	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
     NSArray *companies = [dict objectForKey:@"Objects"];
-<<<<<<< HEAD
-    cell.text = [[companies objectAtIndex:indexPath.row] name];
-=======
+	cell.textLabel.font = [UIFont systemFontOfSize:14];
+	cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+	cell.textLabel.numberOfLines = 5;
     cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
->>>>>>> origin/master
     return cell;
 	}
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
-    return [dict objectForKey:@"Title"];
-}
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
     NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
     return [dict objectForKey:@"Title"];
 }
