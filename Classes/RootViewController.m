@@ -33,6 +33,39 @@
 	[self.tableView reloadData];
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+//	UITableView *table = self.tableView;
+	switch (buttonIndex) {
+		case 0:
+			NSLog(@"Events");
+			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+			break;
+		case 1:
+			NSLog(@"Birth");
+			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+			break;
+		case 2:
+			NSLog(@"Death");
+			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+			break;
+		default:
+			break;
+	}
+}
+	
+- (void) presentSheet
+{
+	UIActionSheet *menu = [[UIActionSheet alloc]
+						   initWithTitle: @ "Section"
+						   delegate:self
+						   cancelButtonTitle:@ "Cancel"
+						   destructiveButtonTitle:nil
+						   otherButtonTitles:@ "Events", @"Birth", @"Death", nil];
+	[menu showInView:self.view];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,6 +81,10 @@
 	self.title = (@"%@", stringFromDate);
 	
 	[[Server sharedInstance] getEventsForDate:[NSDate date]];
+	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"SC"
+																			  style:UIBarButtonItemStylePlain
+																			 target:self
+																			 action:@selector(presentSheet)] autorelease];
 }
 
 - (void)didReceiveMemoryWarning
