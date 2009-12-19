@@ -36,18 +36,14 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-//	UITableView *table = self.tableView;
 	switch (buttonIndex) {
 		case 0:
-			NSLog(@"Events");
 			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 			break;
 		case 1:
-			NSLog(@"Birth");
 			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 			break;
 		case 2:
-			NSLog(@"Death");
 			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 			break;
 		default:
@@ -57,12 +53,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	
 - (void) presentSheet
 {
-	UIActionSheet *menu = [[UIActionSheet alloc]
-						   initWithTitle: @ "Section"
+	UIActionSheet *menu = [[[UIActionSheet alloc]
+						   initWithTitle: @"Section"
 						   delegate:self
-						   cancelButtonTitle:@ "Cancel"
+						   cancelButtonTitle:@"Cancel"
 						   destructiveButtonTitle:nil
-						   otherButtonTitles:@ "Events", @"Birth", @"Death", nil];
+						   otherButtonTitles:@"Events", @"Birth", @"Death", nil] autorelease];
 	[menu showInView:self.view];
 }
 
@@ -85,6 +81,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 																			  style:UIBarButtonItemStylePlain
 																			 target:self
 																			 action:@selector(presentSheet)] autorelease];
+	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:1];
+    NSString *companies = [dict objectForKey:@"Title"];
+	if (companies != nil) {
+		NSLog(@"OK %@", companies);
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,7 +132,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
     NSArray *companies = [dict objectForKey:@"Objects"];
 	cell.textLabel.font = [UIFont systemFontOfSize:14];
 	cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-	cell.textLabel.numberOfLines = 5;
+	cell.textLabel.numberOfLines = 4;
     cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
     return cell;
 	}

@@ -40,6 +40,7 @@
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	NSDate *curdate = [date retain];
+	//NSDate *curdate = [NSDate dateWithString:@"2009-03-04 10:45:32 +0600"];
 	[formatter setDateFormat:@"MMMM dd"];
 	
 	NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
@@ -51,6 +52,9 @@
 	NSError *error = nil;
 	NSString *formattedString = [NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", stringForRef];
 	NSURL *url = [NSURL URLWithString:formattedString];
+	
+	//NSURL *testUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"March_1" ofType:@"html"] isDirectory:NO];
+	
 	NSData *htmlData = [[[NSData alloc] initWithContentsOfURL:url] autorelease];
 	
 	// html
@@ -77,24 +81,40 @@
 			NSMutableArray *tags = [NSMutableArray array];
 			for(DDXMLElement *e in [lis children]) {
 				if([e kind] == DDXMLTextKind) {
-					[descr appendString:[e description]];
+					NSString *tempStr = [[e description] stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
+					[descr appendString:tempStr];
 				} else {
 					if ([[e attributeForName:@"href"] description] != nil) {
 						NSString *prehttp = @"http://en.wikipedia.org";
 						NSString *tagLink = [prehttp stringByAppendingString:[[e attributeForName:@"href"] stringValue]];
-						NSString *tagName = [[e childAtIndex:0] description];
-						[descr appendString:tagName];
-						Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
-						[tags addObject:c];
+						char chr = [[[e childAtIndex:0] description] characterAtIndex:0];
+						if (chr == '<') {
+							int myInt = [[[e childAtIndex:0] description] length];
+							NSString *tagName = [[[e childAtIndex:0] description] substringWithRange:NSMakeRange(3,myInt-7)];
+							NSLog(@"%@", tagName);
+							tagName = [tagName stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
+							[descr appendString:tagName];
+							Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
+							[tags addObject:c];
+						} else {
+							NSString *tagName = [[e childAtIndex:0] description];
+							tagName = [tagName stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
+							[descr appendString:tagName];
+							Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
+							[tags addObject:c];
+						}
+
 					} else {
 						for (DDXMLElement *q in [e children]) {
 							if([q kind] == DDXMLTextKind) {
-								[descr appendString:[q description]];
+								NSString *tempStr = [[q description] stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
+								[descr appendString:tempStr];
 							} else {
 								if ([[q attributeForName:@"href"] description] != nil) {
 									NSString *prehttp = @"http://en.wikipedia.org";
 									NSString *tagLink = [prehttp stringByAppendingString:[[q attributeForName:@"href"] stringValue]];
 									NSString *tagName = [[q childAtIndex:0] description];
+									tagName = [tagName stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
 									[descr appendString:tagName];
 									Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
 									[tags addObject:c];
