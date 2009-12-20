@@ -25,7 +25,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	CGSize tlSize = [name sizeWithFont:textView.font constrainedToSize:CGSizeMake(100, 200)];
+	CGRect newFrame = textView.frame;
+	newFrame.size.height = (tlSize.height/2.0);
+	textView.frame = newFrame;
+	
+	CGRect lowerRect = self.tableView.frame;
+	lowerRect.origin.y = (tlSize.height/2.0);
+	self.tableView.frame = lowerRect;
 	textView.text = name;
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated

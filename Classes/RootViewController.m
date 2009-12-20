@@ -133,7 +133,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	cell.textLabel.font = [UIFont systemFontOfSize:14];
 	cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 	cell.textLabel.numberOfLines = 4;
-    cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
+    //cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
+	int myInt = [[[companies objectAtIndex:indexPath.row] name] length];
+	if (myInt > 140) {
+		NSString *labelName = [[[companies objectAtIndex:indexPath.row] name] substringWithRange:NSMakeRange(0,140)];
+		labelName = [labelName stringByAppendingString:@"..."];
+		cell.textLabel.text = labelName;
+	} else {
+		cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
+	}
+
     return cell;
 	}
 

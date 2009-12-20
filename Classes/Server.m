@@ -91,7 +91,6 @@
 						if (chr == '<') {
 							int myInt = [[[e childAtIndex:0] description] length];
 							NSString *tagName = [[[e childAtIndex:0] description] substringWithRange:NSMakeRange(3,myInt-7)];
-							NSLog(@"%@", tagName);
 							tagName = [tagName stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
 							[descr appendString:tagName];
 							Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
@@ -118,6 +117,23 @@
 									[descr appendString:tagName];
 									Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
 									[tags addObject:c];
+								} else {
+									for (DDXMLElement *w in [q children]) {
+										if([w kind] == DDXMLTextKind) {
+											NSString *tempStr = [[w description] stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
+											[descr appendString:tempStr];
+										} else {
+											if ([[w attributeForName:@"href"] description] != nil) {
+												NSString *prehttp = @"http://en.wikipedia.org";
+												NSString *tagLink = [prehttp stringByAppendingString:[[w attributeForName:@"href"] stringValue]];
+												NSString *tagName = [[w childAtIndex:0] description];
+												tagName = [tagName stringByReplacingOccurrencesOfString:@"amp;" withString:@""];
+												[descr appendString:tagName];
+												Tag *c = [[[Tag alloc] initWithTagname:tagName url:tagLink] autorelease];
+												[tags addObject:c];
+											}
+										}
+									}
 								}
 							}
 						}
