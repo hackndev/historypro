@@ -25,16 +25,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	CGSize tlSize = [name sizeWithFont:textView.font constrainedToSize:CGSizeMake(100, 200)];
-	CGRect newFrame = textView.frame;
-	newFrame.size.height = (tlSize.height/2.0);
-	textView.frame = newFrame;
+	CGSize tlSize = [name sizeWithFont:textView.font constrainedToSize:CGSizeMake(320, 208)];
+	CGRect textRect = textView.frame;
+	textRect.size.height = tlSize.height + 30;
+	textRect.size.width = 320;
+	textView.frame = textRect;
 	
-	CGRect lowerRect = self.tableView.frame;
-	lowerRect.origin.y = (tlSize.height/2.0);
-	self.tableView.frame = lowerRect;
+	CGRect tableRect = self.tableView.frame;
+	tableRect.origin.y = tlSize.height + 30;
+	tableRect.size.height = (416 - (tlSize.height + 30));
+	tableRect.size.width = 320;
+	self.tableView.frame = tableRect;
 	textView.text = name;
-	
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,6 +68,15 @@
 	return [tags count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 40;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	return @"Tags"; 
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -76,6 +88,9 @@
     }
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.textLabel.font = [UIFont systemFontOfSize:16];
+	cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+	cell.textLabel.numberOfLines = 2;
     
 	Tag *curtag = [tags objectAtIndex:indexPath.row];
 	cell.textLabel.text = curtag.tagname;
