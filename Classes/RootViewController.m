@@ -38,9 +38,6 @@
 											  action:@selector(presentSheet)] autorelease];
 	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:1];
     NSString *companies = [dict objectForKey:@"Title"];
-	if (companies != nil) {
-		NSLog(@"OK %@", companies);
-	}
 	isLoaded = YES;
 	[self.tableView reloadData];
 }
@@ -89,7 +86,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	self.title = (@"%@", stringFromDate);
 	
 	[[Server sharedInstance] getEventsForDate:[NSDate date]];
-	// TODO: draw stub "loading" UI
 }
 
 - (void)didReceiveMemoryWarning
