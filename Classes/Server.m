@@ -51,7 +51,23 @@ typedef void (^DataBlock)(NSData *data);
 	DataBlock b = [block copy]; // copy it from stack to heap
 	[NSThread pl_performBlockOnNewThread:^{
 		// this will run in separate thread
-		NSData *htmlData = [[NSData alloc] initWithContentsOfURL:url];
+		NSDate *now = [NSDate date];
+		NSDate *cached = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheDate"];
+		NSData *htmlData = nil;
+		NSLog(@"cached %@ vs. %@", [[cached description] substringToIndex:10], [[now description] substringToIndex:10]);
+		if([[[now description] substringToIndex:10] isEqualToString:[[cached description] substringToIndex:10]]) {
+			htmlData = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheData"];
+			NSLog(@"Got %d bytes from cache", [htmlData length]);
+		} else {
+			htmlData = [[NSData alloc] initWithContentsOfURL:url];
+			if(htmlData) {
+				[[NSUserDefaults standardUserDefaults] setValue:htmlData forKey:@"cacheData"];
+				[[NSUserDefaults standardUserDefaults] setValue:now forKey:@"cacheDate"];
+				NSLog(@"Cached %d bytes", [htmlData length]);
+			} else {
+				// TODO: handle network error
+			}
+		}
 		[[NSThread mainThread] pl_performBlock:^{
 			// this will run on main thread again
 			b([htmlData autorelease]);
