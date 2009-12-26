@@ -18,6 +18,7 @@
 	self = [super initWithCoder:aDecoder];
 	if(!self) return self;
 	
+	isLoaded = NO;
 	[[NSNotificationCenter defaultCenter]
 	 addObserver:self
 	 selector:@selector(onEventsUpdated:)
@@ -40,6 +41,7 @@
 	if (companies != nil) {
 		NSLog(@"OK %@", companies);
 	}
+	isLoaded = YES;
 	[self.tableView reloadData];
 }
 
@@ -104,57 +106,80 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[Server sharedInstance].list count];
+	if(isLoaded)
+		return [[Server sharedInstance].list count];
+	else
+		return 1;
+
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	
-    NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
-    NSArray *companies = [dict objectForKey:@"Objects"];
-    return [companies count];
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	if(isLoaded) {
+		NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
+		NSArray *companies = [dict objectForKey:@"Objects"];
+		return [companies count];
+	} else
+		return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return 88;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
-    NSArray *companies = [dict objectForKey:@"Objects"];
-	cell.textLabel.font = [UIFont systemFontOfSize:14];
-	cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-	cell.textLabel.numberOfLines = 4;
-    //cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
-	int myInt = [[[companies objectAtIndex:indexPath.row] name] length];
-	if (myInt > 140) {
-		NSString *labelName = [[[companies objectAtIndex:indexPath.row] name] substringWithRange:NSMakeRange(0,140)];
-		labelName = [labelName stringByAppendingString:@"..."];
-		cell.textLabel.text = labelName;
+	
+	if(isLoaded) {
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		
+		NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
+		NSArray *companies = [dict objectForKey:@"Objects"];
+		cell.textLabel.font = [UIFont systemFontOfSize:14];
+		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+		cell.textLabel.numberOfLines = 4;
+		cell.textLabel.textAlignment = UITextAlignmentLeft;
+		//cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
+		int myInt = [[[companies objectAtIndex:indexPath.row] name] length];
+		if (myInt > 140) {
+			NSString *labelName = [[[companies objectAtIndex:indexPath.row] name] substringWithRange:NSMakeRange(0,140)];
+			labelName = [labelName stringByAppendingString:@"..."];
+			cell.textLabel.text = labelName;
+		} else {
+			cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
+		}
 	} else {
-		cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
+		cell.textLabel.text = NSLocalizedString(@"Loading", @"Loading message");
+		cell.textLabel.textAlignment = UITextAlignmentCenter;
 	}
-
     return cell;
-	}
+}
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
-    return [dict objectForKey:@"Title"];
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+	if(isLoaded) {
+		NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
+		return [dict objectForKey:@"Title"];
+	} else
+		return nil;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return isLoaded ? indexPath : nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if(!isLoaded)
+		return;
 	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
     NSArray *companies = [dict objectForKey:@"Objects"];
 	TagsController *controller = [[TagsController alloc] initWithTags:[[companies objectAtIndex:indexPath.row] tags]
