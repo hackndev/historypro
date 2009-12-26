@@ -30,6 +30,16 @@
 - (void)onEventsUpdated:(NSNotification *)unused
 {
 	NSLog(@"updating!");
+	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
+											  initWithTitle:@"SC"
+											  style:UIBarButtonItemStylePlain
+											  target:self
+											  action:@selector(presentSheet)] autorelease];
+	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:1];
+    NSString *companies = [dict objectForKey:@"Title"];
+	if (companies != nil) {
+		NSLog(@"OK %@", companies);
+	}
 	[self.tableView reloadData];
 }
 
@@ -77,15 +87,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	self.title = (@"%@", stringFromDate);
 	
 	[[Server sharedInstance] getEventsForDate:[NSDate date]];
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"SC"
-																			  style:UIBarButtonItemStylePlain
-																			 target:self
-																			 action:@selector(presentSheet)] autorelease];
-	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:1];
-    NSString *companies = [dict objectForKey:@"Title"];
-	if (companies != nil) {
-		NSLog(@"OK %@", companies);
-	}
+	// TODO: draw stub "loading" UI
 }
 
 - (void)didReceiveMemoryWarning
