@@ -62,6 +62,7 @@ typedef void (^DataBlock)(NSData *data);
 
 - (void)getEventsForDate:(NSDate *)date
 {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	NSDate *curdate = [date retain];
 	//NSDate *curdate = [NSDate dateWithString:@"2009-03-04 10:45:32 +0600"];
@@ -209,6 +210,7 @@ typedef void (^DataBlock)(NSData *data);
 #ifdef STUB
 - (void)_onTimer:(id)unused
 {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"server.events.updated" object:self];
 }
 #endif
