@@ -92,7 +92,19 @@ typedef void (^DataBlock)(NSData *data);
 	NSString *stringForRef = [stringFromDate stringByReplacingOccurrencesOfString:@" " withString:@"_"];
 	NSError *error = nil;
 	NSString *formattedString = [NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", stringForRef];
+
 	NSURL *url = [NSURL URLWithString:formattedString];
+	NSString *content = [NSString stringWithContentsOfURL:url];
+    
+	if ([content rangeOfString:@"<span class=\"mw-headline\" id=\"Births\">Births</span>"].location != NSNotFound) {
+		
+        NSLog(@"String contains 'Deaths'");
+		
+    }
+    else
+    {
+        NSLog(@"String doesn't contain 'Deaths'.");
+    }
 	
 	[self fetchURL:url invoking:^(NSData *htmlData){
 		// html
