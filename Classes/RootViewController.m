@@ -36,8 +36,6 @@
 											  style:UIBarButtonItemStylePlain
 											  target:self
 											  action:@selector(presentSheet)] autorelease];
-	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:1];
-    NSString *companies = [dict objectForKey:@"Title"];
 	isLoaded = YES;
 	[self.tableView reloadData];
 }

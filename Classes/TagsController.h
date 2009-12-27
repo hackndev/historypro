@@ -18,6 +18,6 @@
 
 @property (readonly) UITableView *tableView;
 
--(id)initWithTags:(NSArray *)aTags eventName:(NSString *)aName;
+- (id)initWithTags:(NSArray *)aTags eventName:(NSString *)aName;
 
 @end

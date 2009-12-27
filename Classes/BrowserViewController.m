@@ -13,6 +13,17 @@
 
 @synthesize viewController;
 
++ (BrowserViewController *)sharedInstance
+{
+	static BrowserViewController *Instance = nil;
+	@synchronized(self) {
+		if(!Instance) {
+			Instance = [[BrowserViewController alloc] init];
+		}
+	}
+	return Instance;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
@@ -70,6 +81,13 @@
 	isStop = NO;
 	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
 	[[NetState sharedInstance] finishedNetworkAccess];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	if(webView.loading)
+        [[NetState sharedInstance] finishedNetworkAccess];        
+    [webView stopLoading];
 }
 
 @end

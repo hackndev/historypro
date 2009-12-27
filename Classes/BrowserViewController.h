@@ -21,6 +21,8 @@
 
 @property (nonatomic, readwrite, assign) UIViewController *viewController;
 
++ (BrowserViewController *)sharedInstance;
+
 - (IBAction)back:(id)unused;
 - (IBAction)forward:(id)unused;
 - (IBAction)stopReload:(id)unused;

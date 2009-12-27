@@ -37,7 +37,7 @@
 	tableRect.size.width = 320;
 	self.tableView.frame = tableRect;
 	textView.text = name;
-
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -101,10 +101,9 @@
 {
 	Tag *curtag = [tags objectAtIndex:indexPath.row];
 	NSURLRequest *requrl = [NSURLRequest requestWithURL:[NSURL URLWithString:curtag.url]];
-	BrowserViewController *webcontroller = [[BrowserViewController alloc] init];
+	BrowserViewController *webcontroller = [BrowserViewController sharedInstance];
 	[webcontroller navigateTo:requrl];
 	[self.navigationController pushViewController:webcontroller animated:YES];
-	[webcontroller release];
 }
 
 - (void)dealloc
