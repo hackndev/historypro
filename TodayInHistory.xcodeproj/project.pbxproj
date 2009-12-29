@@ -15,6 +15,10 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		A52F480C10EAAC1200894139 /* GTMIPhoneUnitTestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A52F480510EAABF900894139 /* GTMIPhoneUnitTestDelegate.m */; };
+		A52F480D10EAAC1500894139 /* GTMIPhoneUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = A52F480610EAABF900894139 /* GTMIPhoneUnitTestMain.m */; };
+		A52F480E10EAAC1A00894139 /* GTMSenTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A52F480810EAABF900894139 /* GTMSenTestCase.m */; };
+		A52F482910EAACEA00894139 /* GTMObjC2Runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = A52F482810EAACEA00894139 /* GTMObjC2Runtime.m */; };
 		A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A590A93410E661D800A3151C /* PLBlocks.framework */; };
 		A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
 		D50C675C109A19DE00E47FD2 /* TagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C675A109A19DE00E47FD2 /* TagsController.m */; };
@@ -52,6 +56,16 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TodayInHistory-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TodayInHistory-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A52F47F710EAAB6500894139 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52F47F910EAAB6500894139 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
+		A52F480310EAABF900894139 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMDefines.h; path = Tests/GTMDefines.h; sourceTree = "<group>"; };
+		A52F480410EAABF900894139 /* GTMIPhoneUnitTestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMIPhoneUnitTestDelegate.h; path = Tests/GTMIPhoneUnitTestDelegate.h; sourceTree = "<group>"; };
+		A52F480510EAABF900894139 /* GTMIPhoneUnitTestDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMIPhoneUnitTestDelegate.m; path = Tests/GTMIPhoneUnitTestDelegate.m; sourceTree = "<group>"; };
+		A52F480610EAABF900894139 /* GTMIPhoneUnitTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMIPhoneUnitTestMain.m; path = Tests/GTMIPhoneUnitTestMain.m; sourceTree = "<group>"; };
+		A52F480710EAABF900894139 /* GTMSenTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMSenTestCase.h; path = Tests/GTMSenTestCase.h; sourceTree = "<group>"; };
+		A52F480810EAABF900894139 /* GTMSenTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMSenTestCase.m; path = Tests/GTMSenTestCase.m; sourceTree = "<group>"; };
+		A52F482710EAACEA00894139 /* GTMObjC2Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMObjC2Runtime.h; path = Tests/GTMObjC2Runtime.h; sourceTree = "<group>"; };
+		A52F482810EAACEA00894139 /* GTMObjC2Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMObjC2Runtime.m; path = Tests/GTMObjC2Runtime.m; sourceTree = "<group>"; };
 		A590A93410E661D800A3151C /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		A590A93610E661EE00A3151C /* NSThread+PLBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+PLBlocks.h"; sourceTree = "<group>"; };
 		A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+PLBlocks.m"; sourceTree = "<group>"; };
@@ -104,6 +118,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A52F47F510EAAB6500894139 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -120,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* TodayInHistory.app */,
+				A52F47F710EAAB6500894139 /* Tests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,12 +149,14 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A52F480010EAAB9A00894139 /* Tests */,
 				D5EF938910BF1A5B004A40DE /* XIB */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				A52F47F910EAAB6500894139 /* Tests-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -202,6 +226,21 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		A52F480010EAAB9A00894139 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A52F480310EAABF900894139 /* GTMDefines.h */,
+				A52F480410EAABF900894139 /* GTMIPhoneUnitTestDelegate.h */,
+				A52F480510EAABF900894139 /* GTMIPhoneUnitTestDelegate.m */,
+				A52F480610EAABF900894139 /* GTMIPhoneUnitTestMain.m */,
+				A52F480710EAABF900894139 /* GTMSenTestCase.h */,
+				A52F480810EAABF900894139 /* GTMSenTestCase.m */,
+				A52F482710EAACEA00894139 /* GTMObjC2Runtime.h */,
+				A52F482810EAACEA00894139 /* GTMObjC2Runtime.m */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 		D577A66210CE9A4500CDD0E7 /* KissXML */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +296,24 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* TodayInHistory.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A52F47F610EAAB6500894139 /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A52F47FC10EAAB6700894139 /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				A52F47F310EAAB6500894139 /* Resources */,
+				A52F47F410EAAB6500894139 /* Sources */,
+				A52F47F510EAAB6500894139 /* Frameworks */,
+				A52F481410EAAC2B00894139 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = A52F47F710EAAB6500894139 /* Tests.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -277,6 +334,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* TodayInHistory */,
+				A52F47F610EAAB6500894139 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -297,7 +355,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A52F47F310EAAB6500894139 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A52F481410EAAC2B00894139 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh $SRCROOT/Tests/RunIPhoneUnitTest.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
@@ -321,6 +402,17 @@
 				D5779A5010CC040000CDD0E7 /* DDXMLDocument+HTML.m in Sources */,
 				D5779A5110CC040000CDD0E7 /* DDXMLNode+HTML.m in Sources */,
 				A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A52F47F410EAAB6500894139 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52F480C10EAAC1200894139 /* GTMIPhoneUnitTestDelegate.m in Sources */,
+				A52F480D10EAAC1500894139 /* GTMIPhoneUnitTestMain.m in Sources */,
+				A52F480E10EAAC1A00894139 /* GTMSenTestCase.m in Sources */,
+				A52F482910EAACEA00894139 /* GTMObjC2Runtime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +450,55 @@
 				GCC_PREFIX_HEADER = TodayInHistory_Prefix.pch;
 				INFOPLIST_FILE = "TodayInHistory-Info.plist";
 				PRODUCT_NAME = TodayInHistory;
+			};
+			name = Release;
+		};
+		A52F47FA10EAAB6600894139 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Tests-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				SDKROOT = iphonesimulator3.1.2;
+			};
+			name = Debug;
+		};
+		A52F47FB10EAAB6600894139 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Tests-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				SDKROOT = iphoneos3.1.2;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -404,6 +545,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A52F47FC10EAAB6700894139 /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A52F47FA10EAAB6600894139 /* Debug */,
+				A52F47FB10EAAB6600894139 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
