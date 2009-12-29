@@ -86,8 +86,8 @@
 		D5D206DE10B03AEE00C3531C /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		D5D206DF10B03AEE00C3531C /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
 		D5D206E110B03B0000C3531C /* BrowserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrowserViewController.xib; sourceTree = "<group>"; };
-		D5D2070B10B03FE300C3531C /* NetState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetState.h; sourceTree = "<group>"; };
-		D5D2070C10B03FE300C3531C /* NetState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetState.m; sourceTree = "<group>"; };
+		D5D2070B10B03FE300C3531C /* NetState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetState.h; path = Classes/NetState.h; sourceTree = "<group>"; };
+		D5D2070C10B03FE300C3531C /* NetState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetState.m; path = Classes/NetState.m; sourceTree = "<group>"; };
 		D5D8653A109C98E300DA5B25 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		D5D8653B109C98E300DA5B25 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,22 +110,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D5D206DE10B03AEE00C3531C /* BrowserViewController.h */,
-				D5D206DF10B03AEE00C3531C /* BrowserViewController.m */,
-				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
-				28C286E00D94DF7D0034E888 /* RootViewController.m */,
-				1D3623240D0F684500981E51 /* TIHAppDelegate.h */,
-				1D3623250D0F684500981E51 /* TIHAppDelegate.m */,
-				D50C6759109A19DE00E47FD2 /* TagsController.h */,
-				D50C675A109A19DE00E47FD2 /* TagsController.m */,
-				D5D8653A109C98E300DA5B25 /* Event.h */,
-				D5D8653B109C98E300DA5B25 /* Event.m */,
-				D5CFA75D109CCC1C00645CD0 /* Tag.h */,
-				D5CFA75E109CCC1C00645CD0 /* Tag.m */,
-				D5CFA761109CD78200645CD0 /* Server.h */,
-				D5CFA762109CD78200645CD0 /* Server.m */,
-				D5D2070B10B03FE300C3531C /* NetState.h */,
-				D5D2070C10B03FE300C3531C /* NetState.m */,
+				A52F47DB10EAA9AB00894139 /* Backend */,
+				A52F47DC10EAA9C100894139 /* Controllers */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -141,7 +127,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				D577A66210CE9A4500CDD0E7 /* KissXML */,
 				D5EF938910BF1A5B004A40DE /* XIB */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -155,6 +140,9 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D577A66210CE9A4500CDD0E7 /* KissXML */,
+				D5D2070B10B03FE300C3531C /* NetState.h */,
+				D5D2070C10B03FE300C3531C /* NetState.m */,
 				A590A93610E661EE00A3151C /* NSThread+PLBlocks.h */,
 				A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */,
 				28A0AAE50D9B0CCF005BE974 /* TodayInHistory_Prefix.pch */,
@@ -184,6 +172,34 @@
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A52F47DB10EAA9AB00894139 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				D5D8653A109C98E300DA5B25 /* Event.h */,
+				D5D8653B109C98E300DA5B25 /* Event.m */,
+				D5CFA75D109CCC1C00645CD0 /* Tag.h */,
+				D5CFA75E109CCC1C00645CD0 /* Tag.m */,
+				D5CFA761109CD78200645CD0 /* Server.h */,
+				D5CFA762109CD78200645CD0 /* Server.m */,
+			);
+			name = Backend;
+			sourceTree = "<group>";
+		};
+		A52F47DC10EAA9C100894139 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5D206DE10B03AEE00C3531C /* BrowserViewController.h */,
+				D5D206DF10B03AEE00C3531C /* BrowserViewController.m */,
+				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
+				28C286E00D94DF7D0034E888 /* RootViewController.m */,
+				1D3623240D0F684500981E51 /* TIHAppDelegate.h */,
+				1D3623250D0F684500981E51 /* TIHAppDelegate.m */,
+				D50C6759109A19DE00E47FD2 /* TagsController.h */,
+				D50C675A109A19DE00E47FD2 /* TagsController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		D577A66210CE9A4500CDD0E7 /* KissXML */ = {
