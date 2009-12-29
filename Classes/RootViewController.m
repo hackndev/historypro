@@ -43,30 +43,102 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	switch (buttonIndex) {
-		case 0:
-			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-			break;
+	switch ([[Server sharedInstance].list count])
+	{
 		case 1:
-			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+		{
+			switch (buttonIndex)
+			{
+				case 0:
+					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+					break;
+			}
+		}			
 			break;
 		case 2:
-			[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+		{
+			switch (buttonIndex)
+			{
+				case 0:
+					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+					break;
+				case 1:
+					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+					break;
+			}
+		}
 			break;
-		default:
+		case 3:
+		{
+			switch (buttonIndex)
+			{
+				case 0:
+					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+					break;
+				case 1:
+					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+					break;
+				case 2:
+					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+					break;
+			}
+		}			
 			break;
 	}
 }
 	
 - (void) presentSheet
-{
-	UIActionSheet *menu = [[[UIActionSheet alloc]
-						   initWithTitle: @"Section"
-						   delegate:self
-						   cancelButtonTitle:@"Cancel"
-						   destructiveButtonTitle:nil
-						   otherButtonTitles:@"Events", @"Birth", @"Death", nil] autorelease];
-	[menu showInView:self.view];
+{	
+	switch ([[Server sharedInstance].list count]) {
+		case 1: {
+			NSDictionary *sect1 = [[Server sharedInstance].list objectAtIndex:0];
+			NSString *sectionName1 = [sect1 objectForKey:@"Title"];
+			
+			UIActionSheet *menu = [[[UIActionSheet alloc]
+									initWithTitle:@"Section"
+									delegate:self
+									cancelButtonTitle:@"Cancel"
+									destructiveButtonTitle:nil
+									otherButtonTitles:sectionName1, nil] autorelease];
+			[menu showInView:self.view];
+		}
+			break;
+		case 2: {
+			NSDictionary *sect1 = [[Server sharedInstance].list objectAtIndex:0];
+			NSString *sectionName1 = [sect1 objectForKey:@"Title"];
+			
+			NSDictionary *sect2 = [[Server sharedInstance].list objectAtIndex:1];
+			NSString *sectionName2 = [sect2 objectForKey:@"Title"];
+			
+			UIActionSheet *menu = [[[UIActionSheet alloc]
+									initWithTitle:@"Section"
+									delegate:self
+									cancelButtonTitle:@"Cancel"
+									destructiveButtonTitle:nil
+									otherButtonTitles:sectionName1, sectionName2, nil] autorelease];
+			[menu showInView:self.view];
+		}
+			break;
+		case 3: {
+			NSDictionary *sect1 = [[Server sharedInstance].list objectAtIndex:0];
+			NSString *sectionName1 = [sect1 objectForKey:@"Title"];
+			
+			NSDictionary *sect2 = [[Server sharedInstance].list objectAtIndex:1];
+			NSString *sectionName2 = [sect2 objectForKey:@"Title"];
+			
+			NSDictionary *sect3 = [[Server sharedInstance].list objectAtIndex:2];
+			NSString *sectionName3 = [sect3 objectForKey:@"Title"];
+			
+			UIActionSheet *menu = [[[UIActionSheet alloc]
+									initWithTitle:@"Section"
+									delegate:self
+									cancelButtonTitle:@"Cancel"
+									destructiveButtonTitle:nil
+									otherButtonTitles:sectionName1, sectionName2, sectionName3, nil] autorelease];
+			[menu showInView:self.view];
+		}
+			break;
+	}
 }
 
 - (void)viewDidLoad
@@ -111,8 +183,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if(isLoaded) {
 		NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:section];
-		NSArray *companies = [dict objectForKey:@"Objects"];
-		return [companies count];
+		NSArray *eventCount = [dict objectForKey:@"Objects"];
+		return [eventCount count];
 	} else
 		return 1;
 }
