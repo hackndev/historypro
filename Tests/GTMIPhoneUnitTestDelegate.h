@@ -35,4 +35,8 @@
 // Fetch the number of successes or failures from the last runTests.
 - (NSUInteger)totalSuccesses;
 - (NSUInteger)totalFailures;
+#ifdef TEAMCITY
+- (NSString *)_tcEscape:(NSString *)s;
+- (NSString *)_tcDate:(NSDate *)d;
+#endif
 @end

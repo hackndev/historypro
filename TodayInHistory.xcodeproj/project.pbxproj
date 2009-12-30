@@ -512,6 +512,11 @@
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Tests-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_CFLAGS = (
+					"-DTEAMCITY",
+					"-fblocks",
+					"-DSTUB",
+				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-framework",
