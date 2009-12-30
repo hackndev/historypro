@@ -33,7 +33,8 @@
 	Server *s = [Server sharedInstance];
 	STAssertNotNil(s, @"Server hasn't inited itself!");
 	
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"];
+	//NSString *path = [[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"March_1" ofType:@"html"];
 	NSURL *url = [NSURL fileURLWithPath:path];
 	NSData *html = [NSData dataWithContentsOfFile:path];
 	
@@ -48,7 +49,8 @@
 
 - (void)testServerParse
 {
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"];
+	//NSString *path = [[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"March_1" ofType:@"html"];
 	NSData *html = [NSData dataWithContentsOfFile:path];
 	
 	Server *s = [Server sharedInstance];
