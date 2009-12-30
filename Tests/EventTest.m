@@ -17,12 +17,12 @@
 
 - (void)testEventProperties
 {
-	NSArray *tags = [NSArray arrayWithObjects:@"tag1", @"tag2", @"tag1", nil];
 	NSDate *dt = [NSDate date];
-	Event *e = [[Event alloc] initWithName:@"test" date:dt tags:tags];
+	Event *e = [[Event alloc] initWithName:@"test" date:dt tags:[NSArray array]];
 	
 	STAssertEqualStrings(e.name, @"test", @"event name should be 'test', but was %@", e.name);
-	STAssertEquals([e.tags count], 2, @"event tags sould be 'tag1', 'tag2', but were %@", e.tags);
+	STAssertEquals((int)[e.tags count], (int)0, @"event tags should be empty, but were %d", [e.tags count]);
+	STAssertEquals(e.date, dt, @"event date sould be %@, but was %@", dt, e.date);
 	
 	[e release];
 }
