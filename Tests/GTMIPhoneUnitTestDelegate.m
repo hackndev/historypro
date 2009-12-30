@@ -26,6 +26,57 @@
 #import <stdio.h>
 #import <UIKit/UIKit.h>
 #import "GTMSenTestCase.h"
+#import <stdio.h>
+
+typedef int File_Writer_t(void *, const char *, int);
+
+static NSMutableString *StdOut = nil;
+static NSMutableString *StdErr = nil;
+File_Writer_t *WriterOut = nil;
+File_Writer_t *WriterErr = nil;
+
+static int WriterOutHook(void *inFD, const char *buffer, int size)
+{
+	NSString *tmp = [[NSString alloc] initWithBytes:buffer length:size encoding:NSUTF8StringEncoding];
+	
+	[StdOut appendString:tmp];
+	
+	[tmp release];
+	return size;
+}
+
+static int WriterErrHook(void *inFD, const char *buffer, int size)
+{
+	NSString *tmp = [[NSString alloc] initWithBytes:buffer length:size encoding:NSUTF8StringEncoding];
+	
+	[StdErr appendString:tmp];
+	
+	[tmp release];
+	return size;
+}
+
+
+static void HookIOStart()
+{
+	StdOut = [[NSMutableString alloc] init];
+	StdErr = [[NSMutableString alloc] init];
+
+	WriterOut = stdout->_write;
+	WriterErr = stderr->_write;
+	
+	stdout->_write = &WriterOutHook;
+	stderr->_write = &WriterErrHook;
+}
+
+static void HookIOEnd()
+{
+	stdout->_write = WriterOut;
+	stderr->_write = WriterErr;
+	
+	[StdOut release];
+	[StdErr release];
+	StdOut = StdErr = nil;
+}
 
 @implementation GTMIPhoneUnitTestDelegate
 
@@ -99,12 +150,11 @@
 					NSString *selectorName = NSStringFromSelector([invocation selector]);
 #ifdef TEAMCITY
 					NSString *caseStartString
-					= [NSString stringWithFormat:@"##teamcity[testStarted name='[%@ %@|]' timestamp='%@']\n"
-												 @"##teamcity[testStdErr name='[%@ %@|]' out='text']\n",
-					   [self _tcEscape:fixtureName], [self _tcEscape:selectorName], [self _tcDate:caseStartDate],
-					   [self _tcEscape:fixtureName], [self _tcEscape:selectorName]];
+					= [NSString stringWithFormat:@"##teamcity[testStarted name='[%@ %@|]' timestamp='%@']\n",
+					   [self _tcEscape:fixtureName], [self _tcEscape:selectorName], [self _tcDate:caseStartDate]];
 					fputs([caseStartString UTF8String], stderr);
 					fflush(stderr);
+					HookIOStart();
 #endif			
 					@try {
 						[testCase performTest];
@@ -112,6 +162,15 @@
 						failed = YES;
 					}
 #ifdef TEAMCITY
+					NSString *so = [StdOut copy];
+					NSString *se = [StdErr copy];
+					HookIOEnd();
+					NSString *caseIOString = [NSString stringWithFormat:@"##teamcity[testStdOut name='[%@ %@|]' out='%@']\n"
+											  @"##teamcity[testStdErr name='[%@ %@|]' out='%@']\n",
+											  [self _tcEscape:fixtureName], [self _tcEscape:selectorName], [self _tcEscape:so],
+											  [self _tcEscape:fixtureName], [self _tcEscape:selectorName], [self _tcEscape:se]];
+					fputs([caseIOString UTF8String], stderr);
+					fflush(stderr);
 					NSDate *caseEndDate = [NSDate date];
 #endif
 					if (failed) {
