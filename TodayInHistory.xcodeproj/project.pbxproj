@@ -511,6 +511,7 @@
 				GCC_PREFIX_HEADER = TodayInHistory_Prefix.pch;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "TodayInHistory-Info.plist";
+				OTHER_CFLAGS = "-fblocks";
 				PRODUCT_NAME = TodayInHistory;
 			};
 			name = Debug;
@@ -528,6 +529,7 @@
 				GCC_PREFIX_HEADER = TodayInHistory_Prefix.pch;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "TodayInHistory-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = TodayInHistory;
 			};
 			name = Release;
