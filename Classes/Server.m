@@ -12,11 +12,10 @@
 #import "DDXML+HTML.h"
 #import "NSThread+PLBlocks.h"
 
-typedef void (^DataBlock)(NSData *data);
-
 @interface Server (PrivateAPI)
 
-- (void)fetchURL:(NSURL *)url invoking:(DataBlock)block;
+- (void)_fetchURL:(NSURL *)url invoking:(DataBlock)block;
+- (NSData *)_fetchURL:(NSURL *)url;
 
 @end
 
@@ -46,28 +45,13 @@ typedef void (^DataBlock)(NSData *data);
 	return server;
 }
 
-- (void)fetchURL:(NSURL *)url invoking:(DataBlock)block
+/// Threaded wrapper for url fetcher
+- (void)_fetchURL:(NSURL *)url invoking:(DataBlock)block
 {
 	DataBlock b = [block copy]; // copy it from stack to heap
 	[NSThread pl_performBlockOnNewThread:^{
-		// this will run in separate thread
-		NSDate *now = [NSDate date];
-		NSDate *cached = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheDate"];
-		NSData *htmlData = nil;
-		NSLog(@"cached %@ vs. %@", [[cached description] substringToIndex:10], [[now description] substringToIndex:10]);
-		if([[[now description] substringToIndex:10] isEqualToString:[[cached description] substringToIndex:10]]) {
-			htmlData = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheData"];
-			NSLog(@"Got %d bytes from cache", [htmlData length]);
-		} else {
-			htmlData = [[NSData alloc] initWithContentsOfURL:url];
-			if(htmlData) {
-				[[NSUserDefaults standardUserDefaults] setValue:htmlData forKey:@"cacheData"];
-				[[NSUserDefaults standardUserDefaults] setValue:now forKey:@"cacheDate"];
-				NSLog(@"Cached %d bytes", [htmlData length]);
-			} else {
-				// TODO: handle network error
-			}
-		}
+		NSData *htmlData = [[self _fetchURL:url] retain];
+		
 		[[NSThread mainThread] pl_performBlock:^{
 			// this will run on main thread again
 			b([htmlData autorelease]);
@@ -76,7 +60,29 @@ typedef void (^DataBlock)(NSData *data);
 	}];
 }
 
-- (void)getEventsForDate:(NSDate *)date
+- (NSData *)_fetchURL:(NSURL *)url
+{
+	NSDate *now = [NSDate date];
+	NSDate *cached = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheDate"];
+	NSData *htmlData = nil;
+	NSLog(@"cached %@ vs. %@", [[cached description] substringToIndex:10], [[now description] substringToIndex:10]);
+	if([[[now description] substringToIndex:10] isEqualToString:[[cached description] substringToIndex:10]]) {
+		htmlData = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheData"];
+		NSLog(@"Got %d bytes from cache", [htmlData length]);
+	} else {
+		htmlData = [[[NSData alloc] initWithContentsOfURL:url] autorelease];
+		if(htmlData) {
+			[[NSUserDefaults standardUserDefaults] setValue:htmlData forKey:@"cacheData"];
+			[[NSUserDefaults standardUserDefaults] setValue:now forKey:@"cacheDate"];
+			NSLog(@"Cached %d bytes", [htmlData length]);
+		} else {
+			// TODO: handle network error
+		}
+	}
+	return htmlData; // XXX: will return nil on error
+}
+
+- (void)getEventsForDate:(NSDate *)date invoking:(SimpleBlock)callback
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -94,7 +100,7 @@ typedef void (^DataBlock)(NSData *data);
 	NSString *formattedString = [NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", stringForRef];
 	//NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"March_1" ofType:@"html"] isDirectory:NO];
 	NSURL *url = [NSURL URLWithString:formattedString];
-	[self fetchURL:url invoking:^(NSData *htmlData){
+	[self _fetchURL:url invoking:^(NSData *htmlData){
 		// html
 		DDXMLDocument *htmlDocument = [[DDXMLDocument alloc]
 									   initWithHTMLData:htmlData
@@ -355,25 +361,26 @@ typedef void (^DataBlock)(NSData *data);
 							  ArrDe, @"Objects",
 							  nil]];
 		}
+		
+		callback();
+	}];
+}
 
-#ifdef STUB
+- (void)getEventsForDate:(NSDate *)date
+{
+	[self getEventsForDate:date invoking:^{
 		[NSTimer scheduledTimerWithTimeInterval:0
 										 target:self
 									   selector:@selector(_onTimer:)
 									   userInfo:nil
 										repeats:NO];
-#else
-	#error NOT IMPLEMENTED
-#endif
 	}];
 }
 
-#ifdef STUB
 - (void)_onTimer:(id)unused
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"server.events.updated" object:self];
 }
-#endif
 
 @end

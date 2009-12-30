@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^SimpleBlock)();
+typedef void (^DataBlock)(NSData *data);
+
 @interface Server : NSObject
 {
 	NSMutableArray *_events;
@@ -18,6 +21,7 @@
 @property (readonly) NSArray *list;
 
 + (Server *)sharedInstance;
+- (void)getEventsForDate:(NSDate *)date invoking:(SimpleBlock)callback;
 - (void)getEventsForDate:(NSDate *)date;
 
 @end
