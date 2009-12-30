@@ -34,6 +34,11 @@
 		A52F485010EAAFCE00894139 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D57799B710CC02D200CDD0E7 /* DDXMLElementAdditions.m */; };
 		A52F485210EAAFCE00894139 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D57799B910CC02D200CDD0E7 /* DDXMLNode.m */; };
 		A52F485510EAAFCE00894139 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D57799BC10CC02D200CDD0E7 /* NSStringAdditions.m */; };
+		A52F48F810EB520600894139 /* ServerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A52F48F710EB520600894139 /* ServerTest.m */; };
+		A52F490510EB52F300894139 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52F490410EB52F300894139 /* OCMock.framework */; };
+		A52F492210EB53B200894139 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A52F490410EB52F300894139 /* OCMock.framework */; };
+		A52F494210EB56D900894139 /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
+		A52F497910EBAF6000894139 /* December_13.html in Resources */ = {isa = PBXBuildFile; fileRef = A52F497810EBAF6000894139 /* December_13.html */; };
 		A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A590A93410E661D800A3151C /* PLBlocks.framework */; };
 		A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
 		D50C675C109A19DE00E47FD2 /* TagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C675A109A19DE00E47FD2 /* TagsController.m */; };
@@ -56,6 +61,19 @@
 		D5D2070D10B03FE300C3531C /* NetState.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D2070C10B03FE300C3531C /* NetState.m */; };
 		D5D8653C109C98E300DA5B25 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D8653B109C98E300DA5B25 /* Event.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A52F491B10EB538B00894139 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(BUILT_PRODUCTS_DIR)";
+			dstSubfolderSpec = 0;
+			files = (
+				A52F492210EB53B200894139 /* OCMock.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -82,6 +100,9 @@
 		A52F482710EAACEA00894139 /* GTMObjC2Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMObjC2Runtime.h; path = Tests/GTMObjC2Runtime.h; sourceTree = "<group>"; };
 		A52F482810EAACEA00894139 /* GTMObjC2Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMObjC2Runtime.m; path = Tests/GTMObjC2Runtime.m; sourceTree = "<group>"; };
 		A52F483510EAAD7300894139 /* EventTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTest.m; path = Tests/EventTest.m; sourceTree = "<group>"; };
+		A52F48F710EB520600894139 /* ServerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerTest.m; path = Tests/ServerTest.m; sourceTree = "<group>"; };
+		A52F490410EB52F300894139 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
+		A52F497810EBAF6000894139 /* December_13.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = December_13.html; path = Tests/December_13.html; sourceTree = "<group>"; };
 		A590A93410E661D800A3151C /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		A590A93610E661EE00A3151C /* NSThread+PLBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+PLBlocks.h"; sourceTree = "<group>"; };
 		A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+PLBlocks.m"; sourceTree = "<group>"; };
@@ -142,6 +163,7 @@
 				A52F484110EAAFAC00894139 /* UIKit.framework in Frameworks */,
 				A52F484210EAAFAC00894139 /* CoreGraphics.framework in Frameworks */,
 				A52F483D10EAAFA500894139 /* PLBlocks.framework in Frameworks */,
+				A52F490510EB52F300894139 /* OCMock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +232,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A52F490410EB52F300894139 /* OCMock.framework */,
 				A590A93410E661D800A3151C /* PLBlocks.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -249,8 +272,10 @@
 		A52F480010EAAB9A00894139 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A52F497310EBAF5100894139 /* Resources */,
 				A52F482C10EAAD1200894139 /* Support */,
 				A52F483510EAAD7300894139 /* EventTest.m */,
+				A52F48F710EB520600894139 /* ServerTest.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -268,6 +293,14 @@
 				A52F482810EAACEA00894139 /* GTMObjC2Runtime.m */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		A52F497310EBAF5100894139 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A52F497810EBAF6000894139 /* December_13.html */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		D577A66210CE9A4500CDD0E7 /* KissXML */ = {
@@ -332,6 +365,7 @@
 				A52F47F310EAAB6500894139 /* Resources */,
 				A52F47F410EAAB6500894139 /* Sources */,
 				A52F47F510EAAB6500894139 /* Frameworks */,
+				A52F491B10EB538B00894139 /* CopyFiles */,
 				A52F481410EAAC2B00894139 /* ShellScript */,
 			);
 			buildRules = (
@@ -388,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52F497910EBAF6000894139 /* December_13.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52F494210EB56D900894139 /* NSThread+PLBlocks.m in Sources */,
 				A52F484710EAAFCE00894139 /* DDXMLDocument+HTML.m in Sources */,
 				A52F484910EAAFCE00894139 /* DDXMLNode+HTML.m in Sources */,
 				A52F484C10EAAFCE00894139 /* DDXMLDocument.m in Sources */,
@@ -453,6 +489,7 @@
 				A52F483010EAAD3300894139 /* Tag.m in Sources */,
 				A52F483110EAAD3300894139 /* Server.m in Sources */,
 				A52F483610EAAD7300894139 /* EventTest.m in Sources */,
+				A52F48F810EB520600894139 /* ServerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
