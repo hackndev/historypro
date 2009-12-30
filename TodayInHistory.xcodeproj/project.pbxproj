@@ -550,7 +550,6 @@
 				INFOPLIST_FILE = "Tests-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_CFLAGS = (
-					"-DTEAMCITY",
 					"-fblocks",
 					"-DSTUB",
 				);
@@ -571,7 +570,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Don't Code Sign";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -584,7 +583,12 @@
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Tests-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_CFLAGS = (
+					"-DTEAMCITY",
+					"-fblocks",
+				);
 				OTHER_LDFLAGS = (
+					"-lxml2",
 					"-framework",
 					Foundation,
 					"-framework",
@@ -592,7 +596,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Tests;
-				SDKROOT = iphoneos3.1.2;
+				SDKROOT = iphonesimulator3.1.2;
 				ZERO_LINK = NO;
 			};
 			name = Release;
