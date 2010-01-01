@@ -48,12 +48,13 @@
 
 - (void)testServerParse
 {
-	NSArray *testPages = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"]];
+	NSArray *testPages = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ParserTests" ofType:@"plist"]];
 	Server *s = [Server sharedInstance];
 	STAssertNotNil(s, @"Server hasn't inited itself!");
 	
 	for(NSDictionary *d in testPages) {
 		NSString *testPage = [d objectForKey:@"page"];
+		NSLog(@"Testing parser in page %@", testPage);
 		NSString *path = [[NSBundle mainBundle] pathForResource:testPage ofType:@"html"];
 		NSData *html = [NSData dataWithContentsOfFile:path];
 		STAssertNotNil(html, @"HTML data for test page %@ is missing", testPage);

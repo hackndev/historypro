@@ -42,6 +42,7 @@
 		A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A590A93410E661D800A3151C /* PLBlocks.framework */; };
 		A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
 		A5EE247E10EE54CB001B5537 /* ParserTests.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5EE247D10EE54CB001B5537 /* ParserTests.plist */; };
+		D50B502B10EE5A0B003C01D6 /* March_1.html in Resources */ = {isa = PBXBuildFile; fileRef = D50B502A10EE5A0B003C01D6 /* March_1.html */; };
 		D50C675C109A19DE00E47FD2 /* TagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C675A109A19DE00E47FD2 /* TagsController.m */; };
 		D52F90E910B41FA200A08BF6 /* 01-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = D52F90E610B41FA200A08BF6 /* 01-refresh.png */; };
 		D52F90EA10B41FA200A08BF6 /* NavBack.png in Resources */ = {isa = PBXBuildFile; fileRef = D52F90E710B41FA200A08BF6 /* NavBack.png */; };
@@ -107,6 +108,7 @@
 		A590A93610E661EE00A3151C /* NSThread+PLBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+PLBlocks.h"; sourceTree = "<group>"; };
 		A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+PLBlocks.m"; sourceTree = "<group>"; };
 		A5EE247D10EE54CB001B5537 /* ParserTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ParserTests.plist; path = Tests/ParserTests.plist; sourceTree = "<group>"; };
+		D50B502A10EE5A0B003C01D6 /* March_1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = March_1.html; path = Tests/March_1.html; sourceTree = "<group>"; };
 		D50C6759109A19DE00E47FD2 /* TagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsController.h; sourceTree = "<group>"; };
 		D50C675A109A19DE00E47FD2 /* TagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsController.m; sourceTree = "<group>"; };
 		D52F90E610B41FA200A08BF6 /* 01-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-refresh.png"; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 		A52F497310EBAF5100894139 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D50B502A10EE5A0B003C01D6 /* March_1.html */,
 				A52F497810EBAF6000894139 /* December_13.html */,
 				A5EE247D10EE54CB001B5537 /* ParserTests.plist */,
 			);
@@ -423,6 +426,7 @@
 			files = (
 				A52F497910EBAF6000894139 /* December_13.html in Resources */,
 				A5EE247E10EE54CB001B5537 /* ParserTests.plist in Resources */,
+				D50B502B10EE5A0B003C01D6 /* March_1.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

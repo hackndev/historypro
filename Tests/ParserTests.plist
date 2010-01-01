@@ -3,6 +3,19 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>categories</key>
+		<dict>
+			<key>Events</key>
+			<integer>0</integer>
+			<key>Births</key>
+			<integer>0</integer>
+			<key>Death</key>
+			<integer>0</integer>
+		</dict>
+		<key>page</key>
+		<string>March_1</string>
+	</dict>
+	<dict>
 		<key>page</key>
 		<string>December_13</string>
 		<key>categories</key>
