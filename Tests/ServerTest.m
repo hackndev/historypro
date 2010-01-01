@@ -57,12 +57,12 @@
 	STAssertNotNil(s, @"Server hasn't inited itself!");
 	BOOL parseOk = [s _parseData:html];
 	STAssertTrue(parseOk, @"Parser failed somehow");
-	STAssertTrue([s.events count] == 254, @"Supposed to parse 254 events, but got %d", [s.events count]);
-	STAssertTrue([s.list count] == 3, @"Supposed to parse 3 categories, but got %d", [s.list count]);
+	STAssertTrue([s.events count] == 223, @"Supposed to parse 223 events, but got %d", [s.events count]);
+	STAssertTrue([s.list count] == 1, @"Supposed to parse 1 categories, but got %d", [s.list count]);
 	NSDictionary *routed = [NSDictionary dictionaryWithObjectsAndKeys:
-							[NSNumber numberWithInt:34], @"Events",
+							/*[NSNumber numberWithInt:34], @"Events",*/
 							[NSNumber numberWithInt:145], @"Birth",
-							[NSNumber numberWithInt:75], @"Death",
+							//[NSNumber numberWithInt:75], @"Death",
 							nil];
 	for(NSDictionary *d in s.list) {
 		NSNumber *n = [routed objectForKey:[d objectForKey:@"Title"]];
