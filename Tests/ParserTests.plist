@@ -7,9 +7,9 @@
 		<dict>
 			<key>Events</key>
 			<integer>0</integer>
-			<key>Birth</key>
+			<key>Births</key>
 			<integer>159</integer>
-			<key>Death</key>
+			<key>Deaths</key>
 			<integer>64</integer>
 		</dict>
 		<key>page</key>
@@ -22,9 +22,9 @@
 		<dict>
 			<key>Events</key>
 			<integer>34</integer>
-			<key>Death</key>
+			<key>Deaths</key>
 			<integer>75</integer>
-			<key>Birth</key>
+			<key>Births</key>
 			<integer>145</integer>
 		</dict>
 	</dict>

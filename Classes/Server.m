@@ -217,13 +217,13 @@
                 break;
             case 2:
                 [_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"Birth", @"Title",
+                                  @"Births", @"Title",
                                   ArrBi, @"Objects",
                                   nil]];
                 break;
             case 3:
                 [_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"Death", @"Title",
+                                  @"Deaths", @"Title",
                                   ArrDe, @"Objects",
                                   nil]];
                 break;
