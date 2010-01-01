@@ -98,7 +98,6 @@
 	[formatter release];
 	NSString *stringForRef = [stringFromDate stringByReplacingOccurrencesOfString:@" " withString:@"_"];
 	NSString *formattedString = [NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", stringForRef];
-	//NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"March_1" ofType:@"html"] isDirectory:NO];
 	NSURL *url = [NSURL URLWithString:formattedString];
 	[self _fetchURL:url invoking:^(NSData *htmlData){
 		// html
@@ -109,6 +108,10 @@
 
 - (BOOL)_parseData:(NSData *)htmlData
 {
+	[_events release];
+	_events = [[NSMutableArray alloc] init];
+	[_list release];
+	_list = [[NSMutableArray alloc] init];
 	NSError *error = nil;
 	DDXMLDocument *htmlDocument = [[DDXMLDocument alloc]
 								   initWithHTMLData:htmlData
