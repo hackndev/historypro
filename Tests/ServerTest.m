@@ -25,7 +25,7 @@
 
 - (void)setUp
 {
-		
+	
 }
 
 - (void)testServerFetchCache
@@ -33,8 +33,7 @@
 	Server *s = [Server sharedInstance];
 	STAssertNotNil(s, @"Server hasn't inited itself!");
 	
-	//NSString *path = [[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"];
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"March_1" ofType:@"html"];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"];
 	NSURL *url = [NSURL fileURLWithPath:path];
 	NSData *html = [NSData dataWithContentsOfFile:path];
 	
@@ -49,27 +48,36 @@
 
 - (void)testServerParse
 {
-	//NSString *path = [[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"];
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"March_1" ofType:@"html"];
-	NSData *html = [NSData dataWithContentsOfFile:path];
-	
+	NSArray *testPages = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"December_13" ofType:@"html"]];
 	Server *s = [Server sharedInstance];
 	STAssertNotNil(s, @"Server hasn't inited itself!");
-	BOOL parseOk = [s _parseData:html];
-	STAssertTrue(parseOk, @"Parser failed somehow");
-	STAssertTrue([s.events count] == 223, @"Supposed to parse 223 events, but got %d", [s.events count]);
-	STAssertTrue([s.list count] == 1, @"Supposed to parse 1 categories, but got %d", [s.list count]);
-	NSDictionary *routed = [NSDictionary dictionaryWithObjectsAndKeys:
-							/*[NSNumber numberWithInt:34], @"Events",*/
-							[NSNumber numberWithInt:145], @"Birth",
-							//[NSNumber numberWithInt:75], @"Death",
-							nil];
-	for(NSDictionary *d in s.list) {
-		NSNumber *n = [routed objectForKey:[d objectForKey:@"Title"]];
-		STAssertNotNil(n, @"Unexpected category %@", [d objectForKey:@"Title"]);
-		NSArray *e = [d objectForKey:@"Objects"];
-		STAssertTrue([e count] == [n intValue], @"Expected %d objects in %@, but got %d",
-					 [n intValue], [d objectForKey:@"Title"], [e count]);
+	
+	for(NSDictionary *d in testPages) {
+		NSString *testPage = [d objectForKey:@"page"];
+		NSString *path = [[NSBundle mainBundle] pathForResource:testPage ofType:@"html"];
+		NSData *html = [NSData dataWithContentsOfFile:path];
+		STAssertNotNil(html, @"HTML data for test page %@ is missing", testPage);
+	
+		BOOL parseOk = [s _parseData:html];
+		STAssertTrue(parseOk, @"Parser failed somehow for page %@", testPage);
+		int totalEvents = 0;
+		for(NSNumber *n in [[d objectForKey:@"categories"] allValues]) {
+			totalEvents += [n intValue];
+		}
+		STAssertTrue([s.events count] == totalEvents, @"Supposed to parse %d events, but got %d in page %@",
+					 totalEvents, [s.events count], testPage);
+		int totalCategories = [[[d objectForKey:@"categories"] allKeys] count];
+		STAssertTrue([s.list count] == totalCategories, @"Supposed to parse %d categories, but got %d in page %@",
+					 totalCategories, [s.list count], testPage);
+		
+		NSDictionary *routed = [d objectForKey:@"categories"];
+		for(NSDictionary *d in s.list) {
+			NSNumber *n = [routed objectForKey:[d objectForKey:@"Title"]];
+			STAssertNotNil(n, @"Unexpected category %@ in page %@", [d objectForKey:@"Title"], testPage);
+			NSArray *e = [d objectForKey:@"Objects"];
+			STAssertTrue([e count] == [n intValue], @"Expected %d objects in %@, but got %d in page %@",
+						 [n intValue], [d objectForKey:@"Title"], [e count], testPage);
+		}
 	}
 }
 
