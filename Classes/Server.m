@@ -121,19 +121,14 @@
 		return NO;
 	
 	// xpath
-	NSMutableArray *ArrEv = [[NSMutableArray alloc] init];
-	NSMutableArray *ArrBi = [[NSMutableArray alloc] init];
-	NSMutableArray *ArrDe = [[NSMutableArray alloc] init];
-	int i = 0;
-	
-	for(NSString *s in [NSArray arrayWithObjects:@"Events", @"Births", @"Deaths", nil]) {
-		i++;
+	NSDictionary *sortedEvents = [NSDictionary dictionaryWithObjectsAndKeys:
+								  [NSMutableArray array], @"Events",
+								  [NSMutableArray array], @"Births",
+								  [NSMutableArray array], @"Deaths",
+								  nil];
+	for(NSString *s in [sortedEvents allKeys]) {
 		NSString *xpath = [NSString stringWithFormat:@"/html/body/div[@id='globalWrapper']/div[@id='column-content']/div[@id='content']/div[@id='bodyContent']/h2/span[@id='%@']/parent::h2/following::ul[1]/li", s];
-		NSArray *array = [htmlDocument
-						  nodesForXPath:xpath
-						  error:&error
-						  ];
-		
+		NSArray *array = [htmlDocument nodesForXPath:xpath error:&error];
 		
 		for(DDXMLElement *lis in array) {
 			NSMutableString *descr = [NSMutableString string];
@@ -201,37 +196,17 @@
 			}
 			Event *n = [[[Event alloc] initWithName:descr date:[NSDate date] tags:tags] autorelease];
 			[_events addObject:n];
-			if (i == 1) {
-                    [ArrEv addObject:n];
-			}
-			if (i == 2) {
-				    [ArrBi addObject:n];
-            }
-            if (i == 3) {
-                    [ArrDe addObject:n];
-            }
+			[[sortedEvents objectForKey:s] addObject:n];
 		}
-		switch (i) {
-            case 1:
-                [_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-								  @"Events", @"Title",
-								  ArrEv, @"Objects",
-								  nil]];
-                break;
-            case 2:
-                [_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"Births", @"Title",
-                                  ArrBi, @"Objects",
-                                  nil]];
-                break;
-            case 3:
-                [_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"Deaths", @"Title",
-                                  ArrDe, @"Objects",
-                                  nil]];
-                break;
-				}
-		}
+	}
+	for(NSString *k in sortedEvents) {
+		NSArray *v = [sortedEvents objectForKey:k];
+		if([v count])
+			[_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+							  k, @"Title",
+							  [NSArray arrayWithArray:v], @"Objects",
+							  nil]];
+	}
 	return YES;
 }
 
