@@ -5,8 +5,6 @@
 	<dict>
 		<key>categories</key>
 		<dict>
-			<key>Events</key>
-			<integer>0</integer>
 			<key>Births</key>
 			<integer>159</integer>
 			<key>Deaths</key>
