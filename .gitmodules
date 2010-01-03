@@ -1,3 +1,3 @@
 [submodule "libappreview"]
 	path = libappreview
-	url = hnd:iphone/libappreview
+	url = gitosis@git.hackndev.com:iphone/libappreview
