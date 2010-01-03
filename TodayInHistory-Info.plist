@@ -26,5 +26,7 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>ARID</key>
+	<string>dailyhistorypro/idXXXXX</string>
 </dict>
 </plist>

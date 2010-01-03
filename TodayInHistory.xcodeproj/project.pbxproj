@@ -41,6 +41,7 @@
 		A52F497910EBAF6000894139 /* December_13.html in Resources */ = {isa = PBXBuildFile; fileRef = A52F497810EBAF6000894139 /* December_13.html */; };
 		A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A590A93410E661D800A3151C /* PLBlocks.framework */; };
 		A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
+		A5DA631810F0CBBE00663315 /* libAppReviewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DA631510F0CBAC00663315 /* libAppReviewLib.a */; };
 		A5EE247E10EE54CB001B5537 /* ParserTests.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5EE247D10EE54CB001B5537 /* ParserTests.plist */; };
 		D50B502B10EE5A0B003C01D6 /* March_1.html in Resources */ = {isa = PBXBuildFile; fileRef = D50B502A10EE5A0B003C01D6 /* March_1.html */; };
 		D50C675C109A19DE00E47FD2 /* TagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C675A109A19DE00E47FD2 /* TagsController.m */; };
@@ -62,6 +63,23 @@
 		D5D2070D10B03FE300C3531C /* NetState.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D2070C10B03FE300C3531C /* NetState.m */; };
 		D5D8653C109C98E300DA5B25 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D8653B109C98E300DA5B25 /* Event.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A5DA631410F0CBAC00663315 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libAppReviewLib.a */;
+			remoteInfo = AppReviewLib;
+		};
+		A5DA631610F0CBB900663315 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D /* AppReviewLib */;
+			remoteInfo = AppReviewLib;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A52F491B10EB538B00894139 /* CopyFiles */ = {
@@ -107,6 +125,7 @@
 		A590A93410E661D800A3151C /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		A590A93610E661EE00A3151C /* NSThread+PLBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+PLBlocks.h"; sourceTree = "<group>"; };
 		A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+PLBlocks.m"; sourceTree = "<group>"; };
+		A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AppReviewLib.xcodeproj; path = ../AppReviewLib/AppReviewLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A5EE247D10EE54CB001B5537 /* ParserTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ParserTests.plist; path = Tests/ParserTests.plist; sourceTree = "<group>"; };
 		D50B502A10EE5A0B003C01D6 /* March_1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = March_1.html; path = Tests/March_1.html; sourceTree = "<group>"; };
 		D50C6759109A19DE00E47FD2 /* TagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsController.h; sourceTree = "<group>"; };
@@ -150,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5DA631810F0CBBE00663315 /* libAppReviewLib.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
@@ -200,7 +220,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				A52F47F910EAAB6500894139 /* Tests-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -208,6 +227,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */,
 				D577A66210CE9A4500CDD0E7 /* KissXML */,
 				D5D2070B10B03FE300C3531C /* NetState.h */,
 				D5D2070C10B03FE300C3531C /* NetState.m */,
@@ -226,6 +246,7 @@
 				D52F90E710B41FA200A08BF6 /* NavBack.png */,
 				D52F90E810B41FA200A08BF6 /* NavForward.png */,
 				8D1107310486CEB800E47090 /* TodayInHistory-Info.plist */,
+				A52F47F910EAAB6500894139 /* Tests-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -306,6 +327,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		A5DA631110F0CBAC00663315 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5DA631510F0CBAC00663315 /* libAppReviewLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D577A66210CE9A4500CDD0E7 /* KissXML */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +384,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A5DA631710F0CBB900663315 /* PBXTargetDependency */,
 			);
 			name = TodayInHistory;
 			productName = DVDCase;
@@ -397,6 +427,12 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A5DA631110F0CBAC00663315 /* Products */;
+					ProjectRef = A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* TodayInHistory */,
@@ -404,6 +440,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A5DA631510F0CBAC00663315 /* libAppReviewLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppReviewLib.a;
+			remoteRef = A5DA631410F0CBAC00663315 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -499,6 +545,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A5DA631710F0CBB900663315 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppReviewLib;
+			targetProxy = A5DA631610F0CBB900663315 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -516,6 +570,10 @@
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "TodayInHistory-Info.plist";
 				OTHER_CFLAGS = "-fblocks";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lxml2",
+				);
 				PRODUCT_NAME = TodayInHistory;
 			};
 			name = Debug;
@@ -533,7 +591,10 @@
 				GCC_PREFIX_HEADER = TodayInHistory_Prefix.pch;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "TodayInHistory-Info.plist";
-				OTHER_LDFLAGS = "-lxml2";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lxml2",
+				);
 				PRODUCT_NAME = TodayInHistory;
 			};
 			name = Release;
@@ -636,6 +697,7 @@
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				OTHER_CFLAGS = "-fblocks";
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.1.2;
