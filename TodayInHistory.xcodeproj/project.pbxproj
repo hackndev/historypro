@@ -41,7 +41,7 @@
 		A52F497910EBAF6000894139 /* December_13.html in Resources */ = {isa = PBXBuildFile; fileRef = A52F497810EBAF6000894139 /* December_13.html */; };
 		A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A590A93410E661D800A3151C /* PLBlocks.framework */; };
 		A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
-		A5DA631810F0CBBE00663315 /* libAppReviewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DA631510F0CBAC00663315 /* libAppReviewLib.a */; };
+		A5DA63C210F0D9AD00663315 /* libAppReviewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DA63C110F0D9A600663315 /* libAppReviewLib.a */; };
 		A5EE247E10EE54CB001B5537 /* ParserTests.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5EE247D10EE54CB001B5537 /* ParserTests.plist */; };
 		D50B502B10EE5A0B003C01D6 /* March_1.html in Resources */ = {isa = PBXBuildFile; fileRef = D50B502A10EE5A0B003C01D6 /* March_1.html */; };
 		D50C675C109A19DE00E47FD2 /* TagsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C675A109A19DE00E47FD2 /* TagsController.m */; };
@@ -65,16 +65,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A5DA631410F0CBAC00663315 /* PBXContainerItemProxy */ = {
+		A5DA63C010F0D9A600663315 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */;
+			containerPortal = A5DA63B910F0D9A600663315 /* AppReviewLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libAppReviewLib.a */;
 			remoteInfo = AppReviewLib;
 		};
-		A5DA631610F0CBB900663315 /* PBXContainerItemProxy */ = {
+		A5DA63C310F0D9B300663315 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */;
+			containerPortal = A5DA63B910F0D9A600663315 /* AppReviewLib.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D /* AppReviewLib */;
 			remoteInfo = AppReviewLib;
@@ -125,7 +125,7 @@
 		A590A93410E661D800A3151C /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		A590A93610E661EE00A3151C /* NSThread+PLBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+PLBlocks.h"; sourceTree = "<group>"; };
 		A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+PLBlocks.m"; sourceTree = "<group>"; };
-		A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AppReviewLib.xcodeproj; path = ../AppReviewLib/AppReviewLib.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A5DA63B910F0D9A600663315 /* AppReviewLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AppReviewLib.xcodeproj; path = libappreview/AppReviewLib.xcodeproj; sourceTree = "<group>"; };
 		A5EE247D10EE54CB001B5537 /* ParserTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ParserTests.plist; path = Tests/ParserTests.plist; sourceTree = "<group>"; };
 		D50B502A10EE5A0B003C01D6 /* March_1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = March_1.html; path = Tests/March_1.html; sourceTree = "<group>"; };
 		D50C6759109A19DE00E47FD2 /* TagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsController.h; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5DA631810F0CBBE00663315 /* libAppReviewLib.a in Frameworks */,
+				A5DA63C210F0D9AD00663315 /* libAppReviewLib.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
@@ -227,7 +227,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */,
+				A5DA63B910F0D9A600663315 /* AppReviewLib.xcodeproj */,
 				D577A66210CE9A4500CDD0E7 /* KissXML */,
 				D5D2070B10B03FE300C3531C /* NetState.h */,
 				D5D2070C10B03FE300C3531C /* NetState.m */,
@@ -327,10 +327,10 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		A5DA631110F0CBAC00663315 /* Products */ = {
+		A5DA63BA10F0D9A600663315 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5DA631510F0CBAC00663315 /* libAppReviewLib.a */,
+				A5DA63C110F0D9A600663315 /* libAppReviewLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -384,7 +384,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A5DA631710F0CBB900663315 /* PBXTargetDependency */,
+				A5DA63C410F0D9B300663315 /* PBXTargetDependency */,
 			);
 			name = TodayInHistory;
 			productName = DVDCase;
@@ -429,8 +429,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A5DA631110F0CBAC00663315 /* Products */;
-					ProjectRef = A5DA631010F0CBAC00663315 /* AppReviewLib.xcodeproj */;
+					ProductGroup = A5DA63BA10F0D9A600663315 /* Products */;
+					ProjectRef = A5DA63B910F0D9A600663315 /* AppReviewLib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -442,11 +442,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A5DA631510F0CBAC00663315 /* libAppReviewLib.a */ = {
+		A5DA63C110F0D9A600663315 /* libAppReviewLib.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libAppReviewLib.a;
-			remoteRef = A5DA631410F0CBAC00663315 /* PBXContainerItemProxy */;
+			remoteRef = A5DA63C010F0D9A600663315 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -546,10 +546,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A5DA631710F0CBB900663315 /* PBXTargetDependency */ = {
+		A5DA63C410F0D9B300663315 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AppReviewLib;
-			targetProxy = A5DA631610F0CBB900663315 /* PBXContainerItemProxy */;
+			targetProxy = A5DA63C310F0D9B300663315 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
