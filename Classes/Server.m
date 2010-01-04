@@ -199,7 +199,7 @@
 			[[sortedEvents objectForKey:s] addObject:n];
 		}
 	}
-	for(NSString *k in sortedEvents) {
+	for(NSString *k in [NSArray arrayWithObjects:@"Events", @"Births", @"Deaths", nil]) {
 		NSArray *v = [sortedEvents objectForKey:k];
 		if([v count])
 			[_list addObject:[NSDictionary dictionaryWithObjectsAndKeys:
