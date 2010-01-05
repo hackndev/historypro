@@ -36,7 +36,13 @@
 
 - (void)navigateTo:(NSURLRequest *)request
 {
+	NSString *HTMLData =  @"<html><head></head>"
+                          @"<body style='background-color: #ffffff;'>"
+                          @"<div style='font-family:\"Arial\";font-size:48px;text-align:center'><strong>Loading</strong></div>"
+						  @"</body></html>";
+    
 	[self loadView];
+	[webView loadHTMLString:HTMLData baseURL:nil];
 	[webView loadRequest:request];
 }
 

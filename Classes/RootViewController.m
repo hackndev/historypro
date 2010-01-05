@@ -42,7 +42,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (buttonIndex == [[Server sharedInstance].list count]) {
+	if (buttonIndex == actionSheet.numberOfButtons-1) {
 		NSLog(@"Cancel pressed");
 	} else {
 		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
