@@ -32,8 +32,7 @@
 {
 	NSLog(@"updating!");
 	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
-											  initWithTitle:@"SC"
-											  style:UIBarButtonItemStylePlain
+											  initWithBarButtonSystemItem:UIBarButtonSystemItemAction
 											  target:self
 											  action:@selector(presentSheet)] autorelease];
 	isLoaded = YES;
