@@ -15,6 +15,7 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		A517BFE110F3CA9900232AEC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A517BFE010F3CA9900232AEC /* icon.png */; };
 		A52F480C10EAAC1200894139 /* GTMIPhoneUnitTestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A52F480510EAABF900894139 /* GTMIPhoneUnitTestDelegate.m */; };
 		A52F480D10EAAC1500894139 /* GTMIPhoneUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = A52F480610EAABF900894139 /* GTMIPhoneUnitTestMain.m */; };
 		A52F480E10EAAC1A00894139 /* GTMSenTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A52F480810EAABF900894139 /* GTMSenTestCase.m */; };
@@ -109,6 +110,7 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TodayInHistory-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TodayInHistory-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A517BFE010F3CA9900232AEC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A52F47F710EAAB6500894139 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52F47F910EAAB6500894139 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		A52F480310EAABF900894139 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMDefines.h; path = Tests/GTMDefines.h; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A517BFE010F3CA9900232AEC /* icon.png */,
 				D5BC51E510F3AA88004C79F0 /* NavStop.png */,
 				D52F90E610B41FA200A08BF6 /* 01-refresh.png */,
 				D52F90E710B41FA200A08BF6 /* NavBack.png */,
@@ -467,6 +470,7 @@
 				D52F90EB10B41FA200A08BF6 /* NavForward.png in Resources */,
 				D5BA9B6410B438C30066082A /* TagsController.xib in Resources */,
 				D5BC51E610F3AA88004C79F0 /* NavStop.png in Resources */,
+				A517BFE110F3CA9900232AEC /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
