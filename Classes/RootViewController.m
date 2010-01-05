@@ -55,12 +55,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 							destructiveButtonTitle:nil
 							otherButtonTitles:nil] autorelease];
 	
-	for (int i=0;i<[[Server sharedInstance].list count];i++)
-	{
-		NSDictionary *sect = [[Server sharedInstance].list objectAtIndex:i];
-		NSString *sectionName = [sect objectForKey:@"Title"];
-		[menu addButtonWithTitle:sectionName];
-	}
+	for(NSString *s in [[Server sharedInstance] valueForKeyPath:@"list.Title"])
+		[menu addButtonWithTitle:s];
 	menu.cancelButtonIndex=[[Server sharedInstance].list count];
 	[menu addButtonWithTitle:@"Cancel"];
 	[menu showInView:self.view];
