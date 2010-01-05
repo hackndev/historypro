@@ -42,7 +42,11 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	if (buttonIndex == [[Server sharedInstance].list count]) {
+		NSLog(@"Cancel pressed");
+	} else {
+		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	}
 }
 	
 - (void) presentSheet
