@@ -71,16 +71,20 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+	NSLog(@"Loading started");
 	isStop = YES;
-	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
+	stopReloadButton.image = [UIImage imageNamed:@"NavStop.png"];
 	[[NetState sharedInstance] startedNetworkAccess];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+	NSLog(@"Loading stopped");
 	isStop = NO;
 	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
 	[[NetState sharedInstance] finishedNetworkAccess];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -88,6 +92,7 @@
 	if(webView.loading)
         [[NetState sharedInstance] finishedNetworkAccess];        
     [webView stopLoading];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 @end

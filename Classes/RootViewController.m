@@ -189,11 +189,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 		return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	return 88;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -210,12 +205,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 		NSArray *companies = [dict objectForKey:@"Objects"];
 		cell.textLabel.font = [UIFont systemFontOfSize:14];
 		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-		cell.textLabel.numberOfLines = 4;
+		cell.textLabel.numberOfLines = 2;
 		cell.textLabel.textAlignment = UITextAlignmentLeft;
 		//cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
 		int myInt = [[[companies objectAtIndex:indexPath.row] name] length];
-		if (myInt > 140) {
-			NSString *labelName = [[[companies objectAtIndex:indexPath.row] name] substringWithRange:NSMakeRange(0,140)];
+		if (myInt > 70) {
+			NSString *labelName = [[[companies objectAtIndex:indexPath.row] name] substringWithRange:NSMakeRange(0,65)];
 			labelName = [labelName stringByAppendingString:@"..."];
 			cell.textLabel.text = labelName;
 		} else {
