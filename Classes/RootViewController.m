@@ -43,102 +43,27 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	switch ([[Server sharedInstance].list count])
-	{
-		case 1:
-		{
-			switch (buttonIndex)
-			{
-				case 0:
-					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-					break;
-			}
-		}			
-			break;
-		case 2:
-		{
-			switch (buttonIndex)
-			{
-				case 0:
-					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-					break;
-				case 1:
-					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-					break;
-			}
-		}
-			break;
-		case 3:
-		{
-			switch (buttonIndex)
-			{
-				case 0:
-					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-					break;
-				case 1:
-					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-					break;
-				case 2:
-					[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-					break;
-			}
-		}			
-			break;
-	}
+	[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 	
 - (void) presentSheet
 {	
-	switch ([[Server sharedInstance].list count]) {
-		case 1: {
-			NSDictionary *sect1 = [[Server sharedInstance].list objectAtIndex:0];
-			NSString *sectionName1 = [sect1 objectForKey:@"Title"];
-			
-			UIActionSheet *menu = [[[UIActionSheet alloc]
-									initWithTitle:@"Section"
-									delegate:self
-									cancelButtonTitle:@"Cancel"
-									destructiveButtonTitle:nil
-									otherButtonTitles:sectionName1, nil] autorelease];
-			[menu showInView:self.view];
-		}
-			break;
-		case 2: {
-			NSDictionary *sect1 = [[Server sharedInstance].list objectAtIndex:0];
-			NSString *sectionName1 = [sect1 objectForKey:@"Title"];
-			
-			NSDictionary *sect2 = [[Server sharedInstance].list objectAtIndex:1];
-			NSString *sectionName2 = [sect2 objectForKey:@"Title"];
-			
-			UIActionSheet *menu = [[[UIActionSheet alloc]
-									initWithTitle:@"Section"
-									delegate:self
-									cancelButtonTitle:@"Cancel"
-									destructiveButtonTitle:nil
-									otherButtonTitles:sectionName1, sectionName2, nil] autorelease];
-			[menu showInView:self.view];
-		}
-			break;
-		case 3: {
-			NSDictionary *sect1 = [[Server sharedInstance].list objectAtIndex:0];
-			NSString *sectionName1 = [sect1 objectForKey:@"Title"];
-			
-			NSDictionary *sect2 = [[Server sharedInstance].list objectAtIndex:1];
-			NSString *sectionName2 = [sect2 objectForKey:@"Title"];
-			
-			NSDictionary *sect3 = [[Server sharedInstance].list objectAtIndex:2];
-			NSString *sectionName3 = [sect3 objectForKey:@"Title"];
-			
-			UIActionSheet *menu = [[[UIActionSheet alloc]
-									initWithTitle:@"Section"
-									delegate:self
-									cancelButtonTitle:@"Cancel"
-									destructiveButtonTitle:nil
-									otherButtonTitles:sectionName1, sectionName2, sectionName3, nil] autorelease];
-			[menu showInView:self.view];
-		}
-			break;
+	UIActionSheet *menu = [[[UIActionSheet alloc]
+							initWithTitle:@"Section"
+							delegate:self
+							cancelButtonTitle:nil
+							destructiveButtonTitle:nil
+							otherButtonTitles:nil] autorelease];
+	
+	for (int i=0;i<[[Server sharedInstance].list count];i++)
+	{
+		NSDictionary *sect = [[Server sharedInstance].list objectAtIndex:i];
+		NSString *sectionName = [sect objectForKey:@"Title"];
+		[menu addButtonWithTitle:sectionName];
 	}
+	menu.cancelButtonIndex=[[Server sharedInstance].list count];
+	[menu addButtonWithTitle:@"Cancel"];
+	[menu showInView:self.view];
 }
 
 - (void)viewDidLoad
