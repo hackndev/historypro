@@ -131,7 +131,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 		cell.textLabel.numberOfLines = 2;
 		cell.textLabel.textAlignment = UITextAlignmentLeft;
-		//cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
 		int myInt = [[[companies objectAtIndex:indexPath.row] name] length];
 		if (myInt > 70) {
 			NSString *labelName = [[[companies objectAtIndex:indexPath.row] name] substringWithRange:NSMakeRange(0,65)];

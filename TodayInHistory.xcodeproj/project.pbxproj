@@ -58,6 +58,7 @@
 		D5779A5110CC040000CDD0E7 /* DDXMLNode+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = D5779A4F10CC040000CDD0E7 /* DDXMLNode+HTML.m */; };
 		D5BA9B6410B438C30066082A /* TagsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5BA9B6310B438C30066082A /* TagsController.xib */; };
 		D5BC51E610F3AA88004C79F0 /* NavStop.png in Resources */ = {isa = PBXBuildFile; fileRef = D5BC51E510F3AA88004C79F0 /* NavStop.png */; };
+		D5C7E8E010F3EC250037A224 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C7E8DF10F3EC250037A224 /* SystemConfiguration.framework */; };
 		D5CFA75F109CCC1C00645CD0 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CFA75E109CCC1C00645CD0 /* Tag.m */; };
 		D5CFA763109CD78200645CD0 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CFA762109CD78200645CD0 /* Server.m */; };
 		D5D206E010B03AEE00C3531C /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D206DF10B03AEE00C3531C /* BrowserViewController.m */; };
@@ -155,6 +156,7 @@
 		D5779A4F10CC040000CDD0E7 /* DDXMLNode+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DDXMLNode+HTML.m"; path = "Classes/DDXMLNode+HTML.m"; sourceTree = "<group>"; };
 		D5BA9B6310B438C30066082A /* TagsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagsController.xib; sourceTree = "<group>"; };
 		D5BC51E510F3AA88004C79F0 /* NavStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavStop.png; sourceTree = "<group>"; };
+		D5C7E8DF10F3EC250037A224 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D5CFA75D109CCC1C00645CD0 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		D5CFA75E109CCC1C00645CD0 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		D5CFA761109CD78200645CD0 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */,
+				D5C7E8E010F3EC250037A224 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +268,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+				D5C7E8DF10F3EC250037A224 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

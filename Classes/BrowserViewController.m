@@ -8,10 +8,38 @@
 
 #import "BrowserViewController.h"
 #import "NetState.h"
+#import <SystemConfiguration/SCNetworkReachability.h>
+#include <netinet/in.h>
 
 @implementation BrowserViewController
 
 @synthesize viewController;
+
+- (BOOL)connectedToNetwork
+{
+	// Create zero addy
+	struct sockaddr_in zeroAddress;
+	bzero(&zeroAddress, sizeof(zeroAddress));
+	zeroAddress.sin_len = sizeof(zeroAddress);
+	zeroAddress.sin_family = AF_INET;
+	
+	// Recover reachability flags
+	SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
+	SCNetworkReachabilityFlags flags;
+	
+	BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
+	CFRelease(defaultRouteReachability);
+	
+	if (!didRetrieveFlags) {
+		NSLog(@"Error. Could not recover network reachability flags");
+		return NO;
+	}
+	
+	BOOL isReachable = flags & kSCNetworkFlagsReachable;
+	BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
+	NSLog(@"Reachability test: %s", (isReachable && !needsConnection) ? "passed":"failed");
+	return (isReachable && !needsConnection) ? YES : NO;
+}
 
 + (BrowserViewController *)sharedInstance
 {
@@ -36,14 +64,24 @@
 
 - (void)navigateTo:(NSURLRequest *)request
 {
-	NSString *HTMLData =  @"<html><head></head>"
-                          @"<body style='background-color: #ffffff;'>"
-                          @"<div style='font-family:\"Arial\";font-size:48px;text-align:center'><strong>Loading</strong></div>"
-						  @"</body></html>";
-    
+	NSString *dataLoading =	@"<html><head></head>"
+							@"<body style='background-color: #ffffff;'><p>"
+							@"<div style='font-family:\"Arial\";font-size:48px;text-align:center'><strong>Loading</strong></div>"
+							@"</body></html>";
+	
+    NSString *daraError =	@"<html><head></head>"
+							@"<body style='background-color: #ffffff;'><p>"
+							@"<div style='font-family:\"Arial\";font-size:48px;text-align:center'><strong>No network connection available</strong></div>"
+							@"</body></html>";
+	
 	[self loadView];
-	[webView loadHTMLString:HTMLData baseURL:nil];
-	[webView loadRequest:request];
+	[webView loadHTMLString:dataLoading baseURL:nil];
+	if ([self connectedToNetwork]) {
+		[webView loadRequest:request];
+	} else {
+		[webView loadHTMLString:daraError baseURL:nil];
+	}
+
 }
 
 - (IBAction)back:(id)unused
