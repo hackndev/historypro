@@ -25,7 +25,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	CGSize tlSize = [name sizeWithFont:textView.font constrainedToSize:CGSizeMake(320, 208)];
+	
+	NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"YYYY"];
+	NSString *now = [dateFormatter stringFromDate:[NSDate date]];
+	NSNumber *eventDate = [formatter numberFromString:[[tags objectAtIndex:0] tagname]];
+	NSNumber *interval = [NSNumber numberWithFloat:([[formatter numberFromString:now] floatValue] - [eventDate floatValue])];
+	NSString *textViewName;
+	
+	if([interval floatValue] == 1)
+	{
+		textViewName = [name stringByAppendingString:[NSString stringWithFormat:@" (%@ year ago)", [formatter stringFromNumber:interval]]];
+	} else {
+		textViewName = [name stringByAppendingString:[NSString stringWithFormat:@" (%@ years ago)", [formatter stringFromNumber:interval]]];
+	}
+	
+	CGSize tlSize = [textViewName sizeWithFont:textView.font constrainedToSize:CGSizeMake(320, 208)];
 	CGRect textRect = textView.frame;
 	textRect.size.height = tlSize.height + 30;
 	textRect.size.width = 320;
@@ -36,8 +52,8 @@
 	tableRect.size.height = (416 - (tlSize.height + 30));
 	tableRect.size.width = 320;
 	self.tableView.frame = tableRect;
-	textView.text = name;
 	
+	textView.text = textViewName;
 }
 
 - (void)viewWillAppear:(BOOL)animated
