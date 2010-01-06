@@ -119,6 +119,7 @@
 	NSURLRequest *requrl = [NSURLRequest requestWithURL:[NSURL URLWithString:curtag.url]];
 	BrowserViewController *webcontroller = [BrowserViewController sharedInstance];
 	[webcontroller navigateTo:requrl];
+	webcontroller.title = curtag.tagname;
 	[self.navigationController pushViewController:webcontroller animated:YES];
 }
 
