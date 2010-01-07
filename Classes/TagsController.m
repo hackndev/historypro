@@ -29,10 +29,20 @@
 	NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"YYYY"];
+	NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@" "];
+	NSRange numberRange;
 	NSString *now = [dateFormatter stringFromDate:[NSDate date]];
-	NSNumber *eventDate = [formatter numberFromString:[[tags objectAtIndex:0] tagname]];
-	NSNumber *interval = [NSNumber numberWithFloat:([[formatter numberFromString:now] floatValue] - [eventDate floatValue])];
+	NSNumber *interval;
 	NSString *textViewName;
+	
+	numberRange = [name rangeOfCharacterFromSet:numbers];
+	NSString *eventYear = [name substringWithRange:NSMakeRange(0,numberRange.location)];
+	if ([name characterAtIndex:(numberRange.location + 1)] == 'B')
+	{
+		interval = [NSNumber numberWithFloat:([[formatter numberFromString:now] floatValue] + [eventYear floatValue])];
+	} else {
+		interval = [NSNumber numberWithFloat:([[formatter numberFromString:now] floatValue] - [eventYear floatValue])];
+	}
 	
 	if([interval floatValue] == 1)
 	{
