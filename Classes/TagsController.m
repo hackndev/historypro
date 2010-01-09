@@ -26,29 +26,28 @@
 {
     [super viewDidLoad];
 	
-	NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"YYYY"];
 	NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@" "];
 	NSRange numberRange;
 	NSString *now = [dateFormatter stringFromDate:[NSDate date]];
-	NSNumber *interval;
+	int interval;
 	NSString *textViewName;
 	
 	numberRange = [name rangeOfCharacterFromSet:numbers];
 	NSString *eventYear = [name substringWithRange:NSMakeRange(0,numberRange.location)];
 	if ([name characterAtIndex:(numberRange.location + 1)] == 'B')
 	{
-		interval = [NSNumber numberWithFloat:([[formatter numberFromString:now] floatValue] + [eventYear floatValue])];
+		interval = ((int)[now intValue] + [eventYear intValue]);
 	} else {
-		interval = [NSNumber numberWithFloat:([[formatter numberFromString:now] floatValue] - [eventYear floatValue])];
+		interval = ([now intValue] - [eventYear intValue]);
 	}
 	
-	if([interval floatValue] == 1)
+	if(interval == 1)
 	{
-		textViewName = [name stringByAppendingString:[NSString stringWithFormat:@" (%@ year ago)", [formatter stringFromNumber:interval]]];
+		textViewName = [name stringByAppendingString:[NSString stringWithFormat:@" (%d year ago)", interval]];
 	} else {
-		textViewName = [name stringByAppendingString:[NSString stringWithFormat:@" (%@ years ago)", [formatter stringFromNumber:interval]]];
+		textViewName = [name stringByAppendingString:[NSString stringWithFormat:@" (%d years ago)", interval]];
 	}
 	
 	CGSize tlSize = [textViewName sizeWithFont:textView.font constrainedToSize:CGSizeMake(320, 208)];
