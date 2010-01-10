@@ -26,19 +26,18 @@
 {
     [super viewDidLoad];
 	
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
 	[dateFormatter setDateFormat:@"YYYY"];
-	NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@" "];
 	NSRange numberRange;
 	NSString *now = [dateFormatter stringFromDate:[NSDate date]];
 	int interval;
 	NSString *textViewName;
 	
-	numberRange = [name rangeOfCharacterFromSet:numbers];
+	numberRange = [name rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
 	NSString *eventYear = [name substringWithRange:NSMakeRange(0,numberRange.location)];
 	if ([name characterAtIndex:(numberRange.location + 1)] == 'B')
 	{
-		interval = ((int)[now intValue] + [eventYear intValue]);
+		interval = ([now intValue] + [eventYear intValue]);
 	} else {
 		interval = ([now intValue] - [eventYear intValue]);
 	}
