@@ -166,8 +166,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 		return;
 	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
     NSArray *companies = [dict objectForKey:@"Objects"];
-	TagsController *controller = [[TagsController alloc] initWithTags:[[companies objectAtIndex:indexPath.row] tags]
-															eventName:[[companies objectAtIndex:indexPath.row] name]];
+	TagsController *controller = [[TagsController alloc] initWithEvent:[companies objectAtIndex:indexPath.row]];
 	[self.navigationController pushViewController:controller animated:YES];
 	[controller release];
 }

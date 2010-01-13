@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class Event;
+
 @interface TagsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
 	IBOutlet UITableView *tableView;
 	IBOutlet UITextView *textView;
-	NSArray *tags;
-	NSString *name;
+	Event *event;
 }
 
 @property (readonly) UITableView *tableView;
 
-- (id)initWithTags:(NSArray *)aTags eventName:(NSString *)aName;
+- (id)initWithEvent:(Event *)e;
 
 @end

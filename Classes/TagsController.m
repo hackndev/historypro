@@ -9,16 +9,16 @@
 #import "BrowserViewController.h"
 #import "Tag.h"
 #import "RootViewController.h"
+#import "Event.h"
 
 @implementation TagsController
 
 @synthesize tableView;
 
--(id)initWithTags:(NSArray *)aTags eventName:(NSString *)aName
+-(id)initWithEvent:(Event *)e
 {
 	self = [super init];
-	tags = [aTags retain];
-	name = [aName retain];	
+	event = [e retain];
 	return self;
 }
 
@@ -70,16 +70,6 @@
 	[self.tableView reloadData];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload
-{
-	
-}
-
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -89,7 +79,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [tags count];
+	return [event.tags count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,14 +106,14 @@
 	cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 	cell.textLabel.numberOfLines = 2;
     
-	Tag *curtag = [tags objectAtIndex:indexPath.row];
+	Tag *curtag = [event.tags objectAtIndex:indexPath.row];
 	cell.textLabel.text = curtag.tagname;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	Tag *curtag = [tags objectAtIndex:indexPath.row];
+	Tag *curtag = [event.tags objectAtIndex:indexPath.row];
 	NSURLRequest *requrl = [NSURLRequest requestWithURL:[NSURL URLWithString:curtag.url]];
 	BrowserViewController *webcontroller = [BrowserViewController sharedInstance];
 	[webcontroller navigateTo:requrl];
@@ -133,8 +123,7 @@
 
 - (void)dealloc
 {
-	[tags release];
-	[name release];
+	[event release];
 	[super dealloc];
 }
 
