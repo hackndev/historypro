@@ -117,8 +117,10 @@
 								   initWithHTMLData:htmlData
 								   options:HTML_PARSE_NOWARNING | HTML_PARSE_NOERROR
 								   error:&error];
-	if(error)
+	if(error) {
+		[htmlDocument release];
 		return NO;
+	}
 	
 	// xpath
 	NSDictionary *sortedEvents = [NSDictionary dictionaryWithObjectsAndKeys:
