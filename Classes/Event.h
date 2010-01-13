@@ -24,5 +24,6 @@
 @property (readonly) NSString *name;
 @property (readonly) NSDate *date;
 @property (readonly) NSArray *tags;
+@property (readonly) NSUInteger yearsPassed;
 
 @end

@@ -28,12 +28,32 @@
 	return self;
 }
 
--(void)dealloc
+- (void)dealloc
 {
 	[tags release];
 	[date release];
 	[name release];
 	[super dealloc];
+}
+
+- (NSUInteger)yearsPassed
+{
+	NSDateComponents *c = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
+	NSInteger currentYear = [c year];
+	NSInteger eventYear = [name integerValue];
+	
+	NSRange r = [name rangeOfString:@" "];
+	if(r.location != NSNotFound) {
+		unichar ch = [name characterAtIndex:r.location+1];
+		if(ch == 'B') {
+			return currentYear + eventYear;
+		} else {
+			return currentYear - eventYear;
+		}
+	} else {
+		return 0;
+	}
+
 }
 
 
