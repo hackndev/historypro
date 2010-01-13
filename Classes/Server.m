@@ -33,6 +33,7 @@
 	
 	_events = [[NSMutableArray alloc] init];
 	_list = [[NSMutableArray alloc] init];
+	failed = NO;
 	
 	return self;
 }
@@ -77,7 +78,7 @@
 			[[NSUserDefaults standardUserDefaults] setValue:now forKey:@"cacheDate"];
 			NSLog(@"Cached %d bytes", [htmlData length]);
 		} else {
-			// TODO: handle network error
+			failed = YES;
 		}
 	}
 	return htmlData; // XXX: will return nil on error
@@ -218,15 +219,20 @@
 		[NSTimer scheduledTimerWithTimeInterval:0
 										 target:self
 									   selector:@selector(_onTimer:)
-									   userInfo:nil
+									   userInfo:[NSDictionary
+												 dictionaryWithObject:[NSNumber numberWithBool:failed]
+												 forKey:@"hasFailed"]
 										repeats:NO];
 	}];
 }
 
-- (void)_onTimer:(id)unused
+- (void)_onTimer:(NSTimer *)timer
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"server.events.updated" object:self];
+	[[NSNotificationCenter defaultCenter]
+	 postNotificationName:@"server.events.updated"
+	 object:self
+	 userInfo:[timer userInfo]];
 }
 
 @end

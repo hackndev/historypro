@@ -9,6 +9,7 @@
 @interface RootViewController : UITableViewController <UIActionSheetDelegate>
 {
 	BOOL isLoaded;
+	BOOL hasFailed;
 }
 
 @end

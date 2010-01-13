@@ -15,7 +15,7 @@ typedef void (^DataBlock)(NSData *data);
 {
 	NSMutableArray *_events;
 	NSMutableArray *_list;
-
+	BOOL failed;
 }
 @property (readonly) NSArray *events;
 @property (readonly) NSArray *list;

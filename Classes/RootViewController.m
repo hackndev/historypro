@@ -19,6 +19,7 @@
 	if(!self) return self;
 	
 	isLoaded = NO;
+	hasFailed = NO;
 	[[NSNotificationCenter defaultCenter]
 	 addObserver:self
 	 selector:@selector(onEventsUpdated:)
@@ -28,19 +29,22 @@
 	return self;
 }
 
-- (void)onEventsUpdated:(NSNotification *)unused
+- (void)onEventsUpdated:(NSNotification *)notification
 {
 	NSLog(@"updating!");
-	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
-											  initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-											  target:self
-											  action:@selector(presentSheet)] autorelease];
-	isLoaded = YES;
+	if(![[[notification userInfo] objectForKey:@"hasFailed"] boolValue]) {
+		self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
+												  initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+												  target:self
+												  action:@selector(presentSheet)] autorelease];
+		isLoaded = YES;
+	} else {
+		hasFailed = YES;
+	}
 	[self.tableView reloadData];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet
-clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if (buttonIndex == actionSheet.numberOfButtons-1) {
 		NSLog(@"Cancel pressed");
@@ -140,7 +144,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 			cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
 		}
 	} else {
-		cell.textLabel.text = NSLocalizedString(@"Loading", @"Loading message");
+		if(!hasFailed) {
+			cell.textLabel.text = NSLocalizedString(@"Loading", @"Loading message");
+		} else {
+			cell.textLabel.text = NSLocalizedString(@"Network connection failed", @"Fail message");
+		}
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
 	}
     return cell;
