@@ -98,11 +98,11 @@
 {
 	if(isStop) {
 		[webView stopLoading];
-	stopReloadButton.image = [UIImage imageNamed:@"NavStop.png"];
-
+		[self webViewDidFinishLoad:webView];
+		stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
 	} else {
 		[webView reload];
-	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
+		stopReloadButton.image = [UIImage imageNamed:@"NavStop.png"];
 	}
 	isStop != isStop;
 }
