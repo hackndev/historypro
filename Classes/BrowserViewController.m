@@ -109,13 +109,13 @@
 
 - (IBAction)openSafari:(id)unused
 {
-	NSURL *u = webView.request.URL; 
+	NSString *title = [webView stringByEvaluatingJavaScriptFromString: @"document.title"];
 	UIActionSheet *s = [[UIActionSheet alloc]
-						initWithTitle:[u description]
+						initWithTitle:title
 						delegate:self
 						cancelButtonTitle:@"Cancel"
 						destructiveButtonTitle:nil
-						otherButtonTitles:@"Open in Safari", @"Send by E-mail", nil];
+						otherButtonTitles:@"Open in Safari", @"Send by e-mail", nil];
 	[s showFromToolbar:toolbar];
 	[s release];
 }
@@ -151,6 +151,7 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+	openSafariButton.enabled = NO;
 	NSLog(@"Loading started");
 	isStop = YES;
 	stopReloadButton.image = [UIImage imageNamed:@"NavStop.png"];
@@ -160,6 +161,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+	openSafariButton.enabled = TRUE;
 	NSLog(@"Loading stopped");
 	isStop = NO;
 	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];

@@ -12,6 +12,7 @@
 @interface BrowserViewController : UIViewController <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 {
 	IBOutlet UIBarButtonItem *stopReloadButton;
+	IBOutlet UIBarButtonItem *openSafariButton;
 	IBOutlet UIWebView *webView;
 	IBOutlet UIToolbar *toolbar;
 
