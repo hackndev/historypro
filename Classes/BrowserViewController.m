@@ -110,7 +110,43 @@
 - (IBAction)openSafari:(id)unused
 {
 	NSURL *u = webView.request.URL; 
-	[[UIApplication sharedApplication] openURL:u];
+	UIActionSheet *s = [[UIActionSheet alloc]
+						initWithTitle:[u description]
+						delegate:self
+						cancelButtonTitle:@"Cancel"
+						destructiveButtonTitle:nil
+						otherButtonTitles:@"Open in Safari", @"Send by E-mail", nil];
+	[s showFromToolbar:toolbar];
+	[s release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	NSURL *u = webView.request.URL;
+	MFMailComposeViewController *mailController = nil;
+	switch (buttonIndex) {
+		case 0:
+			[[UIApplication sharedApplication] openURL:u];
+			break;
+		case 1:
+			mailController = [[MFMailComposeViewController alloc] init];
+			mailController.mailComposeDelegate = self;
+			[mailController setSubject:@"Did you know this?"];
+			[mailController setMessageBody:[u description] isHTML:NO]; 
+			[self presentModalViewController:mailController animated:YES];
+			[mailController release];
+			break;
+		default:
+			break;
+	}
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error;
+{
+	if (result == MFMailComposeResultSent) {
+		NSLog(@"It's away!");
+	}
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView

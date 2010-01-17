@@ -40,6 +40,7 @@
 		A52F492210EB53B200894139 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A52F490410EB52F300894139 /* OCMock.framework */; };
 		A52F494210EB56D900894139 /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
 		A52F497910EBAF6000894139 /* December_13.html in Resources */ = {isa = PBXBuildFile; fileRef = A52F497810EBAF6000894139 /* December_13.html */; };
+		A55CE57A1103912200BB4787 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55CE5791103912200BB4787 /* MessageUI.framework */; };
 		A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A590A93410E661D800A3151C /* PLBlocks.framework */; };
 		A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
 		A5BA1C3D10FE0B7000BA6084 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BA1C3C10FE0B7000BA6084 /* Default.png */; };
@@ -127,6 +128,7 @@
 		A52F48F710EB520600894139 /* ServerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerTest.m; path = Tests/ServerTest.m; sourceTree = "<group>"; };
 		A52F490410EB52F300894139 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		A52F497810EBAF6000894139 /* December_13.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = December_13.html; path = Tests/December_13.html; sourceTree = "<group>"; };
+		A55CE5791103912200BB4787 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A590A93410E661D800A3151C /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		A590A93610E661EE00A3151C /* NSThread+PLBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+PLBlocks.h"; sourceTree = "<group>"; };
 		A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+PLBlocks.m"; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */,
 				D5C7E8E010F3EC250037A224 /* SystemConfiguration.framework in Frameworks */,
+				A55CE57A1103912200BB4787 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +275,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 				D5C7E8DF10F3EC250037A224 /* SystemConfiguration.framework */,
+				A55CE5791103912200BB4787 /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

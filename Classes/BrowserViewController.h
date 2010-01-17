@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-
-@interface BrowserViewController : UIViewController
+@interface BrowserViewController : UIViewController <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 {
 	IBOutlet UIBarButtonItem *stopReloadButton;
 	IBOutlet UIWebView *webView;
+	IBOutlet UIToolbar *toolbar;
 
 	UIViewController *viewController;
 	
@@ -28,5 +29,7 @@
 - (IBAction)stopReload:(id)unused;
 - (IBAction)openSafari:(id)unused;
 - (void)navigateTo:(NSURLRequest *)request;
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
 
 @end
