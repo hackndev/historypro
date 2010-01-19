@@ -41,6 +41,9 @@
 		A52F494210EB56D900894139 /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
 		A52F497910EBAF6000894139 /* December_13.html in Resources */ = {isa = PBXBuildFile; fileRef = A52F497810EBAF6000894139 /* December_13.html */; };
 		A55CE57A1103912200BB4787 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A55CE5791103912200BB4787 /* MessageUI.framework */; };
+		A57181AD1106166600570D67 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = A57181AC1106166600570D67 /* star.png */; };
+		A57181B51106174E00570D67 /* FavoritesController.m in Sources */ = {isa = PBXBuildFile; fileRef = A57181B41106174E00570D67 /* FavoritesController.m */; };
+		A57181D2110619EA00570D67 /* star-off.png in Resources */ = {isa = PBXBuildFile; fileRef = A57181D1110619EA00570D67 /* star-off.png */; };
 		A590A93510E661D800A3151C /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A590A93410E661D800A3151C /* PLBlocks.framework */; };
 		A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
 		A5BA1C3D10FE0B7000BA6084 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BA1C3C10FE0B7000BA6084 /* Default.png */; };
@@ -129,6 +132,10 @@
 		A52F490410EB52F300894139 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		A52F497810EBAF6000894139 /* December_13.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = December_13.html; path = Tests/December_13.html; sourceTree = "<group>"; };
 		A55CE5791103912200BB4787 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A57181AC1106166600570D67 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		A57181B31106174E00570D67 /* FavoritesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesController.h; sourceTree = "<group>"; };
+		A57181B41106174E00570D67 /* FavoritesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesController.m; sourceTree = "<group>"; };
+		A57181D1110619EA00570D67 /* star-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star-off.png"; sourceTree = "<group>"; };
 		A590A93410E661D800A3151C /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		A590A93610E661EE00A3151C /* NSThread+PLBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+PLBlocks.h"; sourceTree = "<group>"; };
 		A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+PLBlocks.m"; sourceTree = "<group>"; };
@@ -254,6 +261,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A57181D1110619EA00570D67 /* star-off.png */,
+				A57181AC1106166600570D67 /* star.png */,
 				A5BA1C3C10FE0B7000BA6084 /* Default.png */,
 				A517BFE010F3CA9900232AEC /* icon.png */,
 				D5BC51E510F3AA88004C79F0 /* NavStop.png */,
@@ -304,6 +313,8 @@
 				1D3623250D0F684500981E51 /* TIHAppDelegate.m */,
 				D50C6759109A19DE00E47FD2 /* TagsController.h */,
 				D50C675A109A19DE00E47FD2 /* TagsController.m */,
+				A57181B31106174E00570D67 /* FavoritesController.h */,
+				A57181B41106174E00570D67 /* FavoritesController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -483,6 +494,8 @@
 				D5BC51E610F3AA88004C79F0 /* NavStop.png in Resources */,
 				A517BFE110F3CA9900232AEC /* icon.png in Resources */,
 				A5BA1C3D10FE0B7000BA6084 /* Default.png in Resources */,
+				A57181AD1106166600570D67 /* star.png in Resources */,
+				A57181D2110619EA00570D67 /* star-off.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +549,7 @@
 				D5779A5010CC040000CDD0E7 /* DDXMLDocument+HTML.m in Sources */,
 				D5779A5110CC040000CDD0E7 /* DDXMLNode+HTML.m in Sources */,
 				A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */,
+				A57181B51106174E00570D67 /* FavoritesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

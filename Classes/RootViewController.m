@@ -10,6 +10,7 @@
 #import "TagsController.h"
 #import "Server.h"
 #import "Event.h"
+#import "FavoritesController.h"
 
 @implementation RootViewController
 
@@ -53,7 +54,7 @@
 	}
 }
 	
-- (void) presentSheet
+- (void)presentSheet
 {	
 	UIActionSheet *menu = [[[UIActionSheet alloc]
 							initWithTitle:@"Section"
@@ -72,6 +73,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -91,9 +93,13 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidUnload
+- (IBAction)onFavoritesList:(id)sender
 {
-
+	FavoritesController *controller = [[FavoritesController alloc] initWithStyle:UITableViewStylePlain];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+	[controller release];
+	[navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+	[self presentModalViewController:navController animated:YES];
 }
 
 #pragma mark Table view methods

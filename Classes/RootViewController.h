@@ -12,4 +12,6 @@
 	BOOL hasFailed;
 }
 
+- (IBAction)onFavoritesList:(id)sender;
+
 @end
