@@ -197,7 +197,7 @@
 					}
 				}
 			}
-			Event *n = [[[Event alloc] initWithName:descr date:[NSDate date] tags:tags] autorelease];
+			Event *n = [[[Event alloc] initWithName:descr tags:tags] autorelease];
 			[_events addObject:n];
 			[[sortedEvents objectForKey:s] addObject:n];
 		}

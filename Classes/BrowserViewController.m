@@ -161,7 +161,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-	openSafariButton.enabled = TRUE;
+	openSafariButton.enabled = YES;
 	NSLog(@"Loading stopped");
 	isStop = NO;
 	stopReloadButton.image = [UIImage imageNamed:@"01-refresh.png"];
