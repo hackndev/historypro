@@ -86,6 +86,9 @@
 	self.title = (@"%@", stringFromDate);
 	
 	[[Server sharedInstance] getEventsForDate:[NSDate date]];
+	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    [backButton release];
 }
 
 - (void)didReceiveMemoryWarning

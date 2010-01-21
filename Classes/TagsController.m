@@ -44,6 +44,17 @@
 	self.tableView.frame = tableRect;
 	
 	textView.text = textViewName;
+
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeStyle:NSDateFormatterNoStyle];
+	[formatter setDateStyle:NSDateFormatterMediumStyle];
+	NSDate *date = [[[NSDate alloc] init] autorelease];
+	//[formatter setLocale:[NSLocale currentLocale]];
+	
+	NSString *stringFromDate = [formatter stringFromDate:date];
+	[formatter release];
+	
+	self.title = (@"%@", stringFromDate);
 }
 
 - (void)viewWillAppear:(BOOL)animated
