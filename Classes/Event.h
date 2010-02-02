@@ -13,14 +13,20 @@
 {
 	NSString *name;
 	NSArray *tags;
+	NSNumber *pk;
 
 }
 
 - (id)initWithName:(NSString *)aName
 			  tags:(NSArray *)aTags;
 
+- (id)initWithName:(NSString *)aName
+			  tags:(NSArray *)aTags
+			  pkID:(NSNumber *)aPk;
+
 @property (readonly) NSString *name;
 @property (readonly) NSArray *tags;
 @property (readonly) NSUInteger yearsPassed;
+@property (readonly) NSNumber *pk;
 
 @end

@@ -15,6 +15,7 @@
 	IBOutlet UITableView *tableView;
 	IBOutlet UITextView *textView;
 	Event *event;
+	NSArray *favEvents;
 }
 
 @property (readonly) UITableView *tableView;

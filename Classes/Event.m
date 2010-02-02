@@ -13,6 +13,7 @@
 
 @synthesize name;
 @synthesize tags;
+@synthesize pk;
 
 - (id)initWithName:(NSString *)aName
 			  tags:(NSArray *)aTags
@@ -25,10 +26,22 @@
 	return self;
 }
 
+- (id)initWithName:(NSString *)aName tags:(NSArray *)aTags pkID:(NSNumber *)aPkID
+{
+	self = [super init];
+	if (nil != self) {
+		name = [aName retain];
+		tags = [aTags retain];
+		pk = [aPkID retain];
+	}
+	return self;
+}
+
 - (void)dealloc
 {
 	[tags release];
 	[name release];
+	[pk release];
 	[super dealloc];
 }
 

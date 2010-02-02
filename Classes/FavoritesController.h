@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-@interface FavoritesController : UITableViewController {
-
+@interface FavoritesController : UITableViewController
+{
+	NSArray *favEvents;
 }
 
 @end

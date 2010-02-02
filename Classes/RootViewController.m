@@ -98,7 +98,7 @@
 
 - (IBAction)onFavoritesList:(id)sender
 {
-	FavoritesController *controller = [[FavoritesController alloc] initWithStyle:UITableViewStylePlain];
+	FavoritesController *controller = [[FavoritesController alloc] initWithStyle:UITableViewStyleGrouped];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	[controller release];
 	[navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];

@@ -10,6 +10,9 @@
 #import "Tag.h"
 #import "RootViewController.h"
 #import "Event.h"
+#import "FMDatabase.h"
+#import "FMDatabaseAdditions.h"
+#import "SQL.h"
 
 @implementation TagsController
 
@@ -55,6 +58,40 @@
 	[formatter release];
 	
 	self.title = (@"%@", stringFromDate);
+	
+	FMDatabase* db = [FMDatabase databaseWithPath:@"/Users/serg/Documents/tmp.db"];
+	if (![db open]) {
+		NSLog(@"Could not open db.");
+	}
+	BOOL buttonCheck = NO;
+	FMResultSet *rs = [db executeQuery:@"select * from event where eventName=? LIMIT 1", event.name];
+	buttonCheck = [rs next];
+	[rs close]; 
+	[db close];
+	UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"Fav" style:buttonCheck?UIBarButtonItemStyleDone:UIBarButtonItemStylePlain target:self action:@selector(addFav:)];
+	self.navigationItem.rightBarButtonItem = btn;
+	[btn release];
+}
+
+- (void)addFav:(id)sender
+{
+	SQL *sqlcontroller = [SQL sharedInstance];
+	if (self.navigationItem.rightBarButtonItem.style == UIBarButtonItemStylePlain) {
+		self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleDone;
+		[sqlcontroller addEvent:event];
+	} else {
+		self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
+		int i = 0;
+		favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
+		for(Event *enumerator in favEvents)
+		{	
+			if ([enumerator.name isEqualToString:event.name]) {
+				NSNumber *j = [[favEvents objectAtIndex:i] pk];
+				[sqlcontroller removeFavoriteEvent:j];
+			}
+		i++;
+		}
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated
