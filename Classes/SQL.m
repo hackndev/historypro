@@ -34,6 +34,26 @@ NSString *kName = @"name";
 	NSString *destinationPath = [[paths objectAtIndex:0] stringByAppendingString:@"/tmp.db"];
 	db = [[FMDatabase databaseWithPath:destinationPath] retain];
 	
+	if (! [[NSFileManager defaultManager] fileExistsAtPath: destinationPath]) {
+		// didn't find db, need to copy
+		NSString *backupDbPath = [[NSBundle mainBundle]
+								  pathForResource:@"tmp"
+								  ofType:@"db"];
+		if (backupDbPath == nil) {
+			// couldn't find backup db to copy, bail
+			return NO;
+		} else {
+			BOOL copiedBackupDb = [[NSFileManager defaultManager]
+								   copyItemAtPath:backupDbPath
+								   toPath:destinationPath
+								   error:nil];
+			if (! copiedBackupDb) {
+				// copying backup db failed, bail
+				return NO;
+			}
+		}
+	}
+	
 	if(![db open]) {
 		[self release];
 		return nil;
