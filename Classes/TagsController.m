@@ -59,7 +59,9 @@
 	
 	self.title = (@"%@", stringFromDate);
 	
-	FMDatabase* db = [FMDatabase databaseWithPath:@"/Users/serg/Documents/tmp.db"];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+	NSString *destinationPath = [[paths objectAtIndex:0] stringByAppendingString:@"/tmp.db"];
+	FMDatabase* db = [FMDatabase databaseWithPath:destinationPath];
 	if (![db open]) {
 		NSLog(@"Could not open db.");
 	}

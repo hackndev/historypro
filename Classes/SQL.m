@@ -30,7 +30,9 @@ NSString *kName = @"name";
 	self = [super init];
 	if(!self) return self;
 	
-	db = [[FMDatabase databaseWithPath:@"/Users/serg/Documents/tmp.db"] retain];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+	NSString *destinationPath = [[paths objectAtIndex:0] stringByAppendingString:@"/tmp.db"];
+	db = [[FMDatabase databaseWithPath:destinationPath] retain];
 	
 	if(![db open]) {
 		[self release];
