@@ -21,7 +21,7 @@
 
 -(void)addEvent:(Event *)aEvent;
 -(void)removeFavoriteEvent:(NSNumber *)pk;
--(Event *)favoriteEvents;
+-(NSArray *)favoriteEvents;
 + (SQL *)sharedInstance;
 
 @end

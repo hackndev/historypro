@@ -62,20 +62,23 @@ NSString *kName = @"name";
 	[db commit];
 }
 
--(Event *)favoriteEvents
+-(NSArray *)favoriteEvents
 {
 	FMResultSet *rs = [db executeQuery:@"select eventID, eventName from event"];
-	FMResultSet *rsTag = [db executeQuery:@"select dbTagName, dbTagUrl from tag where evID = ?", [rs stringForColumnIndex:1]];
-	NSMutableArray *t = [NSMutableArray array];
-	while ([rsTag next]) {
-		[t addObject:[[[Tag alloc] initWithTagname:[rsTag stringForColumnIndex:0]
-											  url:[rsTag stringForColumnIndex:1]] autorelease]];
-	}
 	NSMutableArray *e = [NSMutableArray array];
+	NSString *tagQuery;
+	FMResultSet *rsTag;
 	while([rs next]) {
+		NSMutableArray *t = [NSMutableArray array];
+		tagQuery = [NSString stringWithFormat:@"select dbTagName, dbTagUrl from tag where evID = %d", [rs intForColumnIndex:0]];
+		rsTag = [db executeQuery:tagQuery];
+		while ([rsTag next]) {
+			[t addObject:[[[Tag alloc] initWithTagname:[rsTag stringForColumnIndex:0]
+											url:[rsTag stringForColumnIndex:1]] autorelease]];
+		}
 		[e addObject:[[[Event alloc] initWithName:[rs stringForColumnIndex:1]
-											tags:t
-											pkID:[NSNumber numberWithInt:[rs intForColumnIndex:0]]] autorelease]];
+											 tags:t
+											 pkID:[NSNumber numberWithInt:[rs intForColumnIndex:0]]] autorelease]];
 	}
 	return [NSArray arrayWithArray:e];
 }

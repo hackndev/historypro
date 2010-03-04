@@ -10,6 +10,7 @@
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
 #import "SQL.h"
+#import "TagsController.h"
 
 
 
@@ -78,7 +79,12 @@
 	}  
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	TagsController *controller = [[TagsController alloc] initWithEvent:[favEvents objectAtIndex:indexPath.row]];
+	[self.navigationController pushViewController:controller animated:YES];
+	[controller release];
+}
 - (void)onFavoritesDone:(id)sender
 {
 	[self dismissModalViewControllerAnimated:YES];
