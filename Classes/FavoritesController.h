@@ -9,9 +9,18 @@
 #import <UIKit/UIKit.h>
 
 
-@interface FavoritesController : UITableViewController
+@interface FavoritesController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
+	IBOutlet UITableView *tableView;
 	NSArray *favEvents;
+	NSMutableArray *copyListOfItems;
+	NSMutableArray *copiedEvents;
+	IBOutlet UISearchBar *searchBar;
+	BOOL searching;
+	BOOL letUserSelectRow;
 }
+
+@property (readonly) UITableView *tableView;
+- (void) searchTableView;
 
 @end

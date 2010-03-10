@@ -16,6 +16,8 @@
 
 @implementation FavoritesController
 
+@synthesize tableView;
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -27,6 +29,84 @@
 											  action:@selector(onFavoritesDone:)] autorelease];
 	self.navigationItem.title = @"Favorites";
 	favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
+	
+	copyListOfItems = [[NSMutableArray alloc] init];
+	copiedEvents = [[NSMutableArray alloc] init];
+	
+	tableView.tableHeaderView = searchBar;
+	searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+	
+	searching = NO;
+	letUserSelectRow = YES;
+}
+
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar
+{
+	searching = YES;
+	letUserSelectRow = NO;
+	tableView.scrollEnabled = NO;
+	
+	[searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)_searchBar {
+    _searchBar.text=@"";
+    
+    [_searchBar setShowsCancelButton:NO animated:YES];
+    [_searchBar resignFirstResponder];
+    tableView.scrollEnabled = YES;
+	letUserSelectRow = YES;
+	searching = NO;
+	
+	[tableView reloadData];
+}
+
+- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
+	
+	[copyListOfItems removeAllObjects];
+	[copiedEvents removeAllObjects];
+	
+	if([searchText length] > 0) {
+		
+		searching = YES;
+		letUserSelectRow = YES;
+		tableView.scrollEnabled = YES;
+		[self searchTableView];
+	}
+	else {
+		
+		searching = NO;
+		letUserSelectRow = NO;
+		tableView.scrollEnabled = NO;
+	}
+	
+	[tableView reloadData];
+}
+
+- (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
+	
+	[self searchTableView];
+}
+
+- (void) searchTableView {
+	
+	NSString *searchText = searchBar.text;
+	NSMutableArray *searchArray = [[NSMutableArray alloc] init];
+	
+	[searchArray addObjectsFromArray:favEvents];
+	
+	for (Event *sTemp in searchArray)
+	{
+		NSRange titleResultsRange = [sTemp.name rangeOfString:searchText options:NSCaseInsensitiveSearch];
+		
+		if (titleResultsRange.length > 0) {
+			[copyListOfItems addObject:sTemp.name];
+			[copiedEvents addObject:sTemp];
+		}
+	}
+	
+	[searchArray release];
+	searchArray = nil;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -34,39 +114,64 @@
 	return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	return [favEvents count];
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	
+	if (searching)
+		return [copyListOfItems count];
+	else {
+		return [favEvents count];
+	}
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 	
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	
-	cell.textLabel.font = [UIFont systemFontOfSize:14];
-	cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-	cell.textLabel.numberOfLines = 2;
-	cell.textLabel.textAlignment = UITextAlignmentLeft;
-	NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
-	int myInt = [en length];
-	if (myInt > 70) {
-		NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
-		labelName = [labelName stringByAppendingString:@"..."];
-		cell.textLabel.text = labelName;
-	} else {
-		cell.textLabel.text = en;
+	if(searching)
+	{
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		
+		cell.textLabel.font = [UIFont systemFontOfSize:14];
+		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+		cell.textLabel.numberOfLines = 2;
+		cell.textLabel.textAlignment = UITextAlignmentLeft;
+		NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
+		int myInt = [en length];
+		if (myInt > 70) {
+			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
+			labelName = [labelName stringByAppendingString:@"..."];
+			cell.textLabel.text = labelName;
+		} else {
+			cell.textLabel.text = en;
+		}
 	}
+	else {
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		
+		cell.textLabel.font = [UIFont systemFontOfSize:14];
+		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+		cell.textLabel.numberOfLines = 2;
+		cell.textLabel.textAlignment = UITextAlignmentLeft;
+		NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
+		int myInt = [en length];
+		if (myInt > 70) {
+			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
+			labelName = [labelName stringByAppendingString:@"..."];
+			cell.textLabel.text = labelName;
+		} else {
+			cell.textLabel.text = en;
+		}
+	}
+	
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)_tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		// Delete the managed object for the given index path
@@ -75,15 +180,22 @@
 		[favEvents release];
 		favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
 		
-		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 	}  
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	TagsController *controller = [[TagsController alloc] initWithEvent:[favEvents objectAtIndex:indexPath.row]];
-	[self.navigationController pushViewController:controller animated:YES];
-	[controller release];
+	if(searching) {
+		TagsController *controller = [[TagsController alloc] initWithEvent:[copiedEvents objectAtIndex:indexPath.row]];
+		[self.navigationController pushViewController:controller animated:YES];
+		[controller release];
+	}
+	else {
+		TagsController *controller = [[TagsController alloc] initWithEvent:[favEvents objectAtIndex:indexPath.row]];
+		[self.navigationController pushViewController:controller animated:YES];
+		[controller release];
+	}
 }
 - (void)onFavoritesDone:(id)sender
 {
