@@ -18,9 +18,11 @@
 	IBOutlet UISearchBar *searchBar;
 	BOOL searching;
 	BOOL letUserSelectRow;
+	UITableViewCell *nibLoadedCell;
 }
 
 @property (readonly) UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UITableViewCell *nibLoadedCell;
 - (void) searchTableView;
 
 @end

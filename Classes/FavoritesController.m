@@ -17,10 +17,12 @@
 @implementation FavoritesController
 
 @synthesize tableView;
+@synthesize nibLoadedCell;
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
 											  initWithTitle:@"Back"
@@ -45,6 +47,8 @@
 	searching = YES;
 	letUserSelectRow = NO;
 	tableView.scrollEnabled = NO;
+	[tableView reloadData];
+	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	
 	[searchBar setShowsCancelButton:YES animated:YES];
 }
@@ -59,11 +63,13 @@
 	searching = NO;
 	
 	[tableView reloadData];
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
 	
 	[copyListOfItems removeAllObjects];
+	NSLog(@"REMOVED ALL");
 	[copiedEvents removeAllObjects];
 	
 	if([searchText length] > 0) {
