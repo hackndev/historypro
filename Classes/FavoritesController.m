@@ -138,61 +138,54 @@
 		cell = nibLoadedCell;
     }
 	
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setTimeStyle:NSDateFormatterNoStyle];
-	[formatter setDateFormat:@"d MMM"];
-	
-	NSString *stringFromDate = [formatter stringFromDate:[NSDate date]];
-	
 	if(searching)
 	{
-		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 //		
 //		cell.textLabel.font = [UIFont systemFontOfSize:14];
 //		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 //		cell.textLabel.numberOfLines = 2;
 //		cell.textLabel.textAlignment = UITextAlignmentLeft;
 		NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
-		int myInt = [en length];
-		if (myInt > 70) {
-			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
-			labelName = [labelName stringByAppendingString:@"..."];
+//		int myInt = [en length];
+//		if (myInt > 70) {
+//			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
+//			labelName = [labelName stringByAppendingString:@"..."];
 			UILabel *eventLabel = (UILabel*) [cell viewWithTag:2];
-			eventLabel.text = labelName;
+			eventLabel.text = en;
 			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-			dateLabel.text = stringFromDate;
-		} else {
-			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
-			titleLabel.text = en;
-			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-			dateLabel.text = stringFromDate;
-		}
+			dateLabel.text = [[copiedEvents objectAtIndex:indexPath.row] evDate];
+	//	} else {
+//			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
+//			titleLabel.text = en;
+//			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+//			dateLabel.text = stringFromDate;
+//		}
 	}
 	else {
-		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 //		
 //		cell.textLabel.font = [UIFont systemFontOfSize:14];
 //		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 //		cell.textLabel.numberOfLines = 2;
 //		cell.textLabel.textAlignment = UITextAlignmentLeft;
 		NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
-		int myInt = [en length];
-		if (myInt > 70) {
-			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
-			labelName = [labelName stringByAppendingString:@"..."];
-			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
-			titleLabel.text = labelName;
-			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-			dateLabel.text = stringFromDate;
-		} else {
+		//int myInt = [en length];
+//		if (myInt > 70) {
+//			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
+//			labelName = [labelName stringByAppendingString:@"..."];
 			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
 			titleLabel.text = en;
 			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-			dateLabel.text = stringFromDate;
-		}
+			dateLabel.text = [[favEvents objectAtIndex:indexPath.row] evDate];
+	//	} else {
+//			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
+//			titleLabel.text = en;
+//			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+//			dateLabel.text = stringFromDate;
+//		}
 	}
-	
-	[formatter release];
+
     return cell;
 }
 

@@ -61,10 +61,15 @@ NSString *kName = @"name";
 	return self;
 }
 
--(void)addEvent:(Event *)aEvent
+-(void)addEvent:(Event *)aEvent evDate:(NSDate *)aEvDate
 {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeStyle:NSDateFormatterNoStyle];
+	[formatter setDateFormat:@"MMMM dd"];
+	NSString *stringFromDate = [formatter stringFromDate:aEvDate];
 	[db beginTransaction];
-	[db executeUpdate:@"insert into event (eventName) values (?)", aEvent.name];
+	[db executeUpdate:@"insert into event (eventDate, eventName) values (?, ?)", stringFromDate, aEvent.name];
+	[formatter release];
 	
 	FMResultSet *rs = [db executeQuery:@"select eventID from event where eventName=? LIMIT 1", aEvent.name];
 	[rs next];
@@ -86,7 +91,7 @@ NSString *kName = @"name";
 
 -(NSArray *)favoriteEvents
 {
-	FMResultSet *rs = [db executeQuery:@"select eventID, eventName from event"];
+	FMResultSet *rs = [db executeQuery:@"select eventID, eventName, eventDate from event"];
 	NSMutableArray *e = [NSMutableArray array];
 	NSString *tagQuery;
 	FMResultSet *rsTag;
@@ -100,7 +105,8 @@ NSString *kName = @"name";
 		}
 		[e addObject:[[[Event alloc] initWithName:[rs stringForColumnIndex:1]
 											 tags:t
-											 pkID:[NSNumber numberWithInt:[rs intForColumnIndex:0]]] autorelease]];
+											 pkID:[NSNumber numberWithInt:[rs intForColumnIndex:0]]
+										   evDate:[rs stringForColumnIndex:2]] autorelease]];
 	}
 	return [NSArray arrayWithArray:e];
 }

@@ -14,6 +14,7 @@
 @synthesize name;
 @synthesize tags;
 @synthesize pk;
+@synthesize evDate;
 
 - (id)initWithName:(NSString *)aName
 			  tags:(NSArray *)aTags
@@ -26,13 +27,14 @@
 	return self;
 }
 
-- (id)initWithName:(NSString *)aName tags:(NSArray *)aTags pkID:(NSNumber *)aPkID
+- (id)initWithName:(NSString *)aName tags:(NSArray *)aTags pkID:(NSNumber *)aPkID evDate:(NSString *)aEvDate;
 {
 	self = [super init];
 	if (nil != self) {
 		name = [aName retain];
 		tags = [aTags retain];
 		pk = [aPkID retain];
+		evDate = [aEvDate retain];
 	}
 	return self;
 }
@@ -42,6 +44,7 @@
 	[tags release];
 	[name release];
 	[pk release];
+	[evDate release];
 	[super dealloc];
 }
 

@@ -82,7 +82,7 @@
 	SQL *sqlcontroller = [SQL sharedInstance];
 	if (self.navigationItem.rightBarButtonItem.style == UIBarButtonItemStylePlain) {
 		self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleDone;
-		[sqlcontroller addEvent:event];
+		[sqlcontroller addEvent:event evDate:[NSDate date]];
 	} else {
 		self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
 		int i = 0;
