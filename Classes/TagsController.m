@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
 	
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
+	
 	NSString *textViewName;
 	textViewName = [event.name stringByAppendingString:[NSString stringWithFormat:@" (%d year%s ago)",
 														event.yearsPassed,

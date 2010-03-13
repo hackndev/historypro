@@ -69,7 +69,6 @@
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
 	
 	[copyListOfItems removeAllObjects];
-	NSLog(@"REMOVED ALL");
 	[copiedEvents removeAllObjects];
 	
 	if([searchText length] > 0) {
@@ -135,45 +134,65 @@
     
     UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        [[NSBundle mainBundle] loadNibNamed:@"FavTableCell" owner:self options:NULL];
+		cell = nibLoadedCell;
     }
+	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeStyle:NSDateFormatterNoStyle];
+	[formatter setDateFormat:@"d MMM"];
+	
+	NSString *stringFromDate = [formatter stringFromDate:[NSDate date]];
 	
 	if(searching)
 	{
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		
-		cell.textLabel.font = [UIFont systemFontOfSize:14];
-		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-		cell.textLabel.numberOfLines = 2;
-		cell.textLabel.textAlignment = UITextAlignmentLeft;
+		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//		
+//		cell.textLabel.font = [UIFont systemFontOfSize:14];
+//		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+//		cell.textLabel.numberOfLines = 2;
+//		cell.textLabel.textAlignment = UITextAlignmentLeft;
 		NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
 		int myInt = [en length];
 		if (myInt > 70) {
 			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
 			labelName = [labelName stringByAppendingString:@"..."];
-			cell.textLabel.text = labelName;
+			UILabel *eventLabel = (UILabel*) [cell viewWithTag:2];
+			eventLabel.text = labelName;
+			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+			dateLabel.text = stringFromDate;
 		} else {
-			cell.textLabel.text = en;
+			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
+			titleLabel.text = en;
+			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+			dateLabel.text = stringFromDate;
 		}
 	}
 	else {
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		
-		cell.textLabel.font = [UIFont systemFontOfSize:14];
-		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-		cell.textLabel.numberOfLines = 2;
-		cell.textLabel.textAlignment = UITextAlignmentLeft;
+		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//		
+//		cell.textLabel.font = [UIFont systemFontOfSize:14];
+//		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+//		cell.textLabel.numberOfLines = 2;
+//		cell.textLabel.textAlignment = UITextAlignmentLeft;
 		NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
 		int myInt = [en length];
 		if (myInt > 70) {
 			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
 			labelName = [labelName stringByAppendingString:@"..."];
-			cell.textLabel.text = labelName;
+			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
+			titleLabel.text = labelName;
+			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+			dateLabel.text = stringFromDate;
 		} else {
-			cell.textLabel.text = en;
+			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
+			titleLabel.text = en;
+			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+			dateLabel.text = stringFromDate;
 		}
 	}
 	
+	[formatter release];
     return cell;
 }
 
