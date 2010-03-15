@@ -65,7 +65,7 @@ NSString *kName = @"name";
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
-	[formatter setDateFormat:@"MMMM dd"];
+	[formatter setDateFormat:@"MMM d"];
 	NSString *stringFromDate = [formatter stringFromDate:aEvDate];
 	[db beginTransaction];
 	[db executeUpdate:@"insert into event (eventDate, eventName) values (?, ?)", stringFromDate, aEvent.name];

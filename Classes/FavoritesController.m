@@ -11,6 +11,7 @@
 #import "FMDatabaseAdditions.h"
 #import "SQL.h"
 #import "TagsController.h"
+#import "math.h"
 
 
 
@@ -40,6 +41,20 @@
 	
 	searching = NO;
 	letUserSelectRow = YES;
+	
+	eventDate = YES;
+}
+
+- (IBAction)eventDate:(id)sender
+{
+	eventDate = YES;
+	[tableView reloadData];
+}
+
+- (IBAction)daysLeft:(id)sender
+{
+	eventDate = NO;
+	[tableView reloadData];
 }
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar
@@ -141,51 +156,70 @@
 	if(searching)
 	{
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//		
-//		cell.textLabel.font = [UIFont systemFontOfSize:14];
-//		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-//		cell.textLabel.numberOfLines = 2;
-//		cell.textLabel.textAlignment = UITextAlignmentLeft;
 		NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
-//		int myInt = [en length];
-//		if (myInt > 70) {
-//			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
-//			labelName = [labelName stringByAppendingString:@"..."];
-			UILabel *eventLabel = (UILabel*) [cell viewWithTag:2];
-			eventLabel.text = en;
-			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-			dateLabel.text = [[copiedEvents objectAtIndex:indexPath.row] evDate];
-	//	} else {
-//			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
-//			titleLabel.text = en;
-//			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-//			dateLabel.text = stringFromDate;
-//		}
-	}
-	else {
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//		
-//		cell.textLabel.font = [UIFont systemFontOfSize:14];
-//		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-//		cell.textLabel.numberOfLines = 2;
-//		cell.textLabel.textAlignment = UITextAlignmentLeft;
-		NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
-		//int myInt = [en length];
-//		if (myInt > 70) {
-//			NSString *labelName = [en substringWithRange:NSMakeRange(0,65)];
-//			labelName = [labelName stringByAppendingString:@"..."];
+		UILabel *eventLabel = (UILabel*) [cell viewWithTag:2];
+		eventLabel.text = en;
+		UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+		dateLabel.text = [[copiedEvents objectAtIndex:indexPath.row] evDate];
+		}
+	else
+	{
+		if (eventDate)
+		{
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
 			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
 			titleLabel.text = en;
 			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
 			dateLabel.text = [[favEvents objectAtIndex:indexPath.row] evDate];
-	//	} else {
-//			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
-//			titleLabel.text = en;
-//			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-//			dateLabel.text = stringFromDate;
-//		}
-	}
-
+			}
+		else
+		{
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
+			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
+			titleLabel.text = en;
+			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+			NSString *parsingDate = [[[favEvents objectAtIndex:indexPath.row] evDate] stringByAppendingString:@", 2010"];
+			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+			[formatter setDateStyle:NSDateFormatterMediumStyle];
+			NSDate *date = [formatter dateFromString:parsingDate];
+			NSString *dateConv = [formatter stringFromDate:[NSDate date]];
+			NSDate *curdate = [formatter dateFromString:dateConv];
+			float timeInterval = [date timeIntervalSinceDate:curdate];
+			NSString *timeLabel;
+			int daysInterval = (((abs(timeInterval)/60)/60)/24);
+			if (timeInterval < 0) {
+				switch (daysInterval) {
+					case 0:
+						timeLabel = @"Today!";
+						break;
+					case 1:
+						timeLabel = @"1 day past";
+						break;
+					default:
+						timeLabel = [NSString stringWithFormat:@"%d days past", daysInterval];
+						break;
+				}
+			} else {
+				switch (daysInterval) {
+					case 0:
+						timeLabel = @"Today!";
+						break;
+					case 1:
+						timeLabel = @"1 day left";
+						break;
+					default:
+						timeLabel = [NSString stringWithFormat:@"%d days left", daysInterval];
+						break;
+				}
+				
+			}
+			dateLabel.text = timeLabel;
+			
+			}
+		}
+	
     return cell;
 }
 

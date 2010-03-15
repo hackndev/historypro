@@ -19,10 +19,14 @@
 	BOOL searching;
 	BOOL letUserSelectRow;
 	UITableViewCell *nibLoadedCell;
+	BOOL eventDate;
 }
 
 @property (readonly) UITableView *tableView;
 @property (nonatomic, retain) IBOutlet UITableViewCell *nibLoadedCell;
 - (void) searchTableView;
+
+- (IBAction)eventDate:(id)sender;
+- (IBAction)daysLeft:(id)sender;
 
 @end
