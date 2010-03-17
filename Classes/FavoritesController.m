@@ -12,13 +12,14 @@
 #import "SQL.h"
 #import "TagsController.h"
 #import "math.h"
+#import "FavTableCell.h"
+#import "TIHAppDelegate.h"
 
 
 
 @implementation FavoritesController
 
-@synthesize tableView;
-@synthesize nibLoadedCell;
+//@synthesize customTableView;
 
 - (void)viewDidLoad
 {
@@ -36,7 +37,7 @@
 	copyListOfItems = [[NSMutableArray alloc] init];
 	copiedEvents = [[NSMutableArray alloc] init];
 	
-	tableView.tableHeaderView = searchBar;
+	self.tableView.tableHeaderView = searchBar;
 	searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	
 	searching = NO;
@@ -45,24 +46,37 @@
 	eventDate = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[self.tableView reloadData];
+}
+
+- (IBAction)detailChanged:(id)sender
+{
+	if(((UISegmentedControl *)sender).selectedSegmentIndex == 0)
+		[self eventDate:self];
+	else
+		[self daysLeft:self];
+}
+
 - (IBAction)eventDate:(id)sender
 {
 	eventDate = YES;
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (IBAction)daysLeft:(id)sender
 {
 	eventDate = NO;
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar
 {
 	searching = YES;
 	letUserSelectRow = NO;
-	tableView.scrollEnabled = NO;
-	[tableView reloadData];
+	self.tableView.scrollEnabled = NO;
+	[self.tableView reloadData];
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	
 	[searchBar setShowsCancelButton:YES animated:YES];
@@ -73,11 +87,11 @@
     
     [_searchBar setShowsCancelButton:NO animated:YES];
     [_searchBar resignFirstResponder];
-    tableView.scrollEnabled = YES;
+    self.tableView.scrollEnabled = YES;
 	letUserSelectRow = YES;
 	searching = NO;
 	
-	[tableView reloadData];
+	[self.tableView reloadData];
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -90,17 +104,17 @@
 		
 		searching = YES;
 		letUserSelectRow = YES;
-		tableView.scrollEnabled = YES;
+		self.tableView.scrollEnabled = YES;
 		[self searchTableView];
 	}
 	else {
 		
 		searching = NO;
 		letUserSelectRow = NO;
-		tableView.scrollEnabled = NO;
+		self.tableView.scrollEnabled = NO;
 	}
 	
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
@@ -143,49 +157,67 @@
 		return [favEvents count];
 	}
 }
-- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"FavTableCell";
     
-    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        [[NSBundle mainBundle] loadNibNamed:@"FavTableCell" owner:self options:NULL];
-		cell = nibLoadedCell;
-    }
-	
+    FavTableCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+		cell = [FavTableCell cellFromFactory:self];
+		
 	if(searching)
 	{
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
-		UILabel *eventLabel = (UILabel*) [cell viewWithTag:2];
-		eventLabel.text = en;
-		UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-		dateLabel.text = [[copiedEvents objectAtIndex:indexPath.row] evDate];
+		cell.title = en;
+		
+		cell.shown = YES;
+		
+		cell.date = [[copiedEvents objectAtIndex:indexPath.row] evDate];
+		
+		//NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
+//		UILabel *eventLabel = (UILabel*) [cell viewWithTag:2];
+//		eventLabel.text = en;
+		//UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+//		dateLabel.text = [[copiedEvents objectAtIndex:indexPath.row] evDate];
 		}
 	else
 	{
 		if (eventDate)
 		{
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
-			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
-			titleLabel.text = en;
-			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-			dateLabel.text = [[favEvents objectAtIndex:indexPath.row] evDate];
+			//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.title = [[favEvents objectAtIndex:indexPath.row] name];
+			
+			cell.shown = YES;
+			
+			cell.date = [[favEvents objectAtIndex:indexPath.row] evDate];
+			//NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
+//			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
+//			titleLabel.text = en;
+//			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+//			dateLabel.text = [[favEvents objectAtIndex:indexPath.row] evDate];
 			}
 		else
 		{
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
 			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
 			titleLabel.text = en;
 			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-			NSString *parsingDate = [[[favEvents objectAtIndex:indexPath.row] evDate] stringByAppendingString:@", 2010"];
+			
+			NSDateComponents *c = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
+			NSInteger currentYear = [c year];
+			
+			NSString *parsingDate = [[[favEvents objectAtIndex:indexPath.row] evDate] stringByAppendingString:[NSString stringWithFormat:@", %d", currentYear]];
 			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 			[formatter setDateStyle:NSDateFormatterMediumStyle];
 			NSDate *date = [formatter dateFromString:parsingDate];
+			
+			
 			NSString *dateConv = [formatter stringFromDate:[NSDate date]];
 			NSDate *curdate = [formatter dateFromString:dateConv];
+			[formatter release];
+			
 			float timeInterval = [date timeIntervalSinceDate:curdate];
 			NSString *timeLabel;
 			int daysInterval = (((abs(timeInterval)/60)/60)/24);
@@ -223,7 +255,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)_tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		// Delete the managed object for the given index path
@@ -232,7 +264,7 @@
 		[favEvents release];
 		favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
 		
-		[_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 	}  
 }
 
