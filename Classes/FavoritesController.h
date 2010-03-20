@@ -9,23 +9,23 @@
 #import <UIKit/UIKit.h>
 
 
-@interface FavoritesController : UITableViewController /*<UITableViewDelegate, UITableViewDataSource>*/
+@interface FavoritesController : UITableViewController
 {
-	//IBOutlet UITableView *customTableView;
 	NSArray *favEvents;
 	NSMutableArray *copyListOfItems;
 	NSMutableArray *copiedEvents;
 	IBOutlet UISearchBar *searchBar;
+	UIToolbar *toolbar;
+	
 	BOOL searching;
 	BOOL letUserSelectRow;
 	BOOL eventDate;
 }
 
-//@property (nonatomic, readwrite, retain) UITableView *customTableView;
 - (void) searchTableView;
 
 - (IBAction)detailChanged:(id)sender;
-- (IBAction)eventDate:(id)sender;
-- (IBAction)daysLeft:(id)sender;
+- (void)eventDate;
+- (void)daysLeft;
 
 @end

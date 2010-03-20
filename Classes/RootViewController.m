@@ -37,7 +37,7 @@
 		self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
 												  initWithBarButtonSystemItem:UIBarButtonSystemItemAction
 												  target:self
-												  action:@selector(presentSheet)] autorelease];
+												  action:@selector(datePicker)] autorelease];
 		isLoaded = YES;
 	} else {
 		hasFailed = YES;
@@ -45,15 +45,22 @@
 	[self.tableView reloadData];
 }
 
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//	if (buttonIndex == actionSheet.numberOfButtons-1) {
+//		NSLog(@"Cancel pressed");
+//	} else {
+//		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//	}
+//}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (buttonIndex == actionSheet.numberOfButtons-1) {
+	if (buttonIndex == 0) {
 		NSLog(@"Cancel pressed");
-	} else {
-		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 	}
 }
-	
+
 - (void)presentSheet
 {	
 	UIActionSheet *menu = [[[UIActionSheet alloc]
@@ -68,6 +75,29 @@
 	menu.cancelButtonIndex=[[Server sharedInstance].list count];
 	[menu addButtonWithTitle:@"Cancel"];
 	[menu showInView:self.view];
+}
+
+- (void)datePicker
+{	
+	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"Date Picker" 
+													  delegate:self
+											 cancelButtonTitle:@"Cancel"
+										destructiveButtonTitle:nil
+											 otherButtonTitles:nil];
+	
+    // Add the picker
+    UIDatePicker *pickerView = [[UIDatePicker alloc] init];
+    pickerView.datePickerMode = UIDatePickerModeDate;
+    [menu addSubview:pickerView];
+    [menu showInView:self.view];        
+    [menu setBounds:CGRectMake(0,0,320, 510)];
+	
+    CGRect pickerRect = pickerView.bounds;
+    pickerRect.origin.y = -100;
+    pickerView.bounds = pickerRect;
+	
+    [pickerView release];
+    [menu release];
 }
 
 - (void)viewDidLoad
@@ -98,11 +128,13 @@
 
 - (IBAction)onFavoritesList:(id)sender
 {
-	FavoritesController *controller = [[FavoritesController alloc] init];
+	FavoritesController *controller = [[FavoritesController alloc] initWithNibName:@"FavoritesController" bundle:nil];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
 	[controller release];
 	[navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 	[self presentModalViewController:navController animated:YES];
+	//[self.navigationController pushViewController:controller animated:YES];
+	//[controller release];
 }
 
 #pragma mark Table view methods

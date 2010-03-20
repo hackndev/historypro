@@ -46,9 +46,9 @@
 - (void)setShown:(BOOL)s
 {
 	if(s)
-		[_title setFont:[UIFont systemFontOfSize:17]];
+		[_title setFont:[UIFont systemFontOfSize:14]];
 	else
-		[_title setFont:[UIFont boldSystemFontOfSize:17]];
+		[_title setFont:[UIFont boldSystemFontOfSize:14]];
 }
 
 - (void)dealloc

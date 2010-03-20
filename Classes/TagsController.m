@@ -25,11 +25,20 @@
 	return self;
 }
 
+-(id)initWithEvent:(Event *)e unToolbar:(UIToolbar *)aToolbar
+{
+	self = [super init];
+	event = [e retain];
+	toolbar = [aToolbar retain];
+	return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
+	toolbar.hidden = YES;
 	
 	NSString *textViewName;
 	textViewName = [event.name stringByAppendingString:[NSString stringWithFormat:@" (%d year%s ago)",
@@ -72,29 +81,37 @@
 	buttonCheck = [rs next];
 	[rs close]; 
 	[db close];
-	UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"Fav" style:buttonCheck?UIBarButtonItemStyleDone:UIBarButtonItemStylePlain target:self action:@selector(addFav:)];
+	UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"Fav" style:buttonCheck?UIBarButtonItemStylePlain:UIBarButtonItemStyleDone target:self action:@selector(addFav:)];
 	self.navigationItem.rightBarButtonItem = btn;
 	[btn release];
+	if (self.navigationItem.rightBarButtonItem.style == UIBarButtonItemStylePlain) {
+		self.navigationItem.rightBarButtonItem.enabled = NO;
+	} else {
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+	}
 }
 
 - (void)addFav:(id)sender
 {
 	SQL *sqlcontroller = [SQL sharedInstance];
-	if (self.navigationItem.rightBarButtonItem.style == UIBarButtonItemStylePlain) {
-		self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleDone;
+	if (self.navigationItem.rightBarButtonItem.style == UIBarButtonItemStyleDone) {
+		self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
+		self.navigationItem.rightBarButtonItem.enabled = NO;
 		[sqlcontroller addEvent:event evDate:[NSDate date]];
 	} else {
-		self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
-		int i = 0;
-		favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
-		for(Event *enumerator in favEvents)
-		{	
-			if ([enumerator.name isEqualToString:event.name]) {
-				NSNumber *j = [[favEvents objectAtIndex:i] pk];
-				[sqlcontroller removeFavoriteEvent:j];
-			}
-		i++;
-		}
+		NSLog(@"Already existed");
+		self.navigationItem.rightBarButtonItem.enabled = NO;
+		//self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
+//		int i = 0;
+//		favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
+//		for(Event *enumerator in favEvents)
+//		{	
+//			if ([enumerator.name isEqualToString:event.name]) {
+//				NSNumber *j = [[favEvents objectAtIndex:i] pk];
+//				[sqlcontroller removeFavoriteEvent:j];
+//			}
+//		i++;
+//		}
 	}
 }
 
@@ -158,6 +175,7 @@
 - (void)dealloc
 {
 	[event release];
+	[toolbar release];
 	[super dealloc];
 }
 

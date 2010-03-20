@@ -19,7 +19,6 @@
 
 @implementation FavoritesController
 
-//@synthesize customTableView;
 
 - (void)viewDidLoad
 {
@@ -49,23 +48,67 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[self.tableView reloadData];
+	
+	//Initialize the toolbar
+	toolbar = [[UIToolbar alloc] init];
+	toolbar.barStyle = UIBarStyleDefault;
+	
+	//Set the toolbar to fit the width of the app.
+	[toolbar sizeToFit];
+	
+	//Caclulate the height of the toolbar
+	CGFloat toolbarHeight = [toolbar frame].size.height;
+	
+	//Get the bounds of the parent view
+	CGRect rootViewBounds = self.parentViewController.view.bounds;
+	
+	//Get the height of the parent view.
+	CGFloat rootViewHeight = CGRectGetHeight(rootViewBounds);
+	
+	//Get the width of the parent view,
+	CGFloat rootViewWidth = CGRectGetWidth(rootViewBounds);
+	
+	//Create a rectangle for the toolbar
+	CGRect rectArea = CGRectMake(0, rootViewHeight - toolbarHeight, rootViewWidth, toolbarHeight);
+	
+	//Reposition and resize the receiver
+	[toolbar setFrame:rectArea];
+	
+	NSArray *segments = [NSArray arrayWithObjects:@"Event date", @"Days left", nil];
+
+	UISegmentedControl *segmentedCtrl = [[UISegmentedControl alloc]
+										 initWithItems:segments];
+	segmentedCtrl.selectedSegmentIndex = 0;
+	[segmentedCtrl addTarget:self action:@selector(detailChanged:) forControlEvents:UIControlEventValueChanged];
+	[segmentedCtrl setSegmentedControlStyle:UISegmentedControlStyleBar];
+	UIBarButtonItem *segmentButton = [[UIBarButtonItem alloc]
+									  initWithCustomView:segmentedCtrl];
+	
+	//Create a button
+	UIBarButtonItem *labelButton = [[UIBarButtonItem alloc]
+								   initWithTitle:@"Show" style:UIBarButtonItemStylePlain target:nil action:nil];
+	
+	[toolbar setItems:[NSArray arrayWithObjects:labelButton, segmentButton, nil]];
+	
+	//Add the toolbar as a subview to the navigation controller.
+	[self.navigationController.view addSubview:toolbar];
 }
 
 - (IBAction)detailChanged:(id)sender
 {
 	if(((UISegmentedControl *)sender).selectedSegmentIndex == 0)
-		[self eventDate:self];
+		[self eventDate];
 	else
-		[self daysLeft:self];
+		[self daysLeft];
 }
 
-- (IBAction)eventDate:(id)sender
+- (void)eventDate
 {
 	eventDate = YES;
 	[self.tableView reloadData];
 }
 
-- (IBAction)daysLeft:(id)sender
+- (void)daysLeft
 {
 	eventDate = NO;
 	[self.tableView reloadData];
@@ -271,12 +314,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if(searching) {
-		TagsController *controller = [[TagsController alloc] initWithEvent:[copiedEvents objectAtIndex:indexPath.row]];
+		TagsController *controller = [[TagsController alloc] initWithEvent:[copiedEvents objectAtIndex:indexPath.row] unToolbar:toolbar];
 		[self.navigationController pushViewController:controller animated:YES];
 		[controller release];
 	}
 	else {
-		TagsController *controller = [[TagsController alloc] initWithEvent:[favEvents objectAtIndex:indexPath.row]];
+		TagsController *controller = [[TagsController alloc] initWithEvent:[favEvents objectAtIndex:indexPath.row] unToolbar:toolbar];
 		[self.navigationController pushViewController:controller animated:YES];
 		[controller release];
 	}
