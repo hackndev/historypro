@@ -37,7 +37,7 @@
 		self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
 												  initWithBarButtonSystemItem:UIBarButtonSystemItemAction
 												  target:self
-												  action:@selector(datePicker)] autorelease];
+												  action:@selector(presentSheet)] autorelease];
 		isLoaded = YES;
 	} else {
 		hasFailed = YES;
@@ -45,19 +45,12 @@
 	[self.tableView reloadData];
 }
 
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//	if (buttonIndex == actionSheet.numberOfButtons-1) {
-//		NSLog(@"Cancel pressed");
-//	} else {
-//		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-//	}
-//}
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (buttonIndex == 0) {
+	if (buttonIndex == actionSheet.numberOfButtons-1) {
 		NSLog(@"Cancel pressed");
+	} else {
+		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 	}
 }
 
@@ -77,29 +70,6 @@
 	[menu showInView:self.view];
 }
 
-- (void)datePicker
-{	
-	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"Date Picker" 
-													  delegate:self
-											 cancelButtonTitle:@"Cancel"
-										destructiveButtonTitle:nil
-											 otherButtonTitles:nil];
-	
-    // Add the picker
-    UIDatePicker *pickerView = [[UIDatePicker alloc] init];
-    pickerView.datePickerMode = UIDatePickerModeDate;
-    [menu addSubview:pickerView];
-    [menu showInView:self.view];        
-    [menu setBounds:CGRectMake(0,0,320, 510)];
-	
-    CGRect pickerRect = pickerView.bounds;
-    pickerRect.origin.y = -100;
-    pickerView.bounds = pickerRect;
-	
-    [pickerView release];
-    [menu release];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -108,17 +78,26 @@
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateStyle:NSDateFormatterMediumStyle];
 	NSDate *date = [[[NSDate alloc] init] autorelease];
-	//[formatter setLocale:[NSLocale currentLocale]];
 	
 	NSString *stringFromDate = [formatter stringFromDate:date];
 	[formatter release];
 	
-	self.title = (@"%@", stringFromDate);
+	UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+	btn.frame = CGRectMake(0, 0, 200, 40);
+	[btn setTitle:(@"%@", stringFromDate) forState:UIControlStateNormal];
+	[btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+	self.navigationItem.titleView = btn;
 	
+		
 	[[Server sharedInstance] getEventsForDate:[NSDate date]];
 	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     [backButton release];
+}
+
+- (IBAction)titleClick:(id)sender
+{
+	NSLog(@"Hello");
 }
 
 - (void)didReceiveMemoryWarning

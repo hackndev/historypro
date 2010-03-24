@@ -16,12 +16,10 @@
 	IBOutlet UITextView *textView;
 	Event *event;
 	NSArray *favEvents;
-	UIToolbar *toolbar;
 }
 
 @property (readonly) UITableView *tableView;
 
 - (id)initWithEvent:(Event *)e;
-- (id)initWithEvent:(Event *)e unToolbar:(UIToolbar *)aToolbar;
 
 @end

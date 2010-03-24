@@ -15,15 +15,20 @@
 #import "FavTableCell.h"
 #import "TIHAppDelegate.h"
 
+@interface FavoritesController ()
+
+@property (nonatomic, readwrite, retain) NSArray *favEvents;
+
+@end
 
 
 @implementation FavoritesController
 
+@synthesize favEvents;
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
 											  initWithTitle:@"Back"
@@ -31,7 +36,7 @@
 											  target:self
 											  action:@selector(onFavoritesDone:)] autorelease];
 	self.navigationItem.title = @"Favorites";
-	favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
+	self.favEvents = [[SQL sharedInstance] favoriteEvents];
 	
 	copyListOfItems = [[NSMutableArray alloc] init];
 	copiedEvents = [[NSMutableArray alloc] init];
@@ -49,49 +54,30 @@
 {
 	[self.tableView reloadData];
 	
-	//Initialize the toolbar
-	toolbar = [[UIToolbar alloc] init];
-	toolbar.barStyle = UIBarStyleDefault;
-	
-	//Set the toolbar to fit the width of the app.
-	[toolbar sizeToFit];
-	
-	//Caclulate the height of the toolbar
-	CGFloat toolbarHeight = [toolbar frame].size.height;
-	
-	//Get the bounds of the parent view
-	CGRect rootViewBounds = self.parentViewController.view.bounds;
-	
-	//Get the height of the parent view.
-	CGFloat rootViewHeight = CGRectGetHeight(rootViewBounds);
-	
-	//Get the width of the parent view,
-	CGFloat rootViewWidth = CGRectGetWidth(rootViewBounds);
-	
-	//Create a rectangle for the toolbar
-	CGRect rectArea = CGRectMake(0, rootViewHeight - toolbarHeight, rootViewWidth, toolbarHeight);
-	
-	//Reposition and resize the receiver
-	[toolbar setFrame:rectArea];
-	
 	NSArray *segments = [NSArray arrayWithObjects:@"Event date", @"Days left", nil];
 
-	UISegmentedControl *segmentedCtrl = [[UISegmentedControl alloc]
-										 initWithItems:segments];
+	UISegmentedControl *segmentedCtrl = [[UISegmentedControl alloc] initWithItems:segments];
 	segmentedCtrl.selectedSegmentIndex = 0;
 	[segmentedCtrl addTarget:self action:@selector(detailChanged:) forControlEvents:UIControlEventValueChanged];
 	[segmentedCtrl setSegmentedControlStyle:UISegmentedControlStyleBar];
-	UIBarButtonItem *segmentButton = [[UIBarButtonItem alloc]
-									  initWithCustomView:segmentedCtrl];
 	
-	//Create a button
-	UIBarButtonItem *labelButton = [[UIBarButtonItem alloc]
-								   initWithTitle:@"Show" style:UIBarButtonItemStylePlain target:nil action:nil];
 	
-	[toolbar setItems:[NSArray arrayWithObjects:labelButton, segmentButton, nil]];
+	UIBarButtonItem *spanButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+	UIBarButtonItem *segmentButton = [[[UIBarButtonItem alloc] initWithCustomView:segmentedCtrl] autorelease];
 	
-	//Add the toolbar as a subview to the navigation controller.
-	[self.navigationController.view addSubview:toolbar];
+	UIBarButtonItem *labelButton = [[[UIBarButtonItem alloc] initWithTitle:@"Show" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
+	
+	[self setToolbarItems:[NSArray arrayWithObjects:spanButton, labelButton, segmentButton, nil]];
+	if ([favEvents count] > 0) {
+		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+	}
+	[self.navigationController setToolbarHidden:NO animated:NO];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[self.navigationController setToolbarHidden:YES animated:NO];
 }
 
 - (IBAction)detailChanged:(id)sender
@@ -136,6 +122,14 @@
 	
 	[self.tableView reloadData];
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)viewDidUnload
+{
+	[super viewDidUnload];
+	[copiedEvents release];
+	[copyListOfItems release];
+	self.favEvents = nil;
 }
 
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
@@ -210,43 +204,23 @@
 		
 	if(searching)
 	{
-		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
-		cell.title = en;
-		
+		cell.title = en;	
 		cell.shown = YES;
-		
 		cell.date = [[copiedEvents objectAtIndex:indexPath.row] evDate];
-		
-		//NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
-//		UILabel *eventLabel = (UILabel*) [cell viewWithTag:2];
-//		eventLabel.text = en;
-		//UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-//		dateLabel.text = [[copiedEvents objectAtIndex:indexPath.row] evDate];
 		}
 	else
 	{
 		if (eventDate)
 		{
-			//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.title = [[favEvents objectAtIndex:indexPath.row] name];
-			
 			cell.shown = YES;
-			
 			cell.date = [[favEvents objectAtIndex:indexPath.row] evDate];
-			//NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
-//			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
-//			titleLabel.text = en;
-//			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
-//			dateLabel.text = [[favEvents objectAtIndex:indexPath.row] evDate];
 			}
 		else
 		{
-			//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			NSString *en = [[favEvents objectAtIndex:indexPath.row] name];
-			UILabel *titleLabel = (UILabel*) [cell viewWithTag:2];
-			titleLabel.text = en;
-			UILabel *dateLabel = (UILabel*) [cell viewWithTag:1];
+			cell.title = [[favEvents objectAtIndex:indexPath.row] name];
+			cell.shown = YES;
 			
 			NSDateComponents *c = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
 			NSInteger currentYear = [c year];
@@ -290,7 +264,7 @@
 				}
 				
 			}
-			dateLabel.text = timeLabel;
+			cell.date = timeLabel;
 			
 			}
 		}
@@ -314,12 +288,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if(searching) {
-		TagsController *controller = [[TagsController alloc] initWithEvent:[copiedEvents objectAtIndex:indexPath.row] unToolbar:toolbar];
+		TagsController *controller = [[TagsController alloc] initWithEvent:[copiedEvents objectAtIndex:indexPath.row]];
 		[self.navigationController pushViewController:controller animated:YES];
 		[controller release];
 	}
 	else {
-		TagsController *controller = [[TagsController alloc] initWithEvent:[favEvents objectAtIndex:indexPath.row] unToolbar:toolbar];
+		TagsController *controller = [[TagsController alloc] initWithEvent:[favEvents objectAtIndex:indexPath.row]];
 		[self.navigationController pushViewController:controller animated:YES];
 		[controller release];
 	}

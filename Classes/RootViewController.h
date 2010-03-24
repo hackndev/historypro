@@ -13,5 +13,6 @@
 }
 
 - (IBAction)onFavoritesList:(id)sender;
+- (IBAction)titleClick:(id)sender;
 
 @end

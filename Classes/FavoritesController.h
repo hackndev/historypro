@@ -15,7 +15,6 @@
 	NSMutableArray *copyListOfItems;
 	NSMutableArray *copiedEvents;
 	IBOutlet UISearchBar *searchBar;
-	UIToolbar *toolbar;
 	
 	BOOL searching;
 	BOOL letUserSelectRow;
