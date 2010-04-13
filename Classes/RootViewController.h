@@ -6,13 +6,21 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
-@interface RootViewController : UITableViewController <UIActionSheetDelegate>
+@interface RootViewController : UIViewController <UIActionSheetDelegate, UITableViewDelegate>
 {
 	BOOL isLoaded;
 	BOOL hasFailed;
+	BOOL _isPickerShown;
+	
+	IBOutlet UIDatePicker *picker;
+	IBOutlet UITableView *tableView;
+	
+	UIButton *btn;
 }
 
 - (IBAction)onFavoritesList:(id)sender;
 - (IBAction)titleClick:(id)sender;
+- (void)_showPicker;
+- (void)_hidePicker;
 
 @end

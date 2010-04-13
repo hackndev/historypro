@@ -42,7 +42,7 @@
 	} else {
 		hasFailed = YES;
 	}
-	[self.tableView reloadData];
+	[tableView reloadData];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -50,7 +50,7 @@
 	if (buttonIndex == actionSheet.numberOfButtons-1) {
 		NSLog(@"Cancel pressed");
 	} else {
-		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+		[tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:buttonIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 	}
 }
 
@@ -74,6 +74,8 @@
 {
     [super viewDidLoad];
 	
+	[picker addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
+	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -82,7 +84,7 @@
 	NSString *stringFromDate = [formatter stringFromDate:date];
 	[formatter release];
 	
-	UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+	btn = [UIButton buttonWithType:UIButtonTypeCustom];
 	btn.frame = CGRectMake(0, 0, 200, 40);
 	[btn setTitle:(@"%@", stringFromDate) forState:UIControlStateNormal];
 	[btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -97,7 +99,7 @@
 
 - (IBAction)titleClick:(id)sender
 {
-	NSLog(@"Hello");
+	[self _showPicker];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,10 +114,51 @@
 	[controller release];
 	[navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 	[self presentModalViewController:navController animated:YES];
-	//[self.navigationController pushViewController:controller animated:YES];
-	//[controller release];
+}
+#pragma mark -
+#pragma mark Picker management
+- (void)_showPicker
+{
+	CGRect frame = picker.frame;
+	CGRect tframe = tableView.frame;
+	if(!_isPickerShown) {
+		frame.origin.y = 200 + frame.size.height;
+		picker.frame = frame;
+		[UIView beginAnimations:@"moveInPicker" context:nil];
+		frame.origin.y = 200;
+		picker.frame = frame;
+		tframe.size.height -= 216;
+		tableView.frame = tframe;
+		[UIView commitAnimations];
+		_isPickerShown = YES;
+	}
 }
 
+- (void)_hidePicker
+{
+	CGRect frame = picker.frame;
+	CGRect tframe = tableView.frame;
+	if(_isPickerShown) {
+		[UIView beginAnimations:@"moveOutPicker" context:nil];
+		frame.origin.y = 200 + frame.size.height;
+		picker.frame = frame;
+		tframe.size.height += 216;
+		tableView.frame = tframe;
+		[UIView commitAnimations];
+		
+		_isPickerShown = NO;
+	}
+}
+
+- (void)changeDate:(id)sender
+{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeStyle:NSDateFormatterNoStyle];
+	[formatter setDateStyle:NSDateFormatterMediumStyle];
+	[btn setTitle:[formatter stringFromDate:[picker.date retain]] forState:UIControlStateNormal];
+}
+
+#pragma mark -
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -137,11 +180,11 @@
 		return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
@@ -201,6 +244,7 @@
 
 - (void)dealloc
 {
+	[btn release];
     [super dealloc];
 }
 
