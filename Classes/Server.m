@@ -130,7 +130,7 @@
 								  [NSMutableArray array], @"Deaths",
 								  nil];
 	for(NSString *s in [sortedEvents allKeys]) {
-		NSString *xpath = [NSString stringWithFormat:@"/html/body/div[@id='globalWrapper']/div[@id='column-content']/div[@id='content']/div[@id='bodyContent']/h2/span[@id='%@']/parent::h2/following::ul[1]/li", s];
+		NSString *xpath = [NSString stringWithFormat:@"/html/body/div[@id='content']/div[@id='bodyContent']/h2/span[@id='%@']/parent::h2/following::ul[1]/li", s];
 		NSArray *array = [htmlDocument nodesForXPath:xpath error:&error];
 		
 		for(DDXMLElement *lis in array) {
