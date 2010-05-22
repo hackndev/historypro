@@ -87,7 +87,7 @@
 	btn = [UIButton buttonWithType:UIButtonTypeCustom];
 	btn.frame = CGRectMake(0, 0, 200, 40);
 	[btn setTitle:(@"%@", stringFromDate) forState:UIControlStateNormal];
-	[btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+	//[btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
 	self.navigationItem.titleView = btn;
 	
 		
