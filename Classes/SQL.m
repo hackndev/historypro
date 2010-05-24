@@ -94,6 +94,15 @@ NSString *kName = @"name";
 	[db commit];
 }
 
+- (BOOL)isEventFavorited:(Event *)event
+{
+	BOOL buttonCheck = NO;
+	FMResultSet *rs = [db executeQuery:@"select * from event where eventName=? LIMIT 1", event.name];
+	buttonCheck = [rs next];
+	[rs close];
+	return buttonCheck;
+}
+
 -(NSArray *)favoriteEvents
 {
 	FMResultSet *rs = [db executeQuery:@"select eventID, eventName, eventDate from event"];

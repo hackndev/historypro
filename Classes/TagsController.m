@@ -60,17 +60,7 @@
 	
 	self.title = (@"%@", stringFromDate);
 	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-	NSString *destinationPath = [[paths objectAtIndex:0] stringByAppendingString:@"/favorites.db"];
-	FMDatabase* db = [FMDatabase databaseWithPath:destinationPath];
-	if (![db open]) {
-		NSLog(@"Could not open db.");
-	}
-	BOOL buttonCheck = NO;
-	FMResultSet *rs = [db executeQuery:@"select * from event where eventName=? LIMIT 1", event.name];
-	buttonCheck = [rs next];
-	[rs close]; 
-	[db close];
+	BOOL buttonCheck = [[SQL sharedInstance] isEventFavorited:event];
 	UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star.png"] style:buttonCheck?UIBarButtonItemStylePlain:UIBarButtonItemStyleDone target:self action:@selector(addFav:)];
 	self.navigationItem.rightBarButtonItem = btn;
 	[btn release];
