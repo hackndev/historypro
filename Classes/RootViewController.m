@@ -76,6 +76,7 @@
     [super viewDidLoad];
 	
 	[picker addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
+	[picker setDate:[NSDate date]];
 	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setTimeStyle:NSDateFormatterNoStyle];

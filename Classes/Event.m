@@ -30,7 +30,7 @@
 	return self;
 }
 
-- (id)initWithName:(NSString *)aName tags:(NSArray *)aTags pkID:(NSNumber *)aPkID evDate:(NSString *)aEvDate;
+- (id)initWithName:(NSString *)aName tags:(NSArray *)aTags pkID:(NSNumber *)aPkID evDate:(NSDate *)aEvDate;
 {
 	self = [super init];
 	if (nil != self) {

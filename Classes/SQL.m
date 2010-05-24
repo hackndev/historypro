@@ -106,6 +106,9 @@ NSString *kName = @"name";
 
 -(NSArray *)favoriteEvents
 {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeStyle:NSDateFormatterNoStyle];
+	[formatter setDateFormat:@"MMM d"];
 	FMResultSet *rs = [db executeQuery:@"select eventID, eventName, eventDate from event"];
 	NSMutableArray *e = [NSMutableArray array];
 	NSString *tagQuery;
@@ -121,8 +124,9 @@ NSString *kName = @"name";
 		[e addObject:[[[Event alloc] initWithName:[rs stringForColumnIndex:1]
 											 tags:t
 											 pkID:[NSNumber numberWithInt:[rs intForColumnIndex:0]]
-										   evDate:[rs stringForColumnIndex:2]] autorelease]];
+										   evDate:[formatter dateFromString:[rs stringForColumnIndex:2]]] autorelease]];
 	}
+	[formatter release];
 	return [NSArray arrayWithArray:e];
 }
 

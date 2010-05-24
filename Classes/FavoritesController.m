@@ -193,10 +193,16 @@
 	
 	NSArray *src = (searching || [copiedEvents count]) ? copiedEvents : favEvents;
 	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeStyle:NSDateFormatterNoStyle];
+	[formatter setDateFormat:@"MMM d"];
+	NSString *titleDate = [formatter stringFromDate:[[src objectAtIndex:indexPath.row] evDate]];
+	[formatter release];
+	
 	if (eventDate) {
 		cell.title = [[src objectAtIndex:indexPath.row] name];
 		cell.shown = YES;
-		cell.date = [[src objectAtIndex:indexPath.row] evDate];
+		cell.date = titleDate;
 	} else {
 		cell.title = [[src objectAtIndex:indexPath.row] name];
 		cell.shown = YES;
@@ -204,7 +210,7 @@
 		NSDateComponents *c = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
 		NSInteger currentYear = [c year];
 		
-		NSString *parsingDate = [[[src objectAtIndex:indexPath.row] evDate] stringByAppendingString:[NSString stringWithFormat:@", %d", currentYear]];
+		NSString *parsingDate = [titleDate stringByAppendingString:[NSString stringWithFormat:@", %d", currentYear]];
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 		[formatter setDateStyle:NSDateFormatterMediumStyle];
 		NSDate *date = [formatter dateFromString:parsingDate];
