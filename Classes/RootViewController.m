@@ -11,6 +11,7 @@
 #import "Server.h"
 #import "Event.h"
 #import "FavoritesController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation RootViewController
 
@@ -85,9 +86,16 @@
 	[formatter release];
 	
 	btn = [UIButton buttonWithType:UIButtonTypeCustom];
-	btn.frame = CGRectMake(0, 0, 200, 40);
+	btn.frame = CGRectMake(0, 0, 130, 36);
+	
+	[[btn layer] setCornerRadius:8.0f];
+	[[btn layer] setMasksToBounds:YES];
+	[[btn layer] setBorderWidth:1.0f];
+	[[btn layer] setBorderColor:[[UIColor whiteColor] CGColor]];
+	
+	
 	[btn setTitle:(@"%@", stringFromDate) forState:UIControlStateNormal];
-	//[btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+	[btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
 	self.navigationItem.titleView = btn;
 	
 		
@@ -100,6 +108,9 @@
 - (IBAction)titleClick:(id)sender
 {
 	[self _showPicker];
+	self.navigationItem.rightBarButtonItem.enabled = NO;
+	self.navigationItem.leftBarButtonItem.enabled = NO;
+	//self.navigationItem
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,16 +130,16 @@
 #pragma mark Picker management
 - (void)_showPicker
 {
-	CGRect frame = picker.frame;
-	CGRect tframe = tableView.frame;
+	CGRect frame = pickerView.frame;
+	//CGRect tframe = tableView.frame;
 	if(!_isPickerShown) {
-		frame.origin.y = 200 + frame.size.height;
-		picker.frame = frame;
+		frame.origin.y = 0 + frame.size.height;
+		pickerView.frame = frame;
 		[UIView beginAnimations:@"moveInPicker" context:nil];
-		frame.origin.y = 200;
-		picker.frame = frame;
-		tframe.size.height -= 216;
-		tableView.frame = tframe;
+		frame.origin.y = 0;
+		pickerView.frame = frame;
+		//tframe.size.height -= 416;
+//		tableView.frame = tframe;
 		[UIView commitAnimations];
 		_isPickerShown = YES;
 	}
@@ -136,14 +147,14 @@
 
 - (void)_hidePicker
 {
-	CGRect frame = picker.frame;
-	CGRect tframe = tableView.frame;
+	CGRect frame = pickerView.frame;
+	//CGRect tframe = tableView.frame;
 	if(_isPickerShown) {
 		[UIView beginAnimations:@"moveOutPicker" context:nil];
-		frame.origin.y = 200 + frame.size.height;
-		picker.frame = frame;
-		tframe.size.height += 216;
-		tableView.frame = tframe;
+		frame.origin.y = 0 + frame.size.height;
+		pickerView.frame = frame;
+		//tframe.size.height += 416;
+//		tableView.frame = tframe;
 		[UIView commitAnimations];
 		
 		_isPickerShown = NO;
@@ -156,6 +167,13 @@
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateStyle:NSDateFormatterMediumStyle];
 	[btn setTitle:[formatter stringFromDate:[picker.date retain]] forState:UIControlStateNormal];
+}
+
+- (IBAction)chooseDate
+{
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	self.navigationItem.leftBarButtonItem.enabled = YES;
+	[self _hidePicker];
 }
 
 #pragma mark -

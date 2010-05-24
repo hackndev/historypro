@@ -14,12 +14,14 @@
 	
 	IBOutlet UIDatePicker *picker;
 	IBOutlet UITableView *tableView;
+	IBOutlet UIView *pickerView;
 	
 	UIButton *btn;
 }
 
 - (IBAction)onFavoritesList:(id)sender;
 - (IBAction)titleClick:(id)sender;
+- (IBAction)chooseDate;
 - (void)_showPicker;
 - (void)_hidePicker;
 
