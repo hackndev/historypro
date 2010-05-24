@@ -31,9 +31,10 @@ NSString *kName = @"name";
 	if(!self) return self;
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-	NSString *destinationPath = [[paths objectAtIndex:0] stringByAppendingString:@"/tmp.db"];
+	NSString *destinationPath = [[paths objectAtIndex:0] stringByAppendingString:@"/favorites.db"];
 	db = [[FMDatabase databaseWithPath:destinationPath] retain];
 	
+#if 0
 	if (! [[NSFileManager defaultManager] fileExistsAtPath: destinationPath]) {
 		// didn't find db, need to copy
 		NSString *backupDbPath = [[NSBundle mainBundle]
@@ -53,10 +54,14 @@ NSString *kName = @"name";
 			}
 		}
 	}
+#endif
 	
 	if(![db open]) {
 		[self release];
 		return nil;
+	} else {
+		[db executeUpdate:@"CREATE TABLE IF NOT EXISTS event (eventName text, eventID integer PRIMARY KEY AUTOINCREMENT, eventDate TEXT)"];
+		[db executeUpdate:@"CREATE TABLE IF NOT EXISTS tag (dbTagName text, dbTagUrl text, evID integer)"];
 	}
 	return self;
 }
