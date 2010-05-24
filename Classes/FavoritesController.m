@@ -47,14 +47,9 @@
 	letUserSelectRow = YES;
 	
 	eventDate = YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	[self.tableView reloadData];
 	
 	NSArray *segments = [NSArray arrayWithObjects:@"Event date", @"Days left", nil];
-
+	
 	UISegmentedControl *segmentedCtrl = [[UISegmentedControl alloc] initWithItems:segments];
 	segmentedCtrl.selectedSegmentIndex = 0;
 	[segmentedCtrl addTarget:self action:@selector(detailChanged:) forControlEvents:UIControlEventValueChanged];
@@ -67,7 +62,13 @@
 	
 	UIBarButtonItem *labelButton = [[[UIBarButtonItem alloc] initWithTitle:@"Show" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
 	
-	[self setToolbarItems:[NSArray arrayWithObjects:spanButton, labelButton, segmentButton, nil]];
+	[self setToolbarItems:[NSArray arrayWithObjects:spanButton, labelButton, segmentButton, nil]];	
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[self.tableView reloadData];
+	
 	if ([favEvents count] > 0) {
 		[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 	}
