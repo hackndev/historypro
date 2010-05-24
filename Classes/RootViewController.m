@@ -175,6 +175,9 @@
 	self.navigationItem.rightBarButtonItem.enabled = YES;
 	self.navigationItem.leftBarButtonItem.enabled = YES;
 	[self _hidePicker];
+	isLoaded = NO;
+	[tableView reloadData];
+	[[Server sharedInstance] getEventsForDate:picker.date caching:NO];
 }
 
 #pragma mark -
