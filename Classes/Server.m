@@ -64,17 +64,20 @@
 
 - (NSData *)_fetchURL:(NSURL *)url caching:(BOOL)useCache
 {
-	if(useCache)
-		goto dlnow;
+	NSData *htmlData = nil;
+	if(!useCache) {
+		htmlData = [[[NSData alloc] initWithContentsOfURL:url] autorelease];
+		if(!htmlData)
+			failed = YES;
+		return htmlData;
+	}
 	NSDate *now = [NSDate date];
 	NSDate *cached = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheDate"];
-	NSData *htmlData = nil;
 	NSLog(@"cached %@ vs. %@", [[cached description] substringToIndex:10], [[now description] substringToIndex:10]);
 	if([[[now description] substringToIndex:10] isEqualToString:[[cached description] substringToIndex:10]]) {
 		htmlData = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheData"];
 		NSLog(@"Got %d bytes from cache", [htmlData length]);
 	} else {
-dlnow:
 		htmlData = [[[NSData alloc] initWithContentsOfURL:url] autorelease];
 		if(htmlData) {
 			[[NSUserDefaults standardUserDefaults] setValue:htmlData forKey:@"cacheData"];
@@ -221,9 +224,9 @@ dlnow:
 	return YES;
 }
 
-- (void)getEventsForDate:(NSDate *)date
+- (void)getEventsForDate:(NSDate *)date caching:(BOOL)useCache
 {
-	[self getEventsForDate:date invoking:^{
+	[self getEventsForDate:date caching:useCache invoking:^{
 		[NSTimer scheduledTimerWithTimeInterval:0
 										 target:self
 									   selector:@selector(_onTimer:)
@@ -232,6 +235,11 @@ dlnow:
 												 forKey:@"hasFailed"]
 										repeats:NO];
 	}];
+}
+
+- (void)getEventsForDate:(NSDate *)date
+{
+	[self getEventsForDate:date caching:YES];
 }
 
 - (void)_onTimer:(NSTimer *)timer

@@ -23,6 +23,7 @@ typedef void (^DataBlock)(NSData *data);
 + (Server *)sharedInstance;
 - (void)getEventsForDate:(NSDate *)date caching:(BOOL)useCache invoking:(SimpleBlock)callback;
 - (void)getEventsForDate:(NSDate *)date invoking:(SimpleBlock)callback;
+- (void)getEventsForDate:(NSDate *)date caching:(BOOL)useCache;
 - (void)getEventsForDate:(NSDate *)date;
 
 @end
