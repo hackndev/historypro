@@ -231,8 +231,9 @@
 	return isLoaded ? indexPath : nil;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	[_tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if(!isLoaded)
 		return;
 	NSDictionary *dict = [[Server sharedInstance].list objectAtIndex:indexPath.section];
