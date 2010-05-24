@@ -205,6 +205,7 @@
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+	static UITableViewCell *TextCell = nil;
     
     UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -228,15 +229,19 @@
 		} else {
 			cell.textLabel.text = [[companies objectAtIndex:indexPath.row] name];
 		}
+		return cell;
 	} else {
+		if(!TextCell)
+			TextCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TextCell"];
+			// TODO: possibly leaking
 		if(!hasFailed) {
-			cell.textLabel.text = NSLocalizedString(@"Loading", @"Loading message");
+			TextCell.textLabel.text = NSLocalizedString(@"Loading", @"Loading message");
 		} else {
-			cell.textLabel.text = NSLocalizedString(@"Network connection failed", @"Fail message");
+			TextCell.textLabel.text = NSLocalizedString(@"Network connection failed", @"Fail message");
 		}
-		cell.textLabel.textAlignment = UITextAlignmentCenter;
+		TextCell.textLabel.textAlignment = UITextAlignmentCenter;
+		return TextCell;
 	}
-    return cell;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
