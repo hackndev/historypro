@@ -167,6 +167,7 @@
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateStyle:NSDateFormatterMediumStyle];
 	[btn setTitle:[formatter stringFromDate:[picker.date retain]] forState:UIControlStateNormal];
+	[formatter release];
 }
 
 - (IBAction)chooseDate

@@ -64,6 +64,7 @@
 	
 	UIBarButtonItem *spanButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
 	UIBarButtonItem *segmentButton = [[[UIBarButtonItem alloc] initWithCustomView:segmentedCtrl] autorelease];
+	[segmentedCtrl release];
 	
 	UIBarButtonItem *labelButton = [[[UIBarButtonItem alloc] initWithTitle:@"Show" style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
 	
