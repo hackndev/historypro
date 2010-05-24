@@ -38,7 +38,6 @@
 	self.navigationItem.title = @"Favorites";
 	self.favEvents = [[SQL sharedInstance] favoriteEvents];
 	
-	copyListOfItems = [[NSMutableArray alloc] init];
 	copiedEvents = [[NSMutableArray alloc] init];
 	
 	self.tableView.tableHeaderView = searchBar;
@@ -129,13 +128,12 @@
 {
 	[super viewDidUnload];
 	[copiedEvents release];
-	[copyListOfItems release];
 	self.favEvents = nil;
 }
 
-- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
-	
-	[copyListOfItems removeAllObjects];
+- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText
+{
+	NSLog(@"CE: empty");
 	[copiedEvents removeAllObjects];
 	
 	if([searchText length] > 0) {
@@ -155,30 +153,20 @@
 	[self.tableView reloadData];
 }
 
-- (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
-	
-	[self searchTableView];
+- (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
+{
+	[theSearchBar resignFirstResponder];
+	[searchBar setShowsCancelButton:NO animated:YES];
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
+	//[self searchTableView];
 }
 
-- (void) searchTableView {
-	
-	NSString *searchText = searchBar.text;
-	NSMutableArray *searchArray = [[NSMutableArray alloc] init];
-	
-	[searchArray addObjectsFromArray:favEvents];
-	
-	for (Event *sTemp in searchArray)
-	{
-		NSRange titleResultsRange = [sTemp.name rangeOfString:searchText options:NSCaseInsensitiveSearch];
-		
-		if (titleResultsRange.length > 0) {
-			[copyListOfItems addObject:sTemp.name];
-			[copiedEvents addObject:sTemp];
-		}
-	}
-	
-	[searchArray release];
-	searchArray = nil;
+- (void) searchTableView
+{
+	NSString *searchText = [NSString stringWithFormat:@"*%@*", searchBar.text];
+	NSPredicate *p = [NSPredicate predicateWithFormat:@"name LIKE[cd] %@", searchText];
+	[copiedEvents addObjectsFromArray:[favEvents filteredArrayUsingPredicate:p]];
+	NSLog(@"CE: got %d", [copiedEvents count]);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -189,8 +177,8 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
-	if (searching)
-		return [copyListOfItems count];
+	if (searching || [copiedEvents count])
+		return [copiedEvents count];
 	else {
 		return [favEvents count];
 	}
@@ -202,73 +190,62 @@
     FavTableCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
 		cell = [FavTableCell cellFromFactory:self];
-		
-	if(searching)
-	{
-		NSString *en = [copyListOfItems objectAtIndex:indexPath.row];
-		cell.title = en;	
+	
+	NSArray *src = (searching || [copiedEvents count]) ? copiedEvents : favEvents;
+	
+	if (eventDate) {
+		cell.title = [[src objectAtIndex:indexPath.row] name];
 		cell.shown = YES;
-		cell.date = [[copiedEvents objectAtIndex:indexPath.row] evDate];
+		cell.date = [[src objectAtIndex:indexPath.row] evDate];
+	} else {
+		cell.title = [[src objectAtIndex:indexPath.row] name];
+		cell.shown = YES;
+		
+		NSDateComponents *c = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
+		NSInteger currentYear = [c year];
+		
+		NSString *parsingDate = [[[src objectAtIndex:indexPath.row] evDate] stringByAppendingString:[NSString stringWithFormat:@", %d", currentYear]];
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateStyle:NSDateFormatterMediumStyle];
+		NSDate *date = [formatter dateFromString:parsingDate];
+		
+		
+		NSString *dateConv = [formatter stringFromDate:[NSDate date]];
+		NSDate *curdate = [formatter dateFromString:dateConv];
+		[formatter release];
+		
+		float timeInterval = [date timeIntervalSinceDate:curdate];
+		NSString *timeLabel;
+		int daysInterval = (((abs(timeInterval)/60)/60)/24);
+		if (timeInterval < 0) {
+			switch (daysInterval) {
+				case 0:
+					timeLabel = @"Today!";
+					break;
+				case 1:
+					timeLabel = @"1 day past";
+					break;
+				default:
+					timeLabel = [NSString stringWithFormat:@"%d days past", daysInterval];
+					break;
+			}
+		} else {
+			switch (daysInterval) {
+				case 0:
+					timeLabel = @"Today!";
+					break;
+				case 1:
+					timeLabel = @"1 day left";
+					break;
+				default:
+					timeLabel = [NSString stringWithFormat:@"%d days left", daysInterval];
+					break;
+			}
+			
 		}
-	else
-	{
-		if (eventDate)
-		{
-			cell.title = [[favEvents objectAtIndex:indexPath.row] name];
-			cell.shown = YES;
-			cell.date = [[favEvents objectAtIndex:indexPath.row] evDate];
-			}
-		else
-		{
-			cell.title = [[favEvents objectAtIndex:indexPath.row] name];
-			cell.shown = YES;
-			
-			NSDateComponents *c = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
-			NSInteger currentYear = [c year];
-			
-			NSString *parsingDate = [[[favEvents objectAtIndex:indexPath.row] evDate] stringByAppendingString:[NSString stringWithFormat:@", %d", currentYear]];
-			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-			[formatter setDateStyle:NSDateFormatterMediumStyle];
-			NSDate *date = [formatter dateFromString:parsingDate];
-			
-			
-			NSString *dateConv = [formatter stringFromDate:[NSDate date]];
-			NSDate *curdate = [formatter dateFromString:dateConv];
-			[formatter release];
-			
-			float timeInterval = [date timeIntervalSinceDate:curdate];
-			NSString *timeLabel;
-			int daysInterval = (((abs(timeInterval)/60)/60)/24);
-			if (timeInterval < 0) {
-				switch (daysInterval) {
-					case 0:
-						timeLabel = @"Today!";
-						break;
-					case 1:
-						timeLabel = @"1 day past";
-						break;
-					default:
-						timeLabel = [NSString stringWithFormat:@"%d days past", daysInterval];
-						break;
-				}
-			} else {
-				switch (daysInterval) {
-					case 0:
-						timeLabel = @"Today!";
-						break;
-					case 1:
-						timeLabel = @"1 day left";
-						break;
-					default:
-						timeLabel = [NSString stringWithFormat:@"%d days left", daysInterval];
-						break;
-				}
-				
-			}
-			cell.date = timeLabel;
-			
-			}
-		}
+		cell.date = timeLabel;
+		
+	}
 	
     return cell;
 }

@@ -12,7 +12,6 @@
 @interface FavoritesController : UITableViewController
 {
 	NSArray *favEvents;
-	NSMutableArray *copyListOfItems;
 	NSMutableArray *copiedEvents;
 	IBOutlet UISearchBar *searchBar;
 	
