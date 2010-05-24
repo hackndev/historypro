@@ -47,6 +47,7 @@
 		A590A93810E661EE00A3151C /* NSThread+PLBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */; };
 		A5955AF611992B100078BEF5 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5955AF511992B100078BEF5 /* Entitlements.plist */; };
 		A5BA1C3D10FE0B7000BA6084 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BA1C3C10FE0B7000BA6084 /* Default.png */; };
+		A5BFF2F711AAB1EF00A8A09F /* BookmarkSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BFF2F611AAB1EF00A8A09F /* BookmarkSelected.png */; };
 		A5DA63C210F0D9AD00663315 /* libAppReviewLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DA63C110F0D9A600663315 /* libAppReviewLib.a */; };
 		A5EE247E10EE54CB001B5537 /* ParserTests.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5EE247D10EE54CB001B5537 /* ParserTests.plist */; };
 		D50B502B10EE5A0B003C01D6 /* March_1.html in Resources */ = {isa = PBXBuildFile; fileRef = D50B502A10EE5A0B003C01D6 /* March_1.html */; };
@@ -149,6 +150,7 @@
 		A590A93710E661EE00A3151C /* NSThread+PLBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+PLBlocks.m"; sourceTree = "<group>"; };
 		A5955AF511992B100078BEF5 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		A5BA1C3C10FE0B7000BA6084 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A5BFF2F611AAB1EF00A8A09F /* BookmarkSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BookmarkSelected.png; sourceTree = "<group>"; };
 		A5DA63B910F0D9A600663315 /* AppReviewLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AppReviewLib.xcodeproj; path = libappreview/AppReviewLib.xcodeproj; sourceTree = "<group>"; };
 		A5EE247D10EE54CB001B5537 /* ParserTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ParserTests.plist; path = Tests/ParserTests.plist; sourceTree = "<group>"; };
 		D50B502A10EE5A0B003C01D6 /* March_1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = March_1.html; path = Tests/March_1.html; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				D53FC95A114BE33000FD6A86 /* tmp.db */,
+				A5BFF2F611AAB1EF00A8A09F /* BookmarkSelected.png */,
 				A57181D1110619EA00570D67 /* star-off.png */,
 				A57181AC1106166600570D67 /* star.png */,
 				A5BA1C3C10FE0B7000BA6084 /* Default.png */,
@@ -549,6 +552,7 @@
 				D53FC95B114BE33000FD6A86 /* tmp.db in Resources */,
 				D53D57A9115522AA00176D59 /* FavoritesController.xib in Resources */,
 				A5955AF611992B100078BEF5 /* Entitlements.plist in Resources */,
+				A5BFF2F711AAB1EF00A8A09F /* BookmarkSelected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

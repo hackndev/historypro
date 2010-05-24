@@ -61,7 +61,7 @@
 	self.title = (@"%@", stringFromDate);
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-	NSString *destinationPath = [[paths objectAtIndex:0] stringByAppendingString:@"/tmp.db"];
+	NSString *destinationPath = [[paths objectAtIndex:0] stringByAppendingString:@"/favorites.db"];
 	FMDatabase* db = [FMDatabase databaseWithPath:destinationPath];
 	if (![db open]) {
 		NSLog(@"Could not open db.");
@@ -71,7 +71,7 @@
 	buttonCheck = [rs next];
 	[rs close]; 
 	[db close];
-	UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"Fav" style:buttonCheck?UIBarButtonItemStylePlain:UIBarButtonItemStyleDone target:self action:@selector(addFav:)];
+	UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star.png"] style:buttonCheck?UIBarButtonItemStylePlain:UIBarButtonItemStyleDone target:self action:@selector(addFav:)];
 	self.navigationItem.rightBarButtonItem = btn;
 	[btn release];
 	if (self.navigationItem.rightBarButtonItem.style == UIBarButtonItemStylePlain)
