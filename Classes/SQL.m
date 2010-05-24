@@ -66,12 +66,12 @@ NSString *kName = @"name";
 	return self;
 }
 
--(void)addEvent:(Event *)aEvent evDate:(NSDate *)aEvDate
+-(void)addEvent:(Event *)aEvent
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateFormat:@"MMM d"];
-	NSString *stringFromDate = [formatter stringFromDate:aEvDate];
+	NSString *stringFromDate = [formatter stringFromDate:aEvent.date];
 	[db beginTransaction];
 	[db executeUpdate:@"insert into event (eventDate, eventName) values (?, ?)", stringFromDate, aEvent.name];
 	[formatter release];

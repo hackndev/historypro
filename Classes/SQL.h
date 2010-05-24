@@ -19,7 +19,7 @@
 	FMDatabase* db;
 }
 
-- (void)addEvent:(Event *)aEvent evDate:(NSDate *)aEvDate;
+- (void)addEvent:(Event *)aEvent;
 - (void)removeFavoriteEvent:(Event *)event;
 - (BOOL)isEventFavorited:(Event *)event;
 - (NSArray *)favoriteEvents;

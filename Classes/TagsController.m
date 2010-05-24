@@ -53,7 +53,7 @@
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateStyle:NSDateFormatterMediumStyle];
-	NSDate *date = [[[NSDate alloc] init] autorelease];
+	NSDate *date = event.date;
 	
 	NSString *stringFromDate = [formatter stringFromDate:date];
 	[formatter release];
@@ -71,7 +71,7 @@
 - (void)addFav:(id)sender
 {
 	SQL *sqlcontroller = [SQL sharedInstance];
-	[sqlcontroller addEvent:event evDate:[NSDate date]];
+	[sqlcontroller addEvent:event];
 	self.navigationItem.rightBarButtonItem = nil;
 }
 
