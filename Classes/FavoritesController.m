@@ -254,7 +254,8 @@
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		// Delete the managed object for the given index path
-		[[SQL sharedInstance] removeFavoriteEvent:[favEvents objectAtIndex:indexPath.row]];
+		NSArray *src = (searching || [copiedEvents count]) ? copiedEvents : favEvents;
+		[[SQL sharedInstance] removeFavoriteEvent:[src objectAtIndex:indexPath.row]];
 		[favEvents release];
 		favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
 		
@@ -264,16 +265,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if(searching) {
-		TagsController *controller = [[TagsController alloc] initWithEvent:[copiedEvents objectAtIndex:indexPath.row]];
-		[self.navigationController pushViewController:controller animated:YES];
-		[controller release];
-	}
-	else {
-		TagsController *controller = [[TagsController alloc] initWithEvent:[favEvents objectAtIndex:indexPath.row]];
-		[self.navigationController pushViewController:controller animated:YES];
-		[controller release];
-	}
+	NSArray *src = (searching || [copiedEvents count]) ? copiedEvents : favEvents;
+	TagsController *controller = [[TagsController alloc] initWithEvent:[src objectAtIndex:indexPath.row]];
+	[self.navigationController pushViewController:controller animated:YES];
+	[controller release];
 }
 - (void)onFavoritesDone:(id)sender
 {
