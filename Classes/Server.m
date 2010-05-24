@@ -14,8 +14,8 @@
 
 @interface Server (PrivateAPI)
 
-- (void)_fetchURL:(NSURL *)url invoking:(DataBlock)block;
-- (NSData *)_fetchURL:(NSURL *)url;
+- (void)_fetchURL:(NSURL *)url caching:(BOOL)useCache invoking:(DataBlock)block;
+- (NSData *)_fetchURL:(NSURL *)url caching:(BOOL)useCache;
 - (BOOL)_parseData:(NSData *)htmlData;
 
 @end
@@ -48,11 +48,11 @@
 }
 
 /// Threaded wrapper for url fetcher
-- (void)_fetchURL:(NSURL *)url invoking:(DataBlock)block
+- (void)_fetchURL:(NSURL *)url caching:(BOOL)useCache invoking:(DataBlock)block
 {
 	DataBlock b = [block copy]; // copy it from stack to heap
 	[NSThread pl_performBlockOnNewThread:^{
-		NSData *htmlData = [[self _fetchURL:url] retain];
+		NSData *htmlData = [[self _fetchURL:url caching:useCache] retain];
 		
 		[[NSThread mainThread] pl_performBlock:^{
 			// this will run on main thread again
@@ -62,8 +62,10 @@
 	}];
 }
 
-- (NSData *)_fetchURL:(NSURL *)url
+- (NSData *)_fetchURL:(NSURL *)url caching:(BOOL)useCache
 {
+	if(useCache)
+		goto dlnow;
 	NSDate *now = [NSDate date];
 	NSDate *cached = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheDate"];
 	NSData *htmlData = nil;
@@ -72,6 +74,7 @@
 		htmlData = [[NSUserDefaults standardUserDefaults] valueForKey:@"cacheData"];
 		NSLog(@"Got %d bytes from cache", [htmlData length]);
 	} else {
+dlnow:
 		htmlData = [[[NSData alloc] initWithContentsOfURL:url] autorelease];
 		if(htmlData) {
 			[[NSUserDefaults standardUserDefaults] setValue:htmlData forKey:@"cacheData"];
@@ -85,6 +88,11 @@
 }
 
 - (void)getEventsForDate:(NSDate *)date invoking:(SimpleBlock)callback
+{
+	[self getEventsForDate:date caching:YES invoking:callback];
+}
+
+- (void)getEventsForDate:(NSDate *)date caching:(BOOL)useCache invoking:(SimpleBlock)callback
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -100,7 +108,7 @@
 	NSString *stringForRef = [stringFromDate stringByReplacingOccurrencesOfString:@" " withString:@"_"];
 	NSString *formattedString = [NSString stringWithFormat:@"http://en.wikipedia.org/wiki/%@", stringForRef];
 	NSURL *url = [NSURL URLWithString:formattedString];
-	[self _fetchURL:url invoking:^(NSData *htmlData){
+	[self _fetchURL:url caching:useCache invoking:^(NSData *htmlData){
 		// html
 		[self _parseData:htmlData]; // TODO: check for parser failure
 		callback();

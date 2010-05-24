@@ -21,6 +21,7 @@ typedef void (^DataBlock)(NSData *data);
 @property (readonly) NSArray *list;
 
 + (Server *)sharedInstance;
+- (void)getEventsForDate:(NSDate *)date caching:(BOOL)useCache invoking:(SimpleBlock)callback;
 - (void)getEventsForDate:(NSDate *)date invoking:(SimpleBlock)callback;
 - (void)getEventsForDate:(NSDate *)date;
 
