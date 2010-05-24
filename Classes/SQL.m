@@ -82,12 +82,13 @@ NSString *kName = @"name";
 	{
 		[db executeUpdate:@"insert into tag (dbTagName, dbTagUrl, evID) values (?, ?, ?)", enumerator.tagname, enumerator.url, [NSNumber numberWithInt:[rs intForColumn:@"eventID"]]];
 	}
-	[db commit]; 
+	[db commit];
 	[rs close];
 }
 
--(void)removeFavoriteEvent:(NSNumber *)pk
+-(void)removeFavoriteEvent:(Event *)event
 {
+	NSNumber *pk = event.pk;
 	[db beginTransaction];
 	[db executeUpdate:@"delete from tag where evID = ?", pk];
 	[db executeUpdate:@"delete from event where eventID = ?", pk];

@@ -254,8 +254,7 @@
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		// Delete the managed object for the given index path
-		NSNumber *i = [[favEvents objectAtIndex:indexPath.row] pk];
-		[[SQL sharedInstance] removeFavoriteEvent:i];
+		[[SQL sharedInstance] removeFavoriteEvent:[favEvents objectAtIndex:indexPath.row]];
 		[favEvents release];
 		favEvents = [[[SQL sharedInstance] favoriteEvents] retain];
 		

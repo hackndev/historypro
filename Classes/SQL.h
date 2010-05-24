@@ -20,7 +20,7 @@
 }
 
 - (void)addEvent:(Event *)aEvent evDate:(NSDate *)aEvDate;
-- (void)removeFavoriteEvent:(NSNumber *)pk;
+- (void)removeFavoriteEvent:(Event *)event;
 - (BOOL)isEventFavorited:(Event *)event;
 - (NSArray *)favoriteEvents;
 + (SQL *)sharedInstance;
