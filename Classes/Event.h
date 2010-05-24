@@ -15,11 +15,12 @@
 	NSArray *tags;
 	NSNumber *pk;
 	NSString *evDate;
-
+	NSDate *date;
 }
 
 - (id)initWithName:(NSString *)aName
-			  tags:(NSArray *)aTags;
+			  tags:(NSArray *)aTags
+			  date:(NSDate *)aDate;
 
 - (id)initWithName:(NSString *)aName
 			  tags:(NSArray *)aTags
@@ -31,5 +32,6 @@
 @property (readonly) NSUInteger yearsPassed;
 @property (readonly) NSNumber *pk;
 @property (readonly) NSString *evDate;
+@property (readonly) NSDate *date;
 
 @end

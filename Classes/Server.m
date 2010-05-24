@@ -16,7 +16,7 @@
 
 - (void)_fetchURL:(NSURL *)url caching:(BOOL)useCache invoking:(DataBlock)block;
 - (NSData *)_fetchURL:(NSURL *)url caching:(BOOL)useCache;
-- (BOOL)_parseData:(NSData *)htmlData;
+- (BOOL)_parseData:(NSData *)htmlData forDate:(NSDate *)evDate;
 
 @end
 
@@ -113,12 +113,12 @@
 	NSURL *url = [NSURL URLWithString:formattedString];
 	[self _fetchURL:url caching:useCache invoking:^(NSData *htmlData){
 		// html
-		[self _parseData:htmlData]; // TODO: check for parser failure
+		[self _parseData:htmlData forDate:date]; // TODO: check for parser failure
 		callback();
 	}];
 }
 
-- (BOOL)_parseData:(NSData *)htmlData
+- (BOOL)_parseData:(NSData *)htmlData forDate:(NSDate *)evDate
 {
 	[_events release];
 	_events = [[NSMutableArray alloc] init];
@@ -208,7 +208,7 @@
 					}
 				}
 			}
-			Event *n = [[[Event alloc] initWithName:descr tags:tags] autorelease];
+			Event *n = [[[Event alloc] initWithName:descr tags:tags date:evDate] autorelease];
 			[_events addObject:n];
 			[[sortedEvents objectForKey:s] addObject:n];
 		}

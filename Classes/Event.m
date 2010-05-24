@@ -15,14 +15,17 @@
 @synthesize tags;
 @synthesize pk;
 @synthesize evDate;
+@synthesize date;
 
 - (id)initWithName:(NSString *)aName
 			  tags:(NSArray *)aTags
+			  date:(NSDate *)aDate
 {
 	self = [super init];
 	if (nil != self) {
 		name = [aName retain];
 		tags = [aTags retain];
+		date = [aDate retain];
 	}
 	return self;
 }
@@ -41,6 +44,7 @@
 
 - (void)dealloc
 {
+	[date release];
 	[tags release];
 	[name release];
 	[pk release];
