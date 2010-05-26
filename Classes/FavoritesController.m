@@ -197,7 +197,6 @@
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateFormat:@"MMM d"];
 	NSString *titleDate = [formatter stringFromDate:[[src objectAtIndex:indexPath.row] evDate]];
-	[formatter release];
 	
 	if (eventDate) {
 		cell.title = [[src objectAtIndex:indexPath.row] name];
@@ -210,12 +209,21 @@
 		NSDateComponents *c = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
 		NSInteger currentYear = [c year];
 		
-		NSString *parsingDate = [titleDate stringByAppendingString:[NSString stringWithFormat:@", %d", currentYear]];
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		
+		NSDateComponents *stDate = [[NSCalendar currentCalendar] components:NSHourCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSMinuteCalendarUnit fromDate:[[src objectAtIndex:indexPath.row] evDate]];
+		NSInteger stMonth = [stDate month];
+		NSInteger stDay = [stDate day];
+		NSDateComponents *comps = [[NSDateComponents alloc] init];
+		[comps setYear:currentYear];
+		[comps setMonth:stMonth];
+		[comps setDay:stDay];
+		[comps setHour:0];
+		[comps setMinute:0];
+		[comps setSecond:0];
+		NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+		[comps release];
+		
 		[formatter setDateStyle:NSDateFormatterMediumStyle];
-		NSDate *date = [formatter dateFromString:parsingDate];
-		
-		
 		NSString *dateConv = [formatter stringFromDate:[NSDate date]];
 		NSDate *curdate = [formatter dateFromString:dateConv];
 		[formatter release];
