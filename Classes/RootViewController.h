@@ -6,6 +6,8 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
+#import "CoolButton.h"
+
 @interface RootViewController : UIViewController <UIActionSheetDelegate, UITableViewDelegate>
 {
 	BOOL isLoaded;
@@ -16,7 +18,7 @@
 	IBOutlet UITableView *tableView;
 	IBOutlet UIView *pickerView;
 	
-	UIButton *btn;
+	CoolButton *cButton;
 }
 
 - (IBAction)onFavoritesList:(id)sender;

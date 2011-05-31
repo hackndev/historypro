@@ -12,6 +12,7 @@
 #import "Event.h"
 #import "FavoritesController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CoolButton.h"
 
 @implementation RootViewController
 
@@ -75,6 +76,8 @@
 {
     [super viewDidLoad];
 	
+	tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"letter_back.png"]];
+	
 	[picker addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
 	[picker setDate:[NSDate date]];
 	
@@ -86,18 +89,28 @@
 	NSString *stringFromDate = [formatter stringFromDate:date];
 	[formatter release];
 	
-	btn = [UIButton buttonWithType:UIButtonTypeCustom];
-	btn.frame = CGRectMake(0, 0, 130, 36);
+	//btn = [UIButton buttonWithType:UIButtonTypeCustom];
+	cButton = [[CoolButton alloc] initWithFrame:CGRectMake(0, 0, 120, 29)];
+	//btn.frame = CGRectMake(0, 0, 130, 36);
 	
-	[[btn layer] setCornerRadius:8.0f];
-	[[btn layer] setMasksToBounds:YES];
-	[[btn layer] setBorderWidth:1.0f];
-	[[btn layer] setBorderColor:[[UIColor whiteColor] CGColor]];
+	//[[btn layer] setCornerRadius:8.0f];
+//	[[btn layer] setMasksToBounds:YES];
+//	[[btn layer] setBorderWidth:1.0f];
+//	[[btn layer] setBorderColor:[[UIColor whiteColor] CGColor]];
+	  [cButton setButtonColor:[UIColor colorWithRed:73/255.0 green:107/255.0 blue:155/255.0 alpha:1.0]];
+      [cButton setTitle:@"Label" forState:UIControlStateNormal];
+      [[cButton titleLabel] setShadowColor:[UIColor colorWithWhite:0 alpha:0.5]];
+      [[cButton titleLabel] setShadowOffset:CGSizeMake(0, -1)];
+      [[cButton titleLabel] setTextColor:[UIColor whiteColor]];
+      [[cButton titleLabel] setFont:[UIFont boldSystemFontOfSize:14]];
 	
 	
-	[btn setTitle:(@"%@", stringFromDate) forState:UIControlStateNormal];
-	[btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
-	self.navigationItem.titleView = btn;
+	//[btn setTitle:(@"%@", stringFromDate) forState:UIControlStateNormal];
+//	[btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+//	self.navigationItem.titleView = btn;
+	[cButton setTitle:(@"%@", stringFromDate) forState:UIControlStateNormal];
+	[cButton addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+	self.navigationItem.titleView = cButton;
 	
 		
 	[[Server sharedInstance] getEventsForDate:[NSDate date]];
@@ -167,7 +180,7 @@
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setTimeStyle:NSDateFormatterNoStyle];
 	[formatter setDateStyle:NSDateFormatterMediumStyle];
-	[btn setTitle:[formatter stringFromDate:[picker.date retain]] forState:UIControlStateNormal];
+	[cButton setTitle:[formatter stringFromDate:[picker.date retain]] forState:UIControlStateNormal];
 	[formatter release];
 }
 
@@ -212,6 +225,8 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
+	
+	cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"papyrus.png"]];
 	
 	if(isLoaded) {
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -273,7 +288,7 @@
 
 - (void)dealloc
 {
-	[btn release];
+	[cButton release];
     [super dealloc];
 }
 
